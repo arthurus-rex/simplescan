@@ -5,23 +5,14 @@ repo_list=${homedir}'/repo_list.txt'
 keyword_list=${homedir}'/keyword_list.txt'
 tmp_foldername=${homedir}'/repos'
 
-# rest of filename is appended with name of repo
-results_filename=${homedir}'/outfiles/results_'
+# create results folder in outfiles at datetime of analysis
+echo "Create new results folder..."
+datetime=$(date +%Y-%m-%d_%H.%M.%S)
+results_folder=${homedir}'/outfiles/'${datetime}'/'
+mkdir ${results_folder}
+echo "Created folder as: " ${results_folder}
 
-#echo "Beginning Simple CryptoScan..."
-#echo "Removing old results..."
-#rm $results_filename
-
-# load keywords for grep to use later
-#echo "Loading keywords..."
-#keywords=''
-#while IFS= read -r line; do
-#	keywords=${keywords}${line}'|'
-#done < $keyword_list
-#keywords=${keywords::-1} # remove extra `|`
-#echo "Keywords loaded.  Listing keywords:"
-#echo '    '$keywords
-
+# where git repos are temporarily cloned
 mkdir $tmp_foldername && cd $tmp_foldername
 
 # download all repos in list
@@ -40,7 +31,7 @@ for dir in */ ; do
 
     # extracts name of repo from directory, then creates 
     # results_`repo`.txt for output of grep into homedir
-    repo_results=${results_filename}$(basename $dir)'.txt'
+    repo_results=${results_folder}$(basename $dir)'.txt'
     touch $repo_results
     
     find -type f | grep --file=$keyword_list --recursive -n >> $repo_results

@@ -1,0 +1,728 @@
+docker/ci/Dockerfile:8:FROM quay.io/fedora/fedora@sha256:74fb581ba43d8c03e2576ecd2337c0c1febe09fe3347040824aceb8a4f95ec72
+docker/release/base/Dockerfile.in:1:FROM quay.io/fedora/fedora@sha256:74fb581ba43d8c03e2576ecd2337c0c1febe09fe3347040824aceb8a4f95ec72 AS keylime_base
+docker/release/tenant/Dockerfile.in:7:    curl -LO "https://dl.k8s.io/${KUBERNETES_RELEASE}/bin/linux/${GOARCH}/kubectl.sha256" && \
+docker/release/tenant/Dockerfile.in:8:    echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check && \
+docker/release/tenant/Dockerfile.in:9:    rm -v kubectl.sha256 && \
+docs/design/security.rst:394:We give the main security property for Keylime by stating what a successful adversary must achieve:
+docs/design/security.rst:396:    **A valid attack against Keylime is one in which an adversary can cause a mismatch between a verification outcome
+docs/design/security.rst:413:The Capabilities of the Adversary
+docs/design/security.rst:416:For our adversary, we consider a typical network-based (Dolev-Yao) attacker [7]_ which exercises full control over the
+docs/design/security.rst:418:assumed perfect). Because we need to consider attacks in which the adversary is resident on a node to be verified, we
+docs/design/security.rst:422:The adversary cannot corrupt (i.e., take control of, or impersonate) the verifier, registrar, tenant or any attesting
+docs/design/security.rst:475:.. [8] This type of rule-based adversary is first described by Danny Dolev and Andrew Yao in their 1983 paper, `"On the
+docs/man/keylime-policy.1.rst:71:   **--algo** *{sha1,sha256,sha384,sha512,sm3_256}*
+docs/man/keylime_push_model_agent.8.rst:136:   TPM algorithms. Defaults: ``sha256``, ``rsa``, ``rsassa``
+docs/publications.bib:220:  abstract = {The accuracy and reliability of time synchronization and distribution are essential requirements for many critical infrastructures, including telecommunication networks, where 5G technologies place increasingly stringent conditions in terms of maintaining highly accurate time. A lack of synchronization between the clocks causes a malfunction of the 5G network, preventing it from providing a high quality of service; this makes the time distribution network a very viable target for attacks. Various solutions have been analyzed to mitigate attacks on the Global Navigation Satellite System (GNSS) radio-frequency spectrum and the Precision Time Protocol (PTP) used for time distribution over the network. This paper highlights the significance of monitoring the integrity of the software and configurations of the infrastructural nodes of a time distribution network. Moreover, this work proposes an attestation scheme, based on the Trusted Computing principles, capable of detecting both software violations on the nodes and hardware attacks aimed at tampering with the configuration of the GNSS receivers. The proposed solution has been implemented and validated on a testbed representing a typical synchronization distribution network. The results, simulating various types of adversaries, emphasize the effectiveness of the proposed approach in a wide range of typical attacks and the certain limitations that need to be addressed to enhance the security of the current GNSS receivers.},
+docs/rest_apis.rst:74:      bit-length formats (e.g., ``rsa2048``, ``rsa3072``, ``ecc256``,
+docs/rest_apis.rst:77:    * ``rsa`` → ``rsa2048``
+docs/rest_apis/2_1/agent.rst:44:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_1/agent.rst:168:            "hash_alg": "sha256",
+docs/rest_apis/2_1/agent.rst:169:            "enc_alg": "rsa",
+docs/rest_apis/2_1/agent.rst:170:            "sign_alg": "rsassa",
+docs/rest_apis/2_1/agent.rst:173:            "ima_measurement_list": "10 367a111b682553da5340f977001689db8366056a ima-ng sha256:94c0ac6d0ff747d8f1ca7fac89101a141f3e8f6a2c710717b477a026422766d6 boot_aggregate\n",
+docs/rest_apis/2_1/agent.rst:183:    :>json string hash_alg: Used hash algorithm used in the quote (e.g. sha1, sha256, sha512).
+docs/rest_apis/2_1/agent.rst:184:    :>json string enc_alg: Encryption algorithm used in the quote (ecc, rsa).
+docs/rest_apis/2_1/agent.rst:185:    :>json string sign_alg: Signing algorthm used in the quote (rsassa, rsapss, ecdsa, ecdaa or ecschnorr).
+docs/rest_apis/2_1/agent.rst:226:            "hash_alg": "sha256",
+docs/rest_apis/2_1/agent.rst:227:            "enc_alg": "rsa",
+docs/rest_apis/2_1/agent.rst:228:            "sign_alg": "rsassa",
+docs/rest_apis/2_1/verifier.rst:28:              "sha256",
+docs/rest_apis/2_1/verifier.rst:33:              "rsa"
+docs/rest_apis/2_1/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_1/verifier.rst:39:            "hash_alg": "sha256",
+docs/rest_apis/2_1/verifier.rst:40:            "enc_alg": "rsa",
+docs/rest_apis/2_1/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_1/verifier.rst:107:            "sha256",
+docs/rest_apis/2_1/verifier.rst:112:            "rsa"
+docs/rest_apis/2_1/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_2/agent.rst:38:            "tpm_hash_alg": "sha256",
+docs/rest_apis/2_2/agent.rst:39:            "tpm_enc_alg": "rsa",
+docs/rest_apis/2_2/agent.rst:40:            "tpm_sign_alg": "rsassa",
+docs/rest_apis/2_2/agent.rst:73:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_2/agent.rst:196:            "hash_alg": "sha256",
+docs/rest_apis/2_2/agent.rst:197:            "enc_alg": "rsa",
+docs/rest_apis/2_2/agent.rst:198:            "sign_alg": "rsassa",
+docs/rest_apis/2_2/agent.rst:201:            "ima_measurement_list": "10 367a111b682553da5340f977001689db8366056a ima-ng sha256:94c0ac6d0ff747d8f1ca7fac89101a141f3e8f6a2c710717b477a026422766d6 boot_aggregate\n",
+docs/rest_apis/2_2/agent.rst:211:    :>json string hash_alg: Used hash algorithm used in the quote (e.g. sha1, sha256, sha512).
+docs/rest_apis/2_2/agent.rst:212:    :>json string enc_alg: Encryption algorithm used in the quote (ecc, rsa).
+docs/rest_apis/2_2/agent.rst:213:    :>json string sign_alg: Signing algorthm used in the quote (rsassa, rsapss, ecdsa, ecdaa or ecschnorr).
+docs/rest_apis/2_2/agent.rst:255:            "hash_alg": "sha256",
+docs/rest_apis/2_2/agent.rst:256:            "enc_alg": "rsa",
+docs/rest_apis/2_2/agent.rst:257:            "sign_alg": "rsassa",
+docs/rest_apis/2_2/verifier.rst:28:              "sha256",
+docs/rest_apis/2_2/verifier.rst:33:              "rsa"
+docs/rest_apis/2_2/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_2/verifier.rst:39:            "hash_alg": "sha256",
+docs/rest_apis/2_2/verifier.rst:40:            "enc_alg": "rsa",
+docs/rest_apis/2_2/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_2/verifier.rst:107:            "sha256",
+docs/rest_apis/2_2/verifier.rst:112:            "rsa"
+docs/rest_apis/2_2/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_2/verifier.rst:324:       GET /v2.2/verify/identity?agent_uuid=e1ef9f28-be55-47b0-a6c1-8bef90294b93&hash_alg=sha256&nonce=DGHFH6EQVYGKP7YHNVEAFQQR5TN4W4JA&quote=r/1RDR4AYACIACzy[...] HTTP/1.1
+docs/rest_apis/2_3/agent.rst:38:            "tpm_hash_alg": "sha256",
+docs/rest_apis/2_3/agent.rst:39:            "tpm_enc_alg": "rsa",
+docs/rest_apis/2_3/agent.rst:40:            "tpm_sign_alg": "rsassa",
+docs/rest_apis/2_3/agent.rst:73:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_3/agent.rst:197:            "hash_alg": "sha256",
+docs/rest_apis/2_3/agent.rst:198:            "enc_alg": "rsa",
+docs/rest_apis/2_3/agent.rst:199:            "sign_alg": "rsassa",
+docs/rest_apis/2_3/agent.rst:202:            "ima_measurement_list": "10 367a111b682553da5340f977001689db8366056a ima-ng sha256:94c0ac6d0ff747d8f1ca7fac89101a141f3e8f6a2c710717b477a026422766d6 boot_aggregate\n",
+docs/rest_apis/2_3/agent.rst:212:    :>json string hash_alg: Used hash algorithm used in the quote (e.g. sha1, sha256, sha512).
+docs/rest_apis/2_3/agent.rst:213:    :>json string enc_alg: Encryption algorithm used in the quote (ecc, rsa).
+docs/rest_apis/2_3/agent.rst:214:    :>json string sign_alg: Signing algorthm used in the quote (rsassa, rsapss, ecdsa, ecdaa or ecschnorr).
+docs/rest_apis/2_3/agent.rst:256:            "hash_alg": "sha256",
+docs/rest_apis/2_3/agent.rst:257:            "enc_alg": "rsa",
+docs/rest_apis/2_3/agent.rst:258:            "sign_alg": "rsassa",
+docs/rest_apis/2_3/verifier.rst:28:              "sha256",
+docs/rest_apis/2_3/verifier.rst:33:              "rsa"
+docs/rest_apis/2_3/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_3/verifier.rst:39:            "hash_alg": "sha256",
+docs/rest_apis/2_3/verifier.rst:40:            "enc_alg": "rsa",
+docs/rest_apis/2_3/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_3/verifier.rst:107:            "sha256",
+docs/rest_apis/2_3/verifier.rst:112:            "rsa"
+docs/rest_apis/2_3/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_3/verifier.rst:306:       GET /v2.2/verify/identity?agent_uuid=e1ef9f28-be55-47b0-a6c1-8bef90294b93&hash_alg=sha256&nonce=DGHFH6EQVYGKP7YHNVEAFQQR5TN4W4JA&quote=r/1RDR4AYACIACzy[...] HTTP/1.1
+docs/rest_apis/2_4/agent.rst:38:            "tpm_hash_alg": "sha256",
+docs/rest_apis/2_4/agent.rst:39:            "tpm_enc_alg": "rsa",
+docs/rest_apis/2_4/agent.rst:40:            "tpm_sign_alg": "rsassa",
+docs/rest_apis/2_4/agent.rst:73:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_4/agent.rst:197:            "hash_alg": "sha256",
+docs/rest_apis/2_4/agent.rst:198:            "enc_alg": "rsa",
+docs/rest_apis/2_4/agent.rst:199:            "sign_alg": "rsassa",
+docs/rest_apis/2_4/agent.rst:202:            "ima_measurement_list": "10 367a111b682553da5340f977001689db8366056a ima-ng sha256:94c0ac6d0ff747d8f1ca7fac89101a141f3e8f6a2c710717b477a026422766d6 boot_aggregate\n",
+docs/rest_apis/2_4/agent.rst:212:    :>json string hash_alg: Used hash algorithm used in the quote (e.g. sha1, sha256, sha512).
+docs/rest_apis/2_4/agent.rst:213:    :>json string enc_alg: Encryption algorithm used in the quote (ecc, rsa).
+docs/rest_apis/2_4/agent.rst:214:    :>json string sign_alg: Signing algorthm used in the quote (rsassa, rsapss, ecdsa, ecdaa or ecschnorr).
+docs/rest_apis/2_4/agent.rst:256:            "hash_alg": "sha256",
+docs/rest_apis/2_4/agent.rst:257:            "enc_alg": "rsa",
+docs/rest_apis/2_4/agent.rst:258:            "sign_alg": "rsassa",
+docs/rest_apis/2_4/verifier.rst:28:              "sha256",
+docs/rest_apis/2_4/verifier.rst:33:              "rsa"
+docs/rest_apis/2_4/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_4/verifier.rst:39:            "hash_alg": "sha256",
+docs/rest_apis/2_4/verifier.rst:40:            "enc_alg": "rsa",
+docs/rest_apis/2_4/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_4/verifier.rst:107:            "sha256",
+docs/rest_apis/2_4/verifier.rst:112:            "rsa"
+docs/rest_apis/2_4/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_4/verifier.rst:306:       GET /v2.4/verify/identity?agent_uuid=e1ef9f28-be55-47b0-a6c1-8bef90294b93&hash_alg=sha256&nonce=DGHFH6EQVYGKP7YHNVEAFQQR5TN4W4JA&quote=r/1RDR4AYACIACzy[...] HTTP/1.1
+docs/rest_apis/2_4/verifier.rst:371:          "hash_alg": "sha256",
+docs/rest_apis/2_4/verifier.rst:377:          "ima_measurement_list": "10 0adefe762c149c7cec19da62f0da1297fcfbffff ima-ng sha256:0000000000000000000000000000000000000000000000000000000000000000 boot_aggregate[...]",
+docs/rest_apis/2_5/agent.rst:52:            "tpm_hash_alg": "sha256",
+docs/rest_apis/2_5/agent.rst:53:            "tpm_enc_alg": "rsa2048",
+docs/rest_apis/2_5/agent.rst:54:            "tpm_sign_alg": "rsassa",
+docs/rest_apis/2_5/agent.rst:64:    :>json string tpm_enc_alg: The encryption algorithm used by this agent's TPM device. In API v2.5+, this includes explicit bit-length (e.g., ``rsa2048``, ``ecc256``). Generic formats (``rsa``, ``ecc``) from earlier API versions are normalized to their default bit-lengths.
+docs/rest_apis/2_5/agent.rst:87:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_5/agent.rst:211:            "hash_alg": "sha256",
+docs/rest_apis/2_5/agent.rst:212:            "enc_alg": "rsa2048",
+docs/rest_apis/2_5/agent.rst:213:            "sign_alg": "rsassa",
+docs/rest_apis/2_5/agent.rst:216:            "ima_measurement_list": "10 367a111b682553da5340f977001689db8366056a ima-ng sha256:94c0ac6d0ff747d8f1ca7fac89101a141f3e8f6a2c710717b477a026422766d6 boot_aggregate\n",
+docs/rest_apis/2_5/agent.rst:226:    :>json string hash_alg: Hash algorithm used in the quote. Supported values: ``sha1``, ``sha256``, ``sha384``, ``sha512``, ``sm3_256``.
+docs/rest_apis/2_5/agent.rst:227:    :>json string enc_alg: Encryption algorithm used in the quote. In API v2.5+, this includes explicit bit-length specifications. Supported values: ``rsa``, ``rsa1024``, ``rsa2048``, ``rsa3072``, ``rsa4096``, ``ecc``, ``ecc192``, ``ecc224``, ``ecc256``, ``ecc384``, ``ecc521``, ``ecc_sm2``. Generic formats (``rsa``, ``ecc``) are normalized to ``rsa2048`` and ``ecc256`` respectively.
+docs/rest_apis/2_5/agent.rst:228:    :>json string sign_alg: Signing algorithm used in the quote. Supported values: ``rsassa``, ``rsapss``, ``ecdsa``, ``ecdaa``, ``ecschnorr``.
+docs/rest_apis/2_5/agent.rst:270:            "hash_alg": "sha256",
+docs/rest_apis/2_5/agent.rst:271:            "enc_alg": "rsa2048",
+docs/rest_apis/2_5/agent.rst:272:            "sign_alg": "rsassa",
+docs/rest_apis/2_5/verifier.rst:28:              "sha256",
+docs/rest_apis/2_5/verifier.rst:33:              "rsa"
+docs/rest_apis/2_5/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_5/verifier.rst:39:            "hash_alg": "sha256",
+docs/rest_apis/2_5/verifier.rst:40:            "enc_alg": "rsa2048",
+docs/rest_apis/2_5/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_5/verifier.rst:69:    :>json string enc_alg: Used encryption algorithm. In API v2.5+, this includes explicit bit-length (e.g., rsa2048, ecc256). Generic formats (rsa, ecc) are normalized to their defaults.
+docs/rest_apis/2_5/verifier.rst:107:            "sha256",
+docs/rest_apis/2_5/verifier.rst:112:            "rsa"
+docs/rest_apis/2_5/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_5/verifier.rst:306:       GET /v2.5/verify/identity?agent_uuid=e1ef9f28-be55-47b0-a6c1-8bef90294b93&hash_alg=sha256&nonce=DGHFH6EQVYGKP7YHNVEAFQQR5TN4W4JA&quote=r/1RDR4AYACIACzy[...] HTTP/1.1
+docs/rest_apis/2_5/verifier.rst:373:            "hash_alg": "sha256",
+docs/rest_apis/2_5/verifier.rst:379:            "ima_measurement_list": "10 0adefe762c149c7cec19da62f0da1297fcfbffff ima-ng sha256:0000000000000000000000000000000000000000000000000000000000000000 boot_aggregate[...]",
+docs/rest_apis/2_5/verifier.rst:413:                "hash_alg": "sha256",
+docs/rest_apis/2_5/verifier.rst:419:                "ima_measurement_list": "10 0adefe762c149c7cec19da62f0da1297fcfbffff ima-ng sha256:0000000000000000000000000000000000000000000000000000000000000000 boot_aggregate[...]",
+docs/rest_apis/3_0/verifier.rst:39:                    "signature_schemes": ["rsassa"],
+docs/rest_apis/3_0/verifier.rst:40:                    "hash_algorithms": ["sha256", "sha384", "sha512"],
+docs/rest_apis/3_0/verifier.rst:45:                        "key_algorithm": "rsa",
+docs/rest_apis/3_0/verifier.rst:48:                        "allowable_signature_schemes": ["rsassa"],
+docs/rest_apis/3_0/verifier.rst:49:                        "allowable_hash_algorithms": ["sha256", "sha384", "sha512"],
+docs/rest_apis/3_0/verifier.rst:93:                    "signature_scheme": "rsassa",
+docs/rest_apis/3_0/verifier.rst:94:                    "hash_algorithm": "sha256",
+docs/rest_apis/3_0/verifier.rst:98:                      "key_algorithm": "rsa",
+docs/user_guide/push_model.rst:128:     - ``sha256``
+docs/user_guide/push_model.rst:129:     - TPM hash algorithm (``sha256``, ``sha384``, ``sha512``).
+docs/user_guide/push_model.rst:131:     - ``rsassa``
+docs/user_guide/push_model.rst:132:     - TPM signing algorithm (``rsassa``, ``ecdsa``).
+docs/user_guide/push_model.rst:150:    tpm_hash_alg = "sha256"
+docs/user_guide/push_model.rst:151:    tpm_signing_alg = "rsassa"
+docs/user_guide/runtime_ima.rst:174:    sha256sum /etc/keys/ima/rsakey-rsa.crt.der
+docs/user_guide/runtime_ima.rst:177:As seen the the JSON schema below, the hash (sha1 or sha256) depending on the IMA configuration
+docs/user_guide/runtime_ima.rst:415:  openssl genrsa -out ima-filesigning.pem 2048
+docs/user_guide/runtime_ima.rst:416:  openssl rsa -in ima-filesigning.pem -pubout -out ima-pub.pem
+docs/user_guide/runtime_ima.rst:418:Next, we determine the hash (sha1 or sha256) that IMA is using for file
+docs/user_guide/runtime_ima.rst:430:  in the 4th column. On more recent systems we would likely use 'sha256'.
+docs/user_guide/runtime_ima.rst:438:  accidentally signed with the wrong hash, such as sha1 instead of sha256.
+docs/user_guide/secure_payload.rst:147:    cp payload_id_rsa* /root/.ssh/
+docs/user_guide/secure_payload.rst:148:    chmod 600 /root/.ssh/payload_id_rsa*
+docs/user_guide/secure_payload.rst:156:    payload_id_rsa.pub
+docs/user_guide/secure_payload.rst:157:    payload_id_rsa
+docs/user_guide/secure_payload.rst:212:            os.remove("/root/.ssh/payload_id_rsa")
+docs/user_guide/secure_payload.rst:213:            os.remove("/root/.ssh/payload_id_rsa.pub")
+docs/user_guide/secure_payload.rst:224:    as above, then provision a second server and add `payload_id_rsa.pub` to `.ssh/authorized_keys`
+keylime/.gitignore:2:/tci_rsa_key
+keylime/ca_impl_openssl.py:9:from cryptography.hazmat.primitives.asymmetric import rsa
+keylime/ca_impl_openssl.py:14:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey, RSAPublicKey
+keylime/ca_impl_openssl.py:138:    privkey = rsa.generate_private_key(
+keylime/ca_util.py:40:from cryptography.hazmat.primitives.asymmetric import padding, rsa
+keylime/ca_util.py:45:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
+keylime/ca_util.py:158:        assert isinstance(pubkey, rsa.RSAPublicKey)
+keylime/ca_util.py:246:        assert isinstance(pubkey, rsa.RSAPublicKey)
+keylime/cert_utils.py:12:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+keylime/cloud_verifier_common.py:238:            crypto.rsa_encrypt(crypto.rsa_import_pubkey(agent["public_key"]), base64.b64decode(agent["v"]))
+keylime/cloud_verifier_common.py:378:        signing_key = crypto.rsa_import_privkey(agent["revocation_key"])
+keylime/cloud_verifier_common.py:379:        tosend["signature"] = crypto.rsa_sign(signing_key, tosend["msg"])
+keylime/common/algorithms.py:29:    SHA256 = "sha256"
+keylime/common/algorithms.py:86:    RSA = "rsa"
+keylime/common/algorithms.py:95:    RSA = "rsa"
+keylime/common/algorithms.py:96:    RSA1024 = "rsa1024"
+keylime/common/algorithms.py:97:    RSA2048 = "rsa2048"
+keylime/common/algorithms.py:98:    RSA3072 = "rsa3072"
+keylime/common/algorithms.py:99:    RSA4096 = "rsa4096"
+keylime/common/algorithms.py:112:        if algorithm == "rsa":
+keylime/common/algorithms.py:113:            algorithm = "rsa2048"  # Default RSA alias maps to RSA-2048, same as the agent.
+keylime/common/algorithms.py:121:        if algorithm == "rsa":
+keylime/common/algorithms.py:122:            return "rsa2048"  # Default RSA alias maps to RSA-2048.
+keylime/common/algorithms.py:127:    RSASSA = "rsassa"
+keylime/common/algorithms.py:128:    RSAPSS = "rsapss"
+keylime/common/algorithms.py:139:        if self.value.startswith("rsa"):
+keylime/common/algorithms.py:140:            return Key("rsa")
+keylime/crypto.py:15:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey, RSAPublicKey, generate_private_key
+keylime/crypto.py:22:def rsa_import_pubkey(pubkey: Union[str, bytes]) -> RSAPublicKey:
+keylime/crypto.py:31:        raise TypeError(f"Unsupported raw pubkey data passed to rsa_import_pubkey: {type(pubkey).__name__}")
+keylime/crypto.py:37:def rsa_import_privkey(privkey: Union[str, bytes], password: Optional[bytes] = None) -> RSAPrivateKey:
+keylime/crypto.py:46:        raise TypeError(f"Unsupported raw privkey data passed to rsa_import_privkey: {type(privkey).__name__}")
+keylime/crypto.py:62:def rsa_generate(size: int) -> RSAPrivateKey:
+keylime/crypto.py:74:def rsa_sign(key: RSAPrivateKey, message: bytes, paddingt: str = "internal") -> bytes:
+keylime/crypto.py:89:def rsa_verify(public_key: RSAPublicKey, message: bytes, signature: bytes) -> bool:
+keylime/crypto.py:105:def rsa_export_pubkey(private_key: RSAPrivateKey) -> bytes:
+keylime/crypto.py:112:def rsa_export_privkey(private_key: RSAPrivateKey, password: Optional[str] = None) -> bytes:
+keylime/crypto.py:126:def rsa_encrypt(key: RSAPublicKey, message: bytes) -> bytes:
+keylime/crypto.py:138:def rsa_decrypt(key: RSAPrivateKey, ciphertext: bytes) -> bytes:
+keylime/crypto.py:225:    return hashlib.sha256(token.encode()).hexdigest()[:length]
+keylime/da/record.py:12:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
+keylime/da/record.py:35:        self.rcd_sa = config.get(self.svc, "transparency_log_sign_algo", fallback="sha256")
+keylime/da/record.py:80:                        self.priv_key = crypto.rsa_import_privkey(fp.read())
+keylime/da/record.py:286:                    record_object["signature"] = crypto.rsa_sign(self.priv_key, contents_for_signing, "default")
+keylime/dsse/ecdsa.py:59:        return hashlib.sha256(key_pem).hexdigest()
+keylime/ima/file_signatures.py:14:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+keylime/ima/ima.py:38:# specifies a different algorithm on the kernel command line (e.g., ima_hash=sha256)
+keylime/ima/ima.py:84:                "log_hash_alg": {"type": "string", "enum": ["sha1", "sha256", "sha384", "sha512"]},
+keylime/ima/ima.py:349:            failure.add_event("entry", f"Line was not parsable into a valid IMA entry: {line}", True, ["parser"])
+keylime/ima/ima.py:350:            logger.error("Line was not parsable into a valid IMA entry: %s", line)
+keylime/ima/ima.py:443:    sha256 = hashlib.sha256()
+keylime/ima/ima.py:444:    sha256.update(alist_bytes)
+keylime/ima/ima.py:445:    calculated_checksum = sha256.hexdigest()
+keylime/ima/ima.py:483:    runtime_policy_db_format["checksum"] = hashlib.sha256(runtime_policy_bytes).hexdigest()
+keylime/ima/types.py:70:    log_hash_alg: Required[Literal["sha1", "sha256", "sha384", "sha512"]]
+keylime/mba/elchecking/example.py:28:#   shim_authcode_sha256: 0xhex (for PCR 4 EV_EFI_BOOT_SERVICES_APPLICATION),
+keylime/mba/elchecking/example.py:29:#   grub_authcode_sha256: 0xhex (for PCR 4 EV_EFI_BOOT_SERVICES_APPLICATION),
+keylime/mba/elchecking/example.py:30:#   kernel_authcode_sha256: 0xhex (for PCR 4 EV_EFI_BOOT_SERVICES_APPLICATION),
+keylime/mba/elchecking/example.py:31:#   initrd_plain_sha256: 0xhex (for PCR 9 EV_IPL),
+keylime/mba/elchecking/example.py:38:# A digest is a map from hash-algorithm-name (sha1 or sha256) to 0xhex.
+keylime/mba/elchecking/example.py:62:    shim_authcode_sha256=hex_test,
+keylime/mba/elchecking/example.py:63:    grub_authcode_sha256=hex_test,
+keylime/mba/elchecking/example.py:64:    kernel_authcode_sha256=hex_test,
+keylime/mba/elchecking/example.py:65:    initrd_plain_sha256=hex_test,
+keylime/mba/elchecking/example.py:71:shim_authcode_sha256_no_secureboot = tests.obj_test(
+keylime/mba/elchecking/example.py:72:    shim_authcode_sha256=hex_test,
+keylime/mba/elchecking/example.py:73:    grub_authcode_sha256=hex_test,
+keylime/mba/elchecking/example.py:74:    vmlinuz_plain_sha256=hex_test,
+keylime/mba/elchecking/example.py:75:    initrd_plain_sha256=hex_test,
+keylime/mba/elchecking/example.py:79:allowed_kernel_list_test_no_secureboot = tests.list_test(shim_authcode_sha256_no_secureboot)
+keylime/mba/elchecking/example.py:138:                    tests.DigestTest({"sha256": string_strip0x(kernel["shim_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:139:                    tests.DigestTest({"sha256": string_strip0x(kernel["grub_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:144:                tests.DigestTest({"sha256": string_strip0x(kernel["shim_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:145:                tests.DigestTest({"sha256": string_strip0x(kernel["grub_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:146:                tests.DigestTest({"sha256": string_strip0x(kernel["kernel_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:150:                tests.DigestTest({"sha256": string_strip0x(kernel["shim_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:151:                tests.DigestTest({"sha256": string_strip0x(kernel["grub_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:152:                tests.DigestTest({"sha256": string_strip0x(kernel["kernel_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:153:                tests.DigestTest({"sha256": string_strip0x(kernel["kernel_authcode_sha256"])}),
+keylime/mba/elchecking/example.py:162:            return tests.DigestTest({"sha256": string_strip0x(kernel["vmlinuz_plain_sha256"])})
+keylime/mba/elchecking/example.py:171:                                tests.DigestTest({"sha256": string_strip0x(kernel["initrd_plain_sha256"])})
+keylime/mba/elchecking/example_reference_state.json:3:    {"scrtm": { "sha256": "0x96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"},
+keylime/mba/elchecking/example_reference_state.json:5:      {"sha256": "0x46274f0827aff146e57ade2616074d56d03f36d937203fa553cb4b40e9a5f635"},
+keylime/mba/elchecking/example_reference_state.json:6:      {"sha256": "0xd212f1114cb97c6f2a9a88d38899bdf4445bc7e827b0a4efb431e6307cd34151"}
+keylime/mba/elchecking/example_reference_state.json:43:      "sha256": "0xae320288c88b8b050b1b16163565c264719e623e709c7789d2c12ba9a00bc4ee"
+keylime/mba/elchecking/example_reference_state.json:48:      "sha256": "0x8d8a3aae50d5d25838c95c034aadce7b548c9a952eb7925e366eda537c59c3b0"
+keylime/mba/elchecking/example_reference_state.json:53:      "shim_authcode_sha256": "0x0f87dfd530645c0e0197b89938f0659c943e5eceffec74f09fefa135f4ee76e6",
+keylime/mba/elchecking/example_reference_state.json:54:      "grub_authcode_sha256": "0x412ce775fe05b194ce64441443aa721ad8b7dedb8e4f5e40481633d596d5b842",
+keylime/mba/elchecking/example_reference_state.json:55:      "kernel_authcode_sha256": "0x8d25a4704a6dd7087ba00f1efc0ef34c75214963973c21c06aff1de0437dbf81",
+keylime/mba/elchecking/example_reference_state.json:56:      "initrd_plain_sha256": "0xdca6ad47e7e912c7affbcdea95e138932194b92b2805b11cb6c4881db171444b",
+keylime/mba/elchecking/tests.py:24:# Here digest name is something like 'sha256'.
+keylime/mba/elparsing/tpm2_tools_elparser.py:190:    Hashes are calculated for both sha1 and sha256,
+keylime/mba/mba.py:95:    "sha1" or "sha256".
+keylime/models/base/basic_model.py:193:    of a DevID in the absence of an EK cert and vice versa.
+keylime/models/registrar/registrar_agent.py:6:from cryptography.hazmat.primitives.asymmetric import ec, rsa
+keylime/models/registrar/registrar_agent.py:100:        if not isinstance(tpm_pub, (rsa.RSAPublicKey, ec.EllipticCurvePublicKey)):
+keylime/models/verifier/auth_session.py:335:        hash_algorithm = "sha256"
+keylime/models/verifier/auth_session.py:336:        signing_scheme = "rsassa"
+keylime/models/verifier/auth_session.py:619:            "sha256",
+keylime/models/verifier/auth_session.py:623:        self.supported_signing_schemes = ["rsassa", "rsapss", "ecdsa"]  # pylint: disable=attribute-defined-outside-init
+keylime/policy/create_mb_policy.py:25:def event_to_sha256(event: Dict[str, Any]) -> Dict[str, Any]:
+keylime/policy/create_mb_policy.py:26:    """Extract the sha256 digest from an event."""
+keylime/policy/create_mb_policy.py:31:        if "AlgorithmId" in digest and digest["AlgorithmId"] == "sha256":
+keylime/policy/create_mb_policy.py:34:            return {"sha256": f"0x{digest['Digest']}"}
+keylime/policy/create_mb_policy.py:42:            return {"scrtm": event_to_sha256(event)}
+keylime/policy/create_mb_policy.py:54:        out.append(event_to_sha256(event))
+keylime/policy/create_mb_policy.py:143:        out.append(event_to_sha256(event))
+keylime/policy/create_mb_policy.py:150:        kernel["kernel_authcode_sha256"] = out[2]["sha256"]
+keylime/policy/create_mb_policy.py:156:    kernel["shim_authcode_sha256"] = out[0]["sha256"]
+keylime/policy/create_mb_policy.py:157:    kernel["grub_authcode_sha256"] = out[1]["sha256"]
+keylime/policy/create_mb_policy.py:164:            kernel["initrd_plain_sha256"] = event_to_sha256(event)["sha256"]
+keylime/policy/create_mb_policy.py:168:        logger.info("Adding plain sha256 digest of vmlinuz for GRUB to reference state, because SecureBoot is disabled")
+keylime/policy/create_mb_policy.py:175:                kernel["vmlinuz_plain_sha256"] = event_to_sha256(event)["sha256"]
+keylime/policy/create_mb_policy.py:198:            out["mokdig"].append(event_to_sha256(event))
+keylime/policy/create_mb_policy.py:200:            out["mokxdig"].append(event_to_sha256(event))
+keylime/policy/create_runtime_policy.py:53:SHA256_OR_SM3 = "sha256_or_sm3_256"
+keylime/policy/create_runtime_policy.py:274:    of the sha256sum utility, i.e. <digest>  <file>
+keylime/policy/create_runtime_policy.py:450:        help="checksum algorithm to be used. If not specified, it will attempt to use the same algorithm the boot aggregate uses or fallback to sha256, otherwise",
+keylime/policy/rpm_repo.py:34:    _SHA256_DIGEST_LEN = algorithms.Hash("sha256").get_hex_size()
+keylime/revocation_notifier.py:341:    elif not crypto.rsa_verify(
+keylime/signing.py:115:            (hashlib.sha256(cert).hexdigest(), dsse_x509.Verifier(load_pem_x509_certificate(cert)))
+keylime/signing.py:134:            keyid = hashlib.sha256(runtime_policy_key_bytes).hexdigest()
+keylime/tenant.py:1400:            encrypted_U = crypto.rsa_encrypt(crypto.rsa_import_pubkey(public_key), self.U)
+keylime/tpm/tpm2_objects.py:13:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey, RSAPublicNumbers
+keylime/tpm/tpm2_objects.py:318:        rsa_numbers = RSAPublicNumbers(exponent, bmodulus)
+keylime/tpm/tpm2_objects.py:319:        return rsa_numbers.public_key(backend=default_backend()), name_alg
+keylime/tpm/tpm2_objects.py:383:        rsa_numbers = pubkey.public_numbers()
+keylime/tpm/tpm2_objects.py:384:        n = rsa_numbers.n.to_bytes((rsa_numbers.n.bit_length() + 7) // 8, byteorder="big")
+keylime/tpm/tpm2_objects.py:386:        pub_e = rsa_numbers.e
+keylime/tpm/tpm2_objects.py:429:        return hashlib.sha256()
+keylime/tpm/tpm2_objects_test.py:5:from cryptography.hazmat.primitives.asymmetric import ec, rsa
+keylime/tpm/tpm2_objects_test.py:71:    def test_tpm2b_public_from_pubkey_rsa(self) -> None:
+keylime/tpm/tpm2_objects_test.py:72:        test_rsa_cert_bytes = base64.b64decode(
+keylime/tpm/tpm2_objects_test.py:98:        correct_rsa_obj = base64.b64decode(
+keylime/tpm/tpm2_objects_test.py:107:        test_rsa_cert = load_der_x509_certificate(test_rsa_cert_bytes, backend=default_backend())
+keylime/tpm/tpm2_objects_test.py:108:        test_rsa_pubkey = test_rsa_cert.public_key()
+keylime/tpm/tpm2_objects_test.py:109:        assert isinstance(test_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm2_objects_test.py:110:        new_rsa_obj = ek_low_tpm2b_public_from_pubkey(test_rsa_pubkey)
+keylime/tpm/tpm2_objects_test.py:111:        self.assertEqual(new_rsa_obj.hex(), correct_rsa_obj.hex())
+keylime/tpm/tpm2_objects_test.py:143:    def test_pubkey_from_tpm2b_public_rsa(self) -> None:
+keylime/tpm/tpm2_objects_test.py:144:        test_rsa_cert_bytes = base64.b64decode(
+keylime/tpm/tpm2_objects_test.py:170:        test_rsa_cert = load_der_x509_certificate(test_rsa_cert_bytes, backend=default_backend())
+keylime/tpm/tpm2_objects_test.py:171:        correct_rsa_obj = base64.b64decode(
+keylime/tpm/tpm2_objects_test.py:180:        new_rsa_pubkey = pubkey_from_tpm2b_public(correct_rsa_obj)
+keylime/tpm/tpm2_objects_test.py:181:        assert isinstance(new_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm2_objects_test.py:182:        correct_rsa_pubkey = test_rsa_cert.public_key()
+keylime/tpm/tpm2_objects_test.py:183:        assert isinstance(correct_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm2_objects_test.py:184:        new_rsa_pubkey_n = new_rsa_pubkey.public_numbers()
+keylime/tpm/tpm2_objects_test.py:185:        correct_rsa_pubkey_n = correct_rsa_pubkey.public_numbers()
+keylime/tpm/tpm2_objects_test.py:186:        self.assertEqual(new_rsa_pubkey.key_size, correct_rsa_pubkey.key_size)
+keylime/tpm/tpm2_objects_test.py:187:        self.assertEqual(new_rsa_pubkey_n.e, correct_rsa_pubkey_n.e)  # pylint: disable=no-member
+keylime/tpm/tpm2_objects_test.py:188:        self.assertEqual(new_rsa_pubkey_n.n, correct_rsa_pubkey_n.n)  # pylint: disable=no-member
+keylime/tpm/tpm2_objects_test.py:190:        sym_alg, symkey_bits = get_tpm2b_public_symkey_params(correct_rsa_obj)
+keylime/tpm/tpm2_objects_test.py:194:    def test_pubkey_from_tpm2b_public_rsa_without_encryption(self) -> None:
+keylime/tpm/tpm2_objects_test.py:195:        new_rsa_pubkey = pubkey_from_tpm2b_public(
+keylime/tpm/tpm2_objects_test.py:209:        assert isinstance(new_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm2_objects_test.py:210:        new_rsa_pubkey_n = new_rsa_pubkey.public_numbers()
+keylime/tpm/tpm2_objects_test.py:212:        self.assertEqual(new_rsa_pubkey.key_size, 2048)
+keylime/tpm/tpm2_objects_test.py:213:        self.assertEqual(new_rsa_pubkey_n.e, 65537)  # pylint: disable=no-member
+keylime/tpm/tpm2_objects_test.py:215:            str(new_rsa_pubkey_n.n),  # pylint: disable=no-member
+keylime/tpm/tpm2_objects_test.py:265:    def test_pubkey_from_tpm2b_public_rsa_2(self) -> None:
+keylime/tpm/tpm2_objects_test.py:276:        new_rsa_pubkey, name_alg = pubkey_parms_from_tpm2b_public(test_pubkey_bytes)
+keylime/tpm/tpm2_objects_test.py:277:        self.assertIsInstance(new_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm_main.py:9:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+keylime/tpm/tpm_util.py:50:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+keylime/tpm/tpm_util_test.py:60:            checkquote(aikblob, nonce, sigblob, quoteblob, pcrblob, "sha256")
+keylime/tpm/tpm_util_test.py:68:            checkquote(aikblob, nonce, sigblob, bytes(bad_quoteblob), pcrblob, "sha256")
+keylime/tpm/tpm_util_test.py:74:            checkquote(aikblob, bad_nonce, sigblob, quoteblob, pcrblob, "sha256")
+keylime/tpm/tpm_util_test.py:79:            checkquote(aikblob, nonce, sigblob, quoteblob, bytes(bad_pcrblob), "sha256")
+pylintrc:14:ignored-modules=zmq,alembic.op,alembic.context,cryptography.hazmat.primitives.asymmetric.rsa,gpg
+scripts/create_mb_refstate:23:def event_to_sha256(event):
+scripts/create_mb_refstate:25:    Extracts the sha256 digest from an event
+scripts/create_mb_refstate:28:        if digest["AlgorithmId"] == "sha256":
+scripts/create_mb_refstate:29:            return {"sha256": f"0x{digest['Digest']}"}
+scripts/create_mb_refstate:38:            return {"scrtm": event_to_sha256(event)}
+scripts/create_mb_refstate:49:        out.append(event_to_sha256(event))
+scripts/create_mb_refstate:118:        out.append(event_to_sha256(event))
+scripts/create_mb_refstate:120:    kernel = {"shim_authcode_sha256": out[0]["sha256"], "grub_authcode_sha256": out[1]["sha256"]}
+scripts/create_mb_refstate:123:        kernel["kernel_authcode_sha256"] = out[2]["sha256"]
+scripts/create_mb_refstate:131:            kernel["initrd_plain_sha256"] = event_to_sha256(event)["sha256"]
+scripts/create_mb_refstate:135:        logging.info("Adding plain sha256 digest of vmlinuz for GRUB to refstate, because SecureBoot is disabled")
+scripts/create_mb_refstate:140:                kernel["vmlinuz_plain_sha256"] = event_to_sha256(event)["sha256"]
+scripts/create_mb_refstate:163:            out["mokdig"].append(event_to_sha256(event))
+scripts/create_mb_refstate:165:            out["mokxdig"].append(event_to_sha256(event))
+scripts/create_runtime_policy.sh:23:      64) hashalgo=sha256sum ;;
+scripts/create_runtime_policy.sh:62:ALGO_LIST=("sha1sum" "sha256sum" "sha512sum")
+scripts/create_runtime_policy.sh:195:# File_Digest may start with the digest algorithm specified (e.g "sha1:", "sha256:") depending on the template used.
+scripts/create_runtime_policy.sh:265:# A bit of cleanup on the resulting file (among other problems, sha256sum might output a hash with the prefix '\\')
+scripts/keylime_oneshot_attestation:364:        help="The encryption algorithm to be used by the TPM. Defaults to 'rsa'",
+scripts/keylime_oneshot_attestation:365:        default="rsa",
+scripts/keylime_oneshot_attestation:371:        help="The signing algorithm to be used by the TPM. Defaults to 'rsassa'",
+scripts/keylime_oneshot_attestation:372:        default="rsassa",
+scripts/keylime_oneshot_attestation:378:        help="The hash algorithm to be used by the TPM. Defaults to 'sha256'",
+scripts/keylime_oneshot_attestation:379:        default="sha256",
+templates/2.0/agent.j2:155:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.0/agent.j2:159:# Accepted values: ecc, rsa
+templates/2.0/agent.j2:163:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.0/mapping.json:67:                "option": "rsa_keyname",
+templates/2.0/mapping.json:158:                "default": "sha256"
+templates/2.0/mapping.json:163:                "default": "rsa"
+templates/2.0/mapping.json:168:                "default": "rsassa"
+templates/2.0/mapping.json:385:                "default": "sha256"
+templates/2.0/mapping.json:484:                "default": "sha512, sha384, sha256"
+templates/2.0/mapping.json:489:                "default": "ecc, rsa"
+templates/2.0/mapping.json:494:                "default": "ecschnorr, rsassa"
+templates/2.0/mapping.json:631:                "default": "sha256"
+templates/2.0/registrar.j2:102:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.0/tenant.j2:66:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.0/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.0/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.0/verifier.j2:216:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.1/agent.j2:155:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.1/agent.j2:159:# Accepted values: ecc, rsa
+templates/2.1/agent.j2:163:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.1/agent.j2:180:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.1/agent.j2:181:# iak_idevid_name_alg:        sha256, sm3_256, sha384, sha512
+templates/2.1/mapping.json:158:                "default": "sha256"
+templates/2.1/mapping.json:163:                "default": "rsa"
+templates/2.1/mapping.json:168:                "default": "rsassa"
+templates/2.1/mapping.json:188:                "default": "sha256"
+templates/2.1/mapping.json:193:                "default": "rsa"
+templates/2.1/mapping.json:415:                "default": "sha256"
+templates/2.1/mapping.json:514:                "default": "sha512, sha384, sha256"
+templates/2.1/mapping.json:519:                "default": "ecc, rsa"
+templates/2.1/mapping.json:524:                "default": "ecschnorr, rsassa"
+templates/2.1/mapping.json:661:                "default": "sha256"
+templates/2.1/registrar.j2:102:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.1/tenant.j2:66:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.1/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.1/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.1/verifier.j2:216:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.2/agent.j2:155:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.2/agent.j2:159:# Accepted values: ecc, rsa
+templates/2.2/agent.j2:163:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.2/agent.j2:180:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.2/agent.j2:181:# iak_idevid_name_alg:        sha256, sm3_256, sha384, sha512
+templates/2.2/registrar.j2:102:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.2/tenant.j2:66:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.2/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.2/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.2/verifier.j2:216:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.3/agent.j2:155:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.3/agent.j2:159:# Accepted values: ecc, rsa
+templates/2.3/agent.j2:163:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.3/agent.j2:183:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.3/agent.j2:184:# iak_idevid_name_alg:        sha256, sm3_256, sha384, sha512
+templates/2.3/mapping.json:28:                    "default": "['sha512', 'sha384', 'sha256']"
+templates/2.3/mapping.json:33:                    "default": "['ecc', 'rsa']"
+templates/2.3/mapping.json:38:                    "default": "['ecschnorr', 'rsassa']"
+templates/2.3/registrar.j2:102:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.3/tenant.j2:66:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.3/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.3/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.3/verifier.j2:216:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.4/agent.j2:165:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.4/agent.j2:169:# Accepted values: ecc, rsa
+templates/2.4/agent.j2:173:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.4/agent.j2:193:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.4/agent.j2:194:# iak_idevid_name_alg:        sha256, sm3_256, sha384, sha512
+templates/2.4/registrar.j2:102:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.4/tenant.j2:66:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.4/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.4/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.4/verifier.j2:216:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.5/agent.j2:185:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.5/agent.j2:189:# Accepted values: ecc, rsa
+templates/2.5/agent.j2:193:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.5/agent.j2:213:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.5/agent.j2:214:# iak_idevid_name_alg:        sha256, sm3_256, sha384, sha512
+templates/2.5/registrar.j2:142:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+templates/2.5/tenant.j2:66:# Accepted values: sha512, sha384, sha256, sha1
+templates/2.5/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.5/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.5/verifier.j2:263:# the digest algorithm for signatures is controlled by this parameter (default "sha256")
+test-data/emulator-inputs.txt:16:        "rsa:\n", 
+test-data/emulator-inputs.txt:86:        "sha256:\n", 
+test-data/emulator-inputs.txt:106:        "rsassa:\n", 
+test-data/emulator-inputs.txt:116:        "rsaes:\n", 
+test-data/emulator-inputs.txt:126:        "rsapss:\n", 
+test-data/emulator-inputs.txt:295:        "rsa:\n", 
+test-data/emulator-inputs.txt:365:        "sha256:\n", 
+test-data/emulator-inputs.txt:385:        "rsassa:\n", 
+test-data/emulator-inputs.txt:395:        "rsaes:\n", 
+test-data/emulator-inputs.txt:405:        "rsapss:\n", 
+test-data/emulator-inputs.txt:574:        "rsa:\n", 
+test-data/emulator-inputs.txt:644:        "sha256:\n", 
+test-data/emulator-inputs.txt:664:        "rsassa:\n", 
+test-data/emulator-inputs.txt:674:        "rsaes:\n", 
+test-data/emulator-inputs.txt:684:        "rsapss:\n", 
+test-data/emulator-inputs.txt:848:    "cmd": "tpm2_createek -c - -G rsa -p /tmp/tmpN6MZiK -P tO4ckKfWtqGMz70rt7ep -o keylime -e keylime", 
+test-data/emulator-inputs.txt:871:        "  value: sha256\n", 
+test-data/emulator-inputs.txt:877:        "  value: rsa\n", 
+test-data/emulator-inputs.txt:894:        "rsa: d1d2f17400015493baab16a68c2321ca15998221476479cf11ed2d305c8addf355affc3c957f6bf9038bc4b9a44f421d82c118b4664679f6c3faa425e0ed6c936e7cdb75f3bb9b4417cf7aeab4dd91fb2ff0246b35a04bc16967b7f9feaa3228537c5924c991fa615fa937376bacd598f39826cb45b4cf2be1bf473c252ae8cb5efc9dd6c7817123d47852b094ca201e1fefb441aa48c6e106b15218b3dda71b2bc541805915153a708b77de26aa4eb442202269f986e5327c39e18246007daf4d541febf7cb02742de4bd547e64f247f640e9a76fc7cb287a4481388016ed7995f17a7d992aae20765d49730995c9ff077e4f53705d914b48626e49b861ad3d\n", 
+test-data/emulator-inputs.txt:910:    "cmd": "tpm2_createak -C 0x81000000 -k - -G rsa -D sha256 -s rsassa -p /tmp/tmp8ts49q -f pem -e keylime -P DNRPz7uh9I4Z3yUG1Pl0 -o keylime", 
+test-data/emulator-inputs.txt:1187:        "rsa:\n", 
+test-data/emulator-inputs.txt:1257:        "sha256:\n", 
+test-data/emulator-inputs.txt:1277:        "rsassa:\n", 
+test-data/emulator-inputs.txt:1287:        "rsaes:\n", 
+test-data/emulator-inputs.txt:1297:        "rsapss:\n", 
+test-data/emulator-inputs.txt:1671:    "cmd": "tpm2_pcrextend 16:sha256=b1c68865f8cc97e3d2bc3a287d3f7c6095e37261e69eb39b2b45acf7e7c5dbb8", 
+test-data/emulator-inputs.txt:1680:    "cmd": "tpm2_deluxequote -C 0x81000001 -L sha256:0 -q 75354374506f4a315850476d4d4e457831467739 -m /tmp/tmpTlOZzT -s /tmp/tmpcqidzq -p /tmp/tmp5RFFxN -G sha256 -P DNRPz7uh9I4Z3yUG1Pl0", 
+test-data/emulator-inputs.txt:1691:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:1694:        "  sha256:\n", 
+test-data/emulator-inputs.txt:1711:    "cmd": "tpm2_pcrextend 16:sha256=b1c68865f8cc97e3d2bc3a287d3f7c6095e37261e69eb39b2b45acf7e7c5dbb8", 
+test-data/emulator-inputs.txt:1720:    "cmd": "tpm2_deluxequote -C 0x81000001 -L sha256:15,22 -q 54647678677a486f396543586671314d504b6352 -m /tmp/tmppU4qZQ -s /tmp/tmprYRHTV -p /tmp/tmpFCF8xv -G sha256 -P DNRPz7uh9I4Z3yUG1Pl0", 
+test-data/emulator-inputs.txt:1731:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:1734:        "  sha256:\n", 
+test-data/emulator-inputs.txt:1875:    "cmd": "tpm2_pcrextend 16:sha256=b1c68865f8cc97e3d2bc3a287d3f7c6095e37261e69eb39b2b45acf7e7c5dbb8", 
+test-data/emulator-inputs.txt:1884:    "cmd": "tpm2_deluxequote -C 0x81000001 -L sha256:15,22 -q 494f355a5a4e4a504a4d4932626d346c33714e68 -m /tmp/tmpv9Z5_V -s /tmp/tmpLv0mHQ -p /tmp/tmpRe5z0o -G sha256 -P DNRPz7uh9I4Z3yUG1Pl0", 
+test-data/emulator-inputs.txt:1895:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:1898:        "  sha256:\n", 
+test-data/emulator-inputs.txt:2021:    "cmd": "tpm2_pcrextend 16:sha256=b1c68865f8cc97e3d2bc3a287d3f7c6095e37261e69eb39b2b45acf7e7c5dbb8", 
+test-data/emulator-inputs.txt:2030:    "cmd": "tpm2_deluxequote -C 0x81000001 -L sha256:15,22 -q 306338796334325a77566b31676c544b354b334b -m /tmp/tmpwGd2g9 -s /tmp/tmp2su43I -p /tmp/tmpLvWzRv -G sha256 -P DNRPz7uh9I4Z3yUG1Pl0", 
+test-data/emulator-inputs.txt:2041:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:2044:        "  sha256:\n", 
+test-data/emulator-inputs.txt:2167:    "cmd": "tpm2_pcrextend 16:sha256=b1c68865f8cc97e3d2bc3a287d3f7c6095e37261e69eb39b2b45acf7e7c5dbb8", 
+test-data/emulator-inputs.txt:2176:    "cmd": "tpm2_deluxequote -C 0x81000001 -L sha256:15,22 -q 4562346869526d694731354442496247396f5844 -m /tmp/tmp8I6kmA -s /tmp/tmpuYO2hK -p /tmp/tmp94CbVc -G sha256 -P DNRPz7uh9I4Z3yUG1Pl0", 
+test-data/emulator-inputs.txt:2187:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:2190:        "  sha256:\n", 
+test-data/emulator-inputs.txt:2313:    "cmd": "tpm2_pcrextend 16:sha256=b1c68865f8cc97e3d2bc3a287d3f7c6095e37261e69eb39b2b45acf7e7c5dbb8", 
+test-data/emulator-inputs.txt:2322:    "cmd": "tpm2_deluxequote -C 0x81000001 -L sha256:15,22 -q 784339434d7069524343543169674b4e44714b37 -m /tmp/tmpC_qZ7E -s /tmp/tmpIf_UVa -p /tmp/tmpAmWJay -G sha256 -P DNRPz7uh9I4Z3yUG1Pl0", 
+test-data/emulator-inputs.txt:2333:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:2336:        "  sha256:\n", 
+test/.pylintrc:14:ignored-modules=zmq,alembic.op,alembic.context,cryptography.hazmat.primitives.asymmetric.rsa,gpg
+test/data/create-runtime-policy/ima-log-sha256:1:10 6309e2c83b7814367bb3912a55e5473454623535 ima-ng sha256:f4845392eca429a4c941a6a07fc32faf843a88c5c3dfa3b9329ab8f4171d9ce3 boot_aggregate
+test/data/create-runtime-policy/ima-log-sha256:2:10 80255d9c7dad91ef5f21b18560a47642d6f4d653 ima-ng sha256:96d7fae8adb7286a419a88f78c13d35fb782d63df654b7db56f154765698b754 /data
+test/data/create-runtime-policy/setup-initrd-tests:61:    # foo: sha256:18eb0ba043d6fc5b06b6f785b4a411fa0d6d695c4a08d2497e8b07c4043048f7
+test/data/create-runtime-policy/setup-initrd-tests:63:    # bar: sha256:dd2ccf6ebfabbca501864a3ec5aebecfadd69d717ea9d9ddd509b49471d039db
+test/data/create-runtime-policy/setup-initrd-tests:65:    # foobar.so: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+test/data/create-runtime-policy/setup-initrd-tests:67:    # foobar.so: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+test/data/create-runtime-policy/setup-initrd-tests:100:    # All dummy files with sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+test/data/create-runtime-policy/setup-rpm-tests:33:GPGDIR_RSA="${BASEDIR}"/gnupg/rsa
+test/data/create-runtime-policy/setup-rpm-tests:48:RPM_REPO_SIGNED_RSA="${BASEDIR}"/repo/signed-rsa
+test/data/create-runtime-policy/setup-rpm-tests:70:default_md = sha256
+test/data/create-runtime-policy/setup-rpm-tests:91:    openssl rsa -pubout -in "${IMA_PRIV_KEY}" -out "${IMA_PUB_KEY}"
+test/data/create-runtime-policy/setup-rpm-tests:94:create_gpg_rsa_key() {
+test/data/create-runtime-policy/setup-rpm-tests:127:    [ -d "${GPGDIR_RSA}" ] || create_gpg_rsa_key
+test/data/create-runtime-policy/setup-rpm-tests:194:%__gpg_sign_cmd %{__gpg} ${GPGRSA} --force-v3-sigs --verbose --no-armor --no-secmem-warning -u "%{_gpg_name}" -sbo %{__signature_filename} --digest-algo sha256 %{__plaintext_filename}'
+test/data/ima-allowlist-short.txt:1:sha256:4309217e9709def327c3409407f4d52907aeba46ef1b4f46529fd095f2ef9fb2  boot_aggregate
+test/data/runtime-policy-test.json:1:{"meta": {"version": 1, "timestamp": "2022-10-24 21:46:47.978595", "generator": 2}, "release": 0, "digests": {"boot_aggregate": ["sha256:4309217e9709def327c3409407f4d52907aeba46ef1b4f46529fd095f2ef9fb2"], "/boot/loader.0/entries/ostree-2-fedora-coreos.conf": ["856ce73f0736eba033eaa18d1c90efd4b38a4a4f"], "/boot/loader.0/entries/ostree-1-fedora-coreos.conf": ["792852898b1eba91c9ca858595f1566ce56e0fe1"], "/boot/grub2/i386-pc/terminfo.mod": ["4860656c6855b6db0c7a2ccc6227a395928986a7"], "/boot/grub2/i386-pc/pxechain.mod": ["55aaa56ba794c194b63530c46783fa46037e26d2"], "/boot/grub2/i386-pc/tr.mod": ["e295d64734757d946dbbf294d72edf62a36ab157"], "/boot/grub2/i386-pc/testload.mod": ["68e1d012e3f193dcde955e6ffbbc80e22b0f8778"], "/boot/grub2/i386-pc/zfsinfo.mod": ["5b56106389e376c9c2636d710765b785ae2dfb58"], "/boot/grub2/i386-pc/gcry_seed.mod": ["a8ab07e6517f4cad21bbaeb37d9e2b5d9e852d5c"], "/boot/grub2/i386-pc/odc.mod": ["08755fbe0d9ff2ee596f31930163eb8695500ad1"], "/boot/grub2/i386-pc/xnu_uuid.mod": ["3bb40fc897f149faa8c6cf950e375c4007df14cb"], "/boot/grub2/i386-pc/adler32.mod": ["4caaa00ecde401f0167e8d25885643fcb1c715a5"], "/boot/grub2/i386-pc/iorw.mod": ["427cb344c333c59142eff44a6d75cc2bd5203b61"], "/boot/grub2/i386-pc/ntfs.mod": ["5e8f510b76b2c86d3f0791d419f945cc840efd82"], "/boot/grub2/i386-pc/png.mod": ["cce8b403a21f87c75aa2c23db500e4ce648f56ed"], "/boot/grub2/i386-pc/usbserial_pl2303.mod": ["477e3e293e7ca72132aa39e3c11575112e1a87d3"], "/boot/grub2/i386-pc/btrfs.mod": ["31936e433beca76f89f5f6ea3250fa384d1bbab9"], "/boot/grub2/i386-pc/legacycfg.mod": ["906602abecdcd2cae7ab90c2dfcb5633f2b95b65"], "/boot/grub2/i386-pc/macho.mod": ["a80db30d37330fd3e043c097a64db14c85b13443"], "/boot/grub2/i386-pc/cbmemc.mod": ["77c3547862ac12e3fa517da8945d2e257284fe2a"], "/boot/grub2/i386-pc/pata.mod": ["ee4d2b601c0efc0ea97314c2818667a83272eac1"]}, "excludes": [], "keyrings": {".ima": ["a7d52aaa18c23d2d9bb2abb4308c0eeee67387a42259f4a6b1a42257065f3d5a"]}, "ima": {"ignored_keyrings": [], "log_hash_alg": "sha1", "dm_policy": null}, "ima-buf": {}, "verification-keys": ""}
+test/test_algorithms.py:10:        for algo in ["sha256", "sha384", "sha512"]:
+test/test_algorithms.py:59:            {"hash": "sha256", "len": 64},
+test/test_algorithms.py:79:                "hash": "sha256",
+test/test_algorithms.py:109:                "enc": "rsa",
+test/test_algorithms.py:134:                "enc": "rsa",
+test/test_algorithms.py:208:                "input": "rsa",
+test/test_algorithms.py:209:                "expected": "rsa2048",
+test/test_algorithms.py:227:    def test_normalize_rsa_alias_behavior(self):
+test/test_algorithms.py:229:        # Test that "rsa" is recognized through alias handling
+test/test_algorithms.py:230:        self.assertTrue(Encrypt.is_recognized("rsa"))
+test/test_algorithms.py:232:        # Test that normalize converts "rsa" to "rsa2048"
+test/test_algorithms.py:233:        self.assertEqual(Encrypt.normalize("rsa"), "rsa2048")
+test/test_algorithms.py:235:        # Test that direct rsa2048 works
+test/test_algorithms.py:236:        self.assertTrue(Encrypt.is_recognized("rsa2048"))
+test/test_algorithms.py:247:                "sign": "rsassa",
+test/test_algorithms.py:251:                "sign": "rsapss",
+test/test_algorithms.py:286:                "algorithm": "rsa",
+test/test_algorithms.py:287:                "accepted": ["rsa"],
+test/test_algorithms.py:302:                "accepted": ["rsa", "ecc256"],
+test/test_algorithms.py:380:                "accepted": ["rsa", "ecc"],
+test/test_algorithms.py:386:                "accepted": ["rsa", "ecc256"],
+test/test_algorithms.py:392:                "accepted": ["rsa", "ecc"],
+test/test_algorithms.py:398:                "accepted": ["rsa", "ecc384"],
+test/test_algorithms.py:414:                "algorithm": "rsa",
+test/test_algorithms.py:415:                "accepted": ["ecc", "rsa"],
+test/test_algorithms.py:420:                "accepted": ["rsa", "ecc"],
+test/test_algorithms.py:425:                "accepted": ["rsa", "ecc256", "ecc384"],
+test/test_algorithms.py:430:                "accepted": ["rsa", "ecc", "ecc384"],
+test/test_attestation_model.py:219:                "capabilities": {"algorithms": ["rsa2048"]},
+test/test_attestation_model.py:247:                "capabilities": {"algorithms": ["rsa2048"]},
+test/test_attestation_model.py:359:                    "capabilities": {"algorithms": ["rsa2048"]},
+test/test_auth_session.py:413:                                "supported_hash_algorithms": ["sha256", "sha384"],
+test/test_auth_session.py:414:                                "supported_signing_schemes": ["rsassa", "ecdsa"],
+test/test_auth_session.py:572:            "hash_algorithm": "sha256",
+test/test_auth_session.py:573:            "signing_scheme": "rsassa",
+test/test_auth_session.py:680:        mock_session.hash_algorithm = "sha256"
+test/test_auth_session.py:681:        mock_session.signing_scheme = "rsassa"
+test/test_ca_impl_openssl.py:10:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+test/test_ca_util.py:62:            ca_util.cmd_import_priv(working_dir, os.path.join(keydir, "rsa2048.pem"), 3)
+test/test_cert_utils.py:14:nuvoton_ecdsa_sha256_der = """\
+test/test_cert_utils.py:29:st_sha256_with_rsa_der = """\
+test/test_cert_utils.py:61:st_ecdsa_sha256_der = """\
+test/test_cert_utils.py:151:def has_rsa_pss_compatibility():
+test/test_cert_utils.py:187:            {"cert": st_sha256_with_rsa_der, "expected": True},  # RSA, signed by STM_RSA_05I.pem.
+test/test_cert_utils.py:188:            {"cert": st_ecdsa_sha256_der, "expected": True},  # ECC, signed by STM_ECC_01I.pem.
+test/test_cert_utils.py:203:            {"cert": nuvoton_ecdsa_sha256_der, "expected": True},  # ECC, signed by NUVO_2110.pem.
+test/test_cert_utils.py:213:        # We will be using `nuvoton_ecdsa_sha256_der', which is signed by
+test/test_cert_utils.py:219:        cert = nuvoton_ecdsa_sha256_der.replace("\n", "")
+test/test_cert_utils.py:245:        has_rsa_pss_compatibility(), "Cryptography earlier than v38.0.0 does not support RSAPSS from x509"
+test/test_cert_utils.py:297:                "data": base64.b64decode(st_sha256_with_rsa_der),
+test/test_cert_utils.py:301:                "data": f"-----BEGIN CERTIFICATE-----\n{st_sha256_with_rsa_der}\n-----END CERTIFICATE-----".encode(
+test/test_cloud_verifier_common.py:820:        agent.accept_tpm_hash_algs = ["sha256"]
+test/test_cloud_verifier_common.py:821:        agent.accept_tpm_encryption_algs = ["rsa"]
+test/test_cloud_verifier_common.py:822:        agent.accept_tpm_signing_algs = ["rsassa"]
+test/test_create_mb_policy.py:29:    def test_event_to_sha256(self):
+test/test_create_mb_policy.py:31:            {"event": {"Digests": [{"AlgorithmId": "sha256", "Digest": "foobar"}]}, "expected": {"sha256": "0xfoobar"}},
+test/test_create_mb_policy.py:36:                            "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:41:                "expected": {"sha256": "0x5a16d6659724873d146bdb8cf1c9f9fdb5473040107f16493fd2051ca71a1227"},
+test/test_create_mb_policy.py:49:            self.assertDictEqual(create_mb_policy.event_to_sha256(c["event"]), c["expected"])
+test/test_create_mb_policy.py:72:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:78:                "expected": {field: {"sha256": "0x5a16d6659724873d146bdb8cf1c9f9fdb5473040107f16493fd2051ca71a1227"}},
+test/test_create_mb_policy.py:100:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:106:                "expected": {field: [{"sha256": "0x5a16d6659724873d146bdb8cf1c9f9fdb5473040107f16493fd2051ca71a1227"}]},
+test/test_create_mb_policy.py:116:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:122:                "expected": {field: [{"sha256": "0x5a16d6659724873d146bdb8cf1c9f9fdb5473040107f16493fd2051ca71a1227"}]},
+test/test_create_mb_policy.py:158:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:174:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:202:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:226:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:250:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:265:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:338:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest"}],
+test/test_create_mb_policy.py:342:                "expected": {"mokdig": [], "mokxdig": [{"sha256": "0xdigest"}]},
+test/test_create_mb_policy.py:348:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest"}],
+test/test_create_mb_policy.py:352:                "expected": {"mokdig": [{"sha256": "0xdigest"}], "mokxdig": []},
+test/test_create_mb_policy.py:357:                    {"Digests": [{"AlgorithmId": "sha256", "Digest": "digest"}], "Event": {"String": "MokList"}}
+test/test_create_mb_policy.py:363:                "events": [{"EventType": "EV_IPL", "Digests": [{"AlgorithmId": "sha256", "Digest": "digest"}]}],
+test/test_create_mb_policy.py:369:                    {"EventType": "EV_IPL", "Digests": [{"AlgorithmId": "sha256", "Digest": "digest"}], "Event": {}}
+test/test_create_mb_policy.py:528:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-2"}],
+test/test_create_mb_policy.py:535:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-3"}],
+test/test_create_mb_policy.py:540:                "expected": {"kernels": [{"shim_authcode_sha256": "0xdigest-2", "grub_authcode_sha256": "0xdigest-3"}]},
+test/test_create_mb_policy.py:549:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest1"}],
+test/test_create_mb_policy.py:556:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-2"}],
+test/test_create_mb_policy.py:563:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-3"}],
+test/test_create_mb_policy.py:569:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-4"}],
+test/test_create_mb_policy.py:577:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:590:                            "shim_authcode_sha256": "0xdigest-2",
+test/test_create_mb_policy.py:591:                            "grub_authcode_sha256": "0xdigest-3",
+test/test_create_mb_policy.py:592:                            "vmlinuz_plain_sha256": "0xdigest-4",
+test/test_create_mb_policy.py:603:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-2"}],
+test/test_create_mb_policy.py:617:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-1"}],
+test/test_create_mb_policy.py:624:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-2"}],
+test/test_create_mb_policy.py:629:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-3"}],
+test/test_create_mb_policy.py:636:                                "AlgorithmId": "sha256",
+test/test_create_mb_policy.py:648:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-5"}],
+test/test_create_mb_policy.py:656:                            "kernel_authcode_sha256": "0xdigest-3",
+test/test_create_mb_policy.py:657:                            "shim_authcode_sha256": "0xdigest-1",
+test/test_create_mb_policy.py:658:                            "grub_authcode_sha256": "0xdigest-2",
+test/test_create_mb_policy.py:659:                            "initrd_plain_sha256": "0xdigest-5",
+test/test_create_mb_policy.py:670:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-1"}],
+test/test_create_mb_policy.py:677:                        "Digests": [{"AlgorithmId": "sha256", "Digest": "digest-3"}],
+test/test_create_mb_policy.py:684:                                "AlgorithmId": "sha256",
+test/test_create_runtime_policy.py:170:                "input": "10 8d814e778e1fca7c551276523ac44455da1dc420 ima-ng sha256:0bc72531a41dbecb38557df75af4bc194e441e71dc677c659a1b179ac9b3e6ba boot_aggregate",
+test/test_create_runtime_policy.py:172:                "alg": "sha256",
+test/test_create_runtime_policy.py:206:            "pcr pcr-value img-ng sha256:fff boot_aggregate",
+test/test_create_runtime_policy.py:252:                "algo": "sha256",
+test/test_create_runtime_policy.py:305:                "algo": "sha256",
+test/test_create_runtime_policy.py:308:            {"path": [], "checksum": {}, "algo": "sha256", "owned_by_root": True},
+test/test_create_runtime_policy.py:492:                "ima-list": """10 0adefe762c149c7cec19da62f0da1297fcfbffff ima-ng sha256:0000000000000000000000000000000000000000000000000000000000000000 boot_aggregate
+test/test_create_runtime_policy.py:493:10 cff3da2ff339a1f07bb0dbcbc0381e794ed09555 ima-ng sha256:3e5e8ad9d8b4dd191413aba6166c7a975c3eab903d1fad77ecfa2d5810d6585c /usr/bin/kmod
+test/test_create_runtime_policy.py:494:10 13d5b414e08a45698ce9e3c66545b25ba694046c ima-ng sha256:f51de8688a2903b94016c06f186cf1f053ececd2a88a5f349f29b35a06e94c43 /usr/lib64/ld-linux-x86-64.so.2
+test/test_create_runtime_policy.py:511:                "ima-list": "10 cff3da2ff339a1f07bb0dbcbc0381e794ed09555 ima-ng sha256:3e5e8ad9d8b4dd191413aba6166c7a975c3eab903d1fad77ecfa2d5810d6585c",
+test/test_create_runtime_policy.py:516:                "ima-list": "10 6f3474e730fb7da4bb26cad2d8f5d9d5482735f6 ima-buf sha256:571016c9f57363c80e08dd4346391c4e70227e41b0247b8a3aa2240a178d3d14 dm_table_load 646d5f76657273696f6e3d342e34362e303b6e616d653d7268656c2d726f6f742c757569643d4c564d2d79543538654c3268616470746a55396c565131573078315035544679454e35627450416b375963386779586633446667647a6a7554466b4a39503661746868582c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d3133333133363338342c7461726765745f6e616d653d6c696e6561722c7461726765745f76657273696f6e3d312e342e302c6465766963655f6e616d653d3235323a332c73746172743d37333234363732303b",
+test/test_create_runtime_policy.py:588:                "expected_algorithm": "sha256",
+test/test_create_runtime_policy.py:620:                "expected_algorithm": "sha256",
+test/test_create_runtime_policy.py:664:                "algorithm": "sha256",
+test/test_create_runtime_policy.py:700:        for algo in ["sha1", "sha256", "sha384", "sha512", "sm3_256"]:
+test/test_create_runtime_policy.py:797:        bp_sha256 = os.path.join(HELPER_DIR, "policy-sha256")
+test/test_create_runtime_policy.py:799:        al_sha256 = os.path.join(HELPER_DIR, "allowlist-sha256")
+test/test_create_runtime_policy.py:803:        for algo in ["sha256", "sm3_256"]:
+test/test_create_runtime_policy.py:806:            for bp in [[], ["--base-policy", bp_sha256], ["--base-policy", bp_sm3]]:
+test/test_create_runtime_policy.py:807:                for al in [[], ["--allowlist", al_sha256], ["--allowlist", al_sm3]]:
+test/test_create_runtime_policy.py:823:            for bp in [["--base-policy", bp_sha256], ["--base-policy", bp_sm3]]:
+test/test_create_runtime_policy.py:824:                for al in [["--allowlist", al_sha256], ["--allowlist", al_sm3]]:
+test/test_create_runtime_policy.py:830:                            "expected_algo": "sha256_or_sm3_256",
+test/test_create_runtime_policy.py:886:        for algo in ["sha256", "sha384", "sha512", "sm3_256"]:
+test/test_crypto.py:12:    rsa_decrypt,
+test/test_crypto.py:13:    rsa_encrypt,
+test/test_crypto.py:14:    rsa_export_privkey,
+test/test_crypto.py:15:    rsa_export_pubkey,
+test/test_crypto.py:16:    rsa_generate,
+test/test_crypto.py:17:    rsa_import_privkey,
+test/test_crypto.py:18:    rsa_import_pubkey,
+test/test_crypto.py:19:    rsa_sign,
+test/test_crypto.py:20:    rsa_verify,
+test/test_crypto.py:26:    def test_rsa(self):
+test/test_crypto.py:28:        private = rsa_generate(2048)
+test/test_crypto.py:29:        pubkeypem = rsa_export_pubkey(private)
+test/test_crypto.py:30:        pubkey = rsa_import_pubkey(pubkeypem)
+test/test_crypto.py:31:        keypem = rsa_export_privkey(private)
+test/test_crypto.py:32:        key = rsa_import_privkey(keypem)
+test/test_crypto.py:33:        ciphertext = rsa_encrypt(pubkey, message)
+test/test_crypto.py:34:        plain = rsa_decrypt(key, ciphertext)
+test/test_crypto.py:67:    def test_rsa_sign(self):
+test/test_crypto.py:69:        private = rsa_generate(2048)
+test/test_crypto.py:71:        signature = rsa_sign(private, message)
+test/test_crypto.py:72:        self.assertTrue(rsa_verify(public_key, message, signature))
+test/test_crypto.py:75:        self.assertFalse(rsa_verify(public_key, message, signature))
+test/test_evidence_model.py:105:            "capabilities": {"algorithms": ["rsa2048"]},
+test/test_evidence_model.py:118:        data = {"evidence_class": "log", "evidence_type": "ima_log", "capabilities": {"hash_algorithms": ["sha256"]}}
+test/test_evidence_model.py:259:        mock_caps.render.return_value = {"algorithms": ["rsa2048"]}
+test/test_evidence_model.py:303:        mock_caps1.values = {"algorithms": ["rsa2048"]}
+test/test_evidence_model.py:306:        mock_caps2.values = {"algorithms": ["rsa2048"]}
+test/test_evidence_model.py:504:        mock_caps1.values = {"algorithms": ["rsa2048"]}
+test/test_evidence_model.py:631:            "key_algorithm": "rsa",
+test/test_evidence_model.py:637:            "signature_schemes": ["rsassa"],
+test/test_evidence_model.py:650:        caps.signature_schemes = ["rsassa"]
+test/test_evidence_model.py:651:        caps.hash_algorithms = ["sha256"]
+test/test_evidence_model.py:658:        cert_key.key_algorithm = "rsa"
+test/test_evidence_model.py:713:        params.signature_scheme = "rsassa"
+test/test_evidence_model.py:715:        params.hash_algorithm = "sha256"
+test/test_evidence_model.py:722:        cert_key.key_algorithm = "rsa"
+test/test_evidence_model.py:792:        key.key_algorithm = "rsa"
+test/test_evidence_model.py:795:        key.allowable_signature_schemes = ["rsassa"]
+test/test_evidence_model.py:796:        key.allowable_hash_algorithms = ["sha256"]
+test/test_ima_ast.py:10:    "ima-sig-rsa": (
+test/test_ima_ast.py:12:        "10 1e70a3e1af66f42826ad63b761b4cb9c4df195e1 ima-sig sha256:d33d5d13792292e202dbf69a6f1b07bc8a02f01424db8489ba7bb7d43c0290ef /usr/bin/dd 030204f3452d2301009dd340c852f37e35748363586939d4199b6684be27e7c1236ca1528f708372ed9cd52a0d991f66448790f5616ed5bd7f9bbd22193b1e3e54f6bf29a1497945a34d1b418b24f4cbeaef897bf3cebca27065ebb8761b46bc2662fe76f141245b9186a5ac8493c7f4976cf0d6dfc085c3e503e3f771bc3ccb121230db76fd8aba4f45f060ad64ab3afd99b4e52824b9eba12e93e46f9dcb2fa01d9cef89f298a0da02a82a4fb56924afd3e3c277a1302d99f770d488449df2d43eb5b174a0a528827e6877b965c2f0b7c89cf1aa26a7417a892df4c2294e2872d62748b72ea04ecb0689b5d792e615a9bf9d56f6e0f298560bf9441df0a22729c5f23389f028c25f",
+test/test_ima_ast.py:16:        "10 5d4d5141ccd5066d50dc3f21d79ba02fedc24256 ima-sig sha256:b8ae0b8dd04a5935cd8165aa2260cd11b658bd71629bdb52256a675a1f73907b /usr/bin/zmore 030204531f402500483046022100fe24678d21083ead47660e1a2d553a592d777c478d1b0466de6ed484b54956b3022100cad3adb37f277bbb03544d6107751b4cd4f2289d8353fa36257400a99334d5c3",
+test/test_ima_ast.py:20:        "10 5426cf3031a43f5bfca183d79950698a95a728f6 ima-sig sha256:f1125b940480d20ad841d26d5ea253edc0704b5ec1548c891edf212cb1a9365e /lib/modules/5.4.48-openpower1/kernel/drivers/usb/common/usb-common.ko ",
+test/test_ima_dm.py:11:    "10 fdcd389a7d084c7e1af8ed6917d080b1f0ee0625 ima-buf sha256:09e8a13203b10ce8d352aaafcdaf74986a6e2940e42c44c1a6603624135e1117 dm_table_load 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742c757569643d43525950542d5645524954592d63373664303733343364336134396235616230313032356433623335346466352d746573742c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d3230343830382c7461726765745f6e616d653d7665726974792c7461726765745f76657273696f6e3d312e382e302c686173685f6661696c65643d562c7665726974795f76657273696f6e3d312c646174615f6465766963655f6e616d653d373a312c686173685f6465766963655f6e616d653d373a302c7665726974795f616c676f726974686d3d7368613235362c726f6f745f6469676573743d366561666665366238623031393930613165333937313236353734363865396237323263623634626139393432633664353836393438646131626434303936372c73616c743d643733386664396634323033663339376635613135353632633330323131393537303430636436373165666334363937313562663236383935363232656162632c69676e6f72655f7a65726f5f626c6f636b733d6e2c636865636b5f61745f6d6f73745f6f6e63653d6e3b"
+test/test_ima_dm.py:14:    "10 6cde7a2687bc348d737f1a56f256abd962c96b4d ima-buf sha256:e4a5f19a9f827c1442a76f52c91b149abbef7d327c9a20afa3768a8ac7362334 dm_table_load 646d5f76657273696f6e3d342e34352e303b6e616d653d6964656e746974792c757569643d746573742c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d343236383033322c7461726765745f6e616d653d6c696e6561722c7461726765745f76657273696f6e3d312e342e302c6465766963655f6e616d653d3235343a322c73746172743d303b"
+test/test_ima_dm.py:17:    "10 e63f7fc6ac88ff78154d2841c23a6205dad7cca4 ima-buf sha256:97fb89def8c8938f90b5b79441654beb84663f64974e76956d950f9e93da7cb2 dm_table_load 646d5f76657273696f6e3d342e34352e303b6e616d653d736e6170332c757569643d746573742d736e61702c6d616a6f723d3235332c6d696e6f723d312c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d31303438353736302c7461726765745f6e616d653d736e617073686f742c7461726765745f76657273696f6e3d312e31362e302c736e61705f6f726967696e5f6e616d653d3235333a302c736e61705f636f775f6e616d653d3235323a302c736e61705f76616c69643d792c736e61705f6d657267655f6661696c65643d6e2c736e617073686f745f6f766572666c6f7765643d6e3b"
+test/test_ima_dm.py:20:    "10 15c72d3162ffbdda697c2a0b318545fc2604455d ima-buf sha256:823424c152324a18fbbf788788f1ad97eb89863f0e86fbe63aa7df88a6e4fb12 dm_table_load 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742d696e746567726974792c757569643d43525950542d494e544547524954592d746573742d696e746567726974792c6d616a6f723d3235332c6d696e6f723d312c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d3230313432342c7461726765745f6e616d653d696e746567726974792c7461726765745f76657273696f6e3d312e31302e302c6465765f6e616d653d373a302c73746172743d302c7461675f73697a653d342c6d6f64653d4a2c726563616c63756c6174653d6e2c616c6c6f775f64697363617264733d6e2c6669785f70616464696e673d792c6669785f686d61633d792c6c65676163795f726563616c63756c6174653d6e2c6a6f75726e616c5f736563746f72733d313538342c696e7465726c656176655f736563746f72733d33323736382c6275666665725f736563746f72733d3132383b"
+test/test_ima_dm.py:23:    "10 a55d85d4a6059b44960938b3893f521479e7421e ima-buf sha256:19d0d1eed3d4d1127519e22d63978a1fb58cbab368e13e6204e3c12f64dd9f51 dm_table_load 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742c757569643d43525950542d4c554b53322d38613536343438333362613734633134616534326661313330666138386163612d746573742c6d616a6f723d3235332c6d696e6f723d322c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d3137323034302c7461726765745f6e616d653d63727970742c7461726765745f76657273696f6e3d312e32332e302c616c6c6f775f64697363617264733d6e2c73616d655f6370755f63727970743d6e2c7375626d69745f66726f6d5f63727970745f637075733d6e2c6e6f5f726561645f776f726b71756575653d6e2c6e6f5f77726974655f776f726b71756575653d6e2c69765f6c617267655f736563746f72733d6e2c6369706865725f737472696e673d6165732d7874732d706c61696e36342c6b65795f73697a653d36342c6b65795f70617274733d312c6b65795f65787472615f73697a653d302c6b65795f6d61635f73697a653d303b"
+test/test_ima_dm.py:26:    "10 daa949b2e19a473922b5b27b05df9a8425842d22 ima-buf sha256:cbcb9a0db9280f4a19d8e06a9825f1effc6db3e0fa0b2c72096ce8b7a534e6df dm_table_load 646d5f76657273696f6e3d342e34352e303b6e616d653d63616368652c757569643d63616368652c6d616a6f723d3235332c6d696e6f723d342c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d323034383030302c7461726765745f6e616d653d63616368652c7461726765745f76657273696f6e3d322e322e302c6d657461646174615f6d6f64653d72772c63616368655f6d657461646174615f6465766963653d373a322c63616368655f6465766963653d373a332c63616368655f6f726967696e5f6465766963653d373a342c77726974657468726f7567683d6e2c77726974656261636b3d792c706173737468726f7567683d6e2c6d65746164617461323d6e2c6e6f5f646973636172645f70617373646f776e3d6e3b"
+test/test_ima_dm.py:29:    "10 5e686ad192b519cb316ad191def2403f90b96b16 ima-buf sha256:7548978b7d86b776adf00ce11659cc0142b719be8d4b83e3b53ff6d090f73812 dm_table_load 646d5f76657273696f6e3d342e34352e303b6e616d653d6d6972726f722c757569643d746573742d6d6972726f722c6d616a6f723d3235332c6d696e6f723d352c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d323034383030302c7461726765745f6e616d653d6d6972726f722c7461726765745f76657273696f6e3d312e31342e302c6e725f6d6972726f72733d322c6d6972726f725f6465766963655f303d373a332c6d6972726f725f6465766963655f305f7374617475733d412c6d6972726f725f6465766963655f313d373a322c6d6972726f725f6465766963655f315f7374617475733d412c68616e646c655f6572726f72733d792c6b6565705f6c6f673d6e2c6c6f675f747970655f7374617475733d3b"
+test/test_ima_dm.py:34:    "10 efe6f16e52cf11f16515db24956b150512048e64 ima-buf sha256:7eeb012fa22a12456b91e1162de13fba0417d566a444d11c7f1f44f03f29de86 dm_device_resume 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742c757569643d43525950542d5645524954592d63373664303733343364336134396235616230313032356433623335346466352d746573742c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b6163746976655f7461626c655f686173683d7368613235363a303965386131333230336231306365386433353261616166636461663734393836613665323934306534326334346331613636303336323431333565313131373b63757272656e745f6465766963655f63617061636974793d3230343830383b"
+test/test_ima_dm.py:37:    "10 2b6c00a8f9bf1c14cb297854da51cc1815d9857e ima-buf sha256:a8366c157cc83cc4e83e4e6ed814c3b86b7e2ce75a82d249db85055669e1d689 dm_device_remove 646d5f76657273696f6e3d342e34352e303b6465766963655f6163746976655f6d657461646174613d6e616d653d746573742c757569643d43525950542d5645524954592d63373664303733343364336134396235616230313032356433623335346466352d746573742c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b6163746976655f7461626c655f686173683d7368613235363a303965386131333230336231306365386433353261616166636461663734393836613665323934306534326334346331613636303336323431333565313131372c72656d6f76655f616c6c3d6e3b63757272656e745f6465766963655f63617061636974793d3230343830383b"
+test/test_ima_dm.py:40:    "10 cf05b61f406363ba08d642a6b4e2c8760d68e12b ima-buf sha256:e480e9677c5865d72bbde6e84d8ea5d75ee3c87a682dd127b8bb439c643823ee dm_target_update 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742c757569643d43525950542d5645524954592d63373664303733343364336134396235616230313032356433623335346466352d746573742c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d3230343830382c7461726765745f6e616d653d7665726974792c7461726765745f76657273696f6e3d312e382e302c686173685f6661696c65643d432c7665726974795f76657273696f6e3d312c646174615f6465766963655f6e616d653d373a312c686173685f6465766963655f6e616d653d373a302c7665726974795f616c676f726974686d3d7368613235362c726f6f745f6469676573743d366561666665366238623031393930613165333937313236353734363865396237323263623634626139393432633664353836393438646131626434303936372c73616c743d643733386664396634323033663339376635613135353632633330323131393537303430636436373165666334363937313562663236383935363232656162632c69676e6f72655f7a65726f5f626c6f636b733d6e2c636865636b5f61745f6d6f73745f6f6e63653d6e3b"
+test/test_ima_dm.py:43:    "10 6149775a61f3e878a806554865798b62295b90d0 ima-buf sha256:da71026bb20de95fd3f9d18b2b278980dcbe227a54fa8f94c8a4c26b2b2e5e55 dm_table_clear 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742c757569643d43525950542d5645524954592d63373664303733343364336134396235616230313032356433623335346466352d746573743b7461626c655f636c6561723d6e6f5f646174613b00000000000000000000000000000000000063757272656e745f6465766963655f63617061636974793d3230343830383b"
+test/test_ima_dm.py:75:                        "verity_algorithm": "sha256",
+test/test_ima_dm.py:89:    "10 65c977c3ce1fbf9e68a5a4a486847ef7ae943bb3 ima-buf sha256:cb0d66bf4c79cb9a85fffaa5f47729332a3a5a29fd0dc317a878c8786c5f4067 dm_table_load 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742c757569643d2c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b7461726765745f696e6465783d302c7461726765745f626567696e3d302c7461726765745f6c656e3d343236383033322c7461726765745f6e616d653d6c696e6561722c7461726765745f76657273696f6e3d312e342e302c6465766963655f6e616d653d3235343a322c73746172743d303b"
+test/test_ima_dm.py:92:    "10 8a869290c3456b2c983f5daef7fd864a680452a1 ima-buf sha256:513204e3560627b0751858ba0012fbe8bee2e7a5ac4765529a60b4500f9adf09 dm_device_resume 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742c757569643d2c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b6163746976655f7461626c655f686173683d7368613235363a636230643636626634633739636239613835666666616135663437373239333332613361356132396664306463333137613837386338373836633566343036373b63757272656e745f6465766963655f63617061636974793d343236383033323b"
+test/test_ima_dm.py:95:    "10 cf9f33a163183ebd4d92a42cd38305dfbc814748 ima-buf sha256:4088aee6143157dff39df843ff20467a500234f07d2c38b9312108455ea99968 dm_device_rename 646d5f76657273696f6e3d342e34352e303b6e616d653d746573742c757569643d2c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b6e65775f6e616d653d74657374322c6e65775f757569643d3b63757272656e745f6465766963655f63617061636974793d343236383033323b"
+test/test_ima_dm.py:98:    "10 9f9f094b0aab1f07f967c61d0c4a18b26fad73ce ima-buf sha256:9144918395fbd350087fae06d02950c968342463734bb127533ae232bbbf1a42 dm_device_rename 646d5f76657273696f6e3d342e34352e303b6e616d653d74657374322c757569643d2c6d616a6f723d3235332c6d696e6f723d302c6d696e6f725f636f756e743d312c6e756d5f746172676574733d313b6e65775f6e616d653d74657374322c6e65775f757569643d746573745f757569643b63757272656e745f6465766963655f63617061636974793d343236383033323b"
+test/test_ima_verification.py:73:    "10 0c8a706a75a5689c1e168f0a573a3cbec33061b5 ima-sig sha256:e4cb9f5709c88376b5fc3743cd88e76b9aae8f3d992d845678de5215edb31216 boot_aggregate \n"
+test/test_ima_verification.py:74:    "10 5426cf3031a43f5bfca183d79950698a95a728f6 ima-sig sha256:f1125b940480d20ad841d26d5ea253edc0704b5ec1548c891edf212cb1a9365e /lib/modules/5.4.48-openpower1/kernel/drivers/usb/common/usb-common.ko \n"
+test/test_ima_verification.py:75:    "10 f8a7b32dba2cb3a5437786d7f9d5caee8db3115b ima-sig sha256:cd026b58efdf66658685430ff526490d54a430a3f0066a35ac26a8acab66c55d /lib/modules/5.4.48-openpower1/kernel/drivers/gpu/drm/drm_panel_orientation_quirks.ko \n"
+test/test_ima_verification.py:81:    "10 1e70a3e1af66f42826ad63b761b4cb9c4df195e1 ima-sig sha256:d33d5d13792292e202dbf69a6f1b07bc8a02f01424db8489ba7bb7d43c0290ef /usr/bin/dd 030204f3452d2301009dd340c852f37e35748363586939d4199b6684be27e7c1236ca1528f708372ed9cd52a0d991f66448790f5616ed5bd7f9bbd22193b1e3e54f6bf29a1497945a34d1b418b24f4cbeaef897bf3cebca27065ebb8761b46bc2662fe76f141245b9186a5ac8493c7f4976cf0d6dfc085c3e503e3f771bc3ccb121230db76fd8aba4f45f060ad64ab3afd99b4e52824b9eba12e93e46f9dcb2fa01d9cef89f298a0da02a82a4fb56924afd3e3c277a1302d99f770d488449df2d43eb5b174a0a528827e6877b965c2f0b7c89cf1aa26a7417a892df4c2294e2872d62748b72ea04ecb0689b5d792e615a9bf9d56f6e0f298560bf9441df0a22729c5f23389f028c25f\n"
+test/test_ima_verification.py:82:    "10 5d4d5141ccd5066d50dc3f21d79ba02fedc24256 ima-sig sha256:b8ae0b8dd04a5935cd8165aa2260cd11b658bd71629bdb52256a675a1f73907b /usr/bin/zmore 030204531f402500483046022100fe24678d21083ead47660e1a2d553a592d777c478d1b0466de6ed484b54956b3022100cad3adb37f277bbb03544d6107751b4cd4f2289d8353fa36257400a99334d5c3\n"
+test/test_ima_verification.py:88:BAD_SIGNATURES: str = "10 5d4d5141ccd5066d50dc3f21d79ba02fedc24256 ima-sig sha256:b8ae0b8dd04a5935cd8165aa2260cd11b658bd71629bdb52256a675a1f73907b /usr/bin/zmore 030204531f402548003046022100fe24678d21083ead47660e1a2d553a592d777c478d1b0466de6ed484b54956b3022100cad3adb37f277bbb03544d6107751b4cd4f2289d8353fa36257400a99334d5c3\n"
+test/test_ima_verification.py:90:KEYRINGS: str = "10 978351440c6c8a17568f0c366b9ede28efd14f8c ima-buf sha256:a7d52aaa18c23d2d9bb2abb4308c0eeee67387a42259f4a6b1a42257065f3d5a .ima 308201d130820178a003020102020101300906072a8648ce3d0401301b3119301706035504030c1054657374696e672d45434453412d4341301e170d3231303631313133353831365a170d3232303631313133353831365a3021311f301d06035504030c1665636473612d63612d7369676e65642d65632d6b65793059301306072a8648ce3d020106082a8648ce3d030107034200044ce55be36765b59de2767f6d6721be8bea8e3db4ccc25ab76c30f5d1c11752ae1699cc39d31b378f69fecbe65ce1eb09e075f840fe4c052bafb9039742b76202a381a73081a430090603551d1304023000301d0603551d0e04160414b6fb3c083d19695be441c5f59afb95742cb6058c30560603551d23044f304d80140a51da379e45bd7ac623c3f765b53e1e2dde5195a11fa41d301b3119301706035504030c1054657374696e672d45434453412d434182142bb351b0d645e4d8594316ac3c96fc6d9c83791530130603551d25040c300a06082b06010505070302300b0603551d0f040403020780300906072a8648ce3d04010348003045022033d47b623c9feefab7d6e68b001ac6463433f99b61ce7b951a32da065a5d17af022100f3d73e38070053aec63a941ed36ae0dcfa25ed9cd538c459732a7e782132a4ca"
+test/test_ima_verification.py:160:        rsakeyfile = os.path.join(keydir, "rsa2048pub.pem")
+test/test_ima_verification.py:161:        pubkey, keyidv2 = file_signatures.get_pubkey_from_file(rsakeyfile)
+test/test_ima_verification.py:239:        rsakeyfile = os.path.join(keydir, "rsa2048pub.pem")
+test/test_ima_verification.py:240:        pubkey, keyidv2 = file_signatures.get_pubkey_from_file(rsakeyfile)
+test/test_push_agent_monitor.py:92:            accept_tpm_hash_algs=["sha256"],
+test/test_push_agent_monitor.py:93:            accept_tpm_encryption_algs=["rsa"],
+test/test_push_agent_monitor.py:94:            accept_tpm_signing_algs=["rsassa"],
+test/test_rpm_repo.py:86:                "repo": os.path.join(self.dirpath, "repo", "signed-rsa"),
+test/test_rpm_repo.py:143:                "rpm": os.path.join(self.dirpath, "repo", "signed-rsa", "DUMMY-empty-42.0.0-el42.noarch.rpm"),
+test/test_rpm_repo.py:148:                "rpm": os.path.join(self.dirpath, "repo", "signed-rsa", "DUMMY-foo-42.0.0-el42.noarch.rpm"),
+test/test_rpm_repo.py:168:                "repo": os.path.join(self.dirpath, "repo", "signed-rsa"),
+test/test_rpm_repo.py:244:                "repo": os.path.join(self.dirpath, "repo", "signed-rsa"),
+test/test_rpm_repo.py:250:                "repo": os.path.join(self.dirpath, "repo", "signed-rsa"),
+test/test_rpm_repo.py:255:            {"repo": os.path.join(self.dirpath, "repo", "signed-rsa"), "rpm": "foo/bar", "hashes": {}, "ima-sig": {}},
+test/test_session_controller.py:399:            "hash_algorithm": "sha256",
+test/test_session_controller.py:400:            "signing_scheme": "rsassa",
+test/test_sign_runtime_policy.py:23:RSA_PRIVKEY = os.path.join(DATA_DIR, "rsa-4096-private.pem")
+test/test_tpm_verify.py:8:from cryptography.hazmat.primitives.asymmetric import rsa
+test/test_tpm_verify.py:20:        private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+test/test_tpm_verify.py:51:        private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+test/test_tpm_verify.py:83:        private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+test/test_verifier_db.py:22:    "accept_tpm_hash_algs": ["sha512", "sha384", "sha256", "sha1"],
+test/test_verifier_db.py:23:    "accept_tpm_encryption_algs": ["ecc", "rsa"],
+test/test_verifier_db.py:24:    "accept_tpm_signing_algs": ["ecschnorr", "rsassa"],
+test/test_verifier_db.py:42:    "mb_policy": '[{"kernel_plain_sha256": "0x5c6120cddb77ba236333081e69ac4f790d6983a899047df0e728bf1ab2b84afc", "initrd_plain_sha256": "0xa1457f95224f364ab3c12f5ce24190d8c5cc0ba2e17259a2556e3a860259a96c" }]',
+test/test_verifier_db.py:95:        self.assertEqual(agent.accept_tpm_hash_algs, ["sha512", "sha384", "sha256", "sha1"])
+tpm_cert_store/Alibaba_Cloud_vTPM_EK.pem:12:            Public Key Algorithm: rsaEncryption
