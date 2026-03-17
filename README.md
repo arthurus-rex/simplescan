@@ -13,7 +13,7 @@ chmod +x cryptoscan.sh
 3. Run `./cryptoscan.sh`
 Results files will be created with names matching their source repositories in the filepath `outfiles/{datetime}/repo.txt`.
 
-* Remember: Your scan is only as good as your keywords.  Choose carefully.
+* Remember: Your scan is only as good as your keywords.  [Examples](https://github.com/arthurus-rex/simplescan/blob/master/EXAMPLE_KEYWORDS.md) may help you choose wisely.
 
 # Caveats:
 This is a simple keyword search designed to be verbose, preferring false positives to false negatives.  This project should not be considered for production without modification, and all output should be manually evaluated for accuracy.  This repo will change as bugs are found and features (maybe) added.
