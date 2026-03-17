@@ -32,9 +32,8 @@ for dir in */ ; do
     # extracts name of repo from directory, then creates 
     # results_`repo`.txt for output of grep into homedir
     repo_results=${results_folder}$(basename $dir)'.txt'
-    touch $repo_results
-    find ~   
-#    find -type f | grep --file=$keyword_list --recursive -n >> $repo_results
+    touch $repo_results   
+    find -type f | grep --file=$keyword_list --recursive -n >> $repo_results
     echo "Done scanning " $dir && cd ..
 done
 echo "Scan complete."
