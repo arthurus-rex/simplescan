@@ -1,0 +1,777 @@
+.gitleaks.toml:9:    '''test-data/test-rsa.pem''',
+.gitleaks.toml:10:    '''keylime/test-data/test-rsa.pem''',
+keylime-agent.conf:129:# A new RSA 2048 private key is generated in case it is not found.
+keylime-agent.conf:130:# If an existing key is provided, it MUST be RSA 2048, otherwise the agent will
+keylime-agent.conf:279:# - encryption: rsa (alias for rsa2048), rsa1024, rsa2048, rsa3072, rsa4096, ecc (alias for ecc256), ecc192, ecc224, ecc256, ecc384, ecc521 or ecc_sm2.
+keylime-agent.conf:280:# - signing:    rsassa or ecdsa
+keylime-agent.conf:288:tpm_encryption_alg = "rsa"
+keylime-agent.conf:289:tpm_signing_alg = "rsassa"
+keylime-agent.conf:310:# iak_idevid_asymmetric_alg:   rsa, ecc
+keylime-agent.conf:314:iak_idevid_asymmetric_alg = "rsa"
+keylime-agent/src/agent_handler.rs:98:        quotedata.enc_alg = keylime::algorithms::EncryptionAlgorithm::Rsa2048;
+keylime-agent/src/agent_handler.rs:99:        quotedata.sign_alg = keylime::algorithms::SignAlgorithm::RsaSsa;
+keylime-agent/src/agent_handler.rs:124:        assert_eq!(result.results.tpm_enc_alg.as_str(), "rsa"); // Legacy format for v2.4
+keylime-agent/src/agent_handler.rs:125:        assert_eq!(result.results.tpm_sign_alg.as_str(), "rsassa");
+keylime-agent/src/agent_handler.rs:135:        quotedata.enc_alg = keylime::algorithms::EncryptionAlgorithm::Rsa2048;
+keylime-agent/src/agent_handler.rs:136:        quotedata.sign_alg = keylime::algorithms::SignAlgorithm::RsaSsa;
+keylime-agent/src/agent_handler.rs:161:        assert_eq!(result.results.tpm_enc_alg.as_str(), "rsa2048"); // New format for v2.5
+keylime-agent/src/agent_handler.rs:162:        assert_eq!(result.results.tpm_sign_alg.as_str(), "rsassa");
+keylime-agent/src/api.rs:180:/// algorithm reporting format (e.g., "rsa2048" instead of "rsa")
+keylime-agent/src/keys_handler.rs:168:    let decrypted_key = match crypto::rsa_oaep_decrypt(
+keylime-agent/src/keys_handler.rs:280:    let decrypted_key = match crypto::rsa_oaep_decrypt(
+keylime-agent/src/keys_handler.rs:607:        encrypt_aead, pkey_pub_from_pem, rsa_oaep_encrypt,
+keylime-agent/src/keys_handler.rs:620:        rsa::Padding,
+keylime-agent/src/keys_handler.rs:675:            rsa_oaep_encrypt(pubkey, ukey.decrypted_key.as_ref()).unwrap(); //#[allow_ci]
+keylime-agent/src/keys_handler.rs:677:            rsa_oaep_encrypt(pubkey, vkey.decrypted_key.as_ref()).unwrap(); //#[allow_ci]
+keylime-agent/src/keys_handler.rs:971:            rsa_oaep_encrypt(&quotedata.payload_pub_key, u.as_ref()).unwrap(); //#[allow_ci]
+keylime-agent/src/keys_handler.rs:988:            rsa_oaep_encrypt(&quotedata.payload_pub_key, v.as_ref()).unwrap(); //#[allow_ci]
+keylime-agent/src/main.rs:515:    // Load or generate RSA key pair for secure transmission of u, v keys.
+keylime-agent/src/main.rs:524:        keylime::algorithms::EncryptionAlgorithm::Rsa2048,
+keylime-agent/src/main.rs:525:        true, // Validate that loaded keys are RSA 2048
+keylime-agent/src/main.rs:540:    // Uses ECC P-256 by default for better security and performance
+keylime-agent/src/main.rs:545:        keylime::algorithms::EncryptionAlgorithm::Ecc256,
+keylime-agent/src/main.rs:1029:            let rsa_key_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+keylime-agent/src/main.rs:1031:                .join("test-rsa.pem");
+keylime-agent/src/main.rs:1034:                crypto::testing::rsa_import_pair(rsa_key_path.clone())?;
+keylime-agent/src/main.rs:1037:            debug!("Generating ephemeral RSA key pair for payload mechanism");
+keylime-agent/src/main.rs:1039:                crypto::rsa_generate_pair(2048)?;
+keylime-agent/src/main.rs:1102:                        keylime::algorithms::EncryptionAlgorithm::Rsa2048,
+keylime-agent/src/main.rs:1103:                    sign_alg: keylime::algorithms::SignAlgorithm::RsaSsa,
+keylime-agent/src/payloads.rs:344:        encrypt_aead, pkey_pub_from_pem, rsa_oaep_encrypt,
+keylime-agent/src/quotes_handler.rs:406:        assert_eq!(result.results.enc_alg.as_str(), "rsa"); // Legacy format for v2.4
+keylime-agent/src/quotes_handler.rs:407:        assert_eq!(result.results.sign_alg.as_str(), "rsassa");
+keylime-agent/src/quotes_handler.rs:455:        assert_eq!(result.results.enc_alg.as_str(), "rsa2048"); // New format for v2.5
+keylime-agent/src/quotes_handler.rs:456:        assert_eq!(result.results.sign_alg.as_str(), "rsassa");
+keylime-agent/src/quotes_handler.rs:506:        assert_eq!(result.results.enc_alg.as_str(), "rsa2048"); // New format for v2.5
+keylime-agent/src/quotes_handler.rs:507:        assert_eq!(result.results.sign_alg.as_str(), "rsassa");
+keylime-agent/src/quotes_handler.rs:573:        assert_eq!(result.results.enc_alg.as_str(), "rsa2048"); // New format for v2.5
+keylime-agent/src/quotes_handler.rs:574:        assert_eq!(result.results.sign_alg.as_str(), "rsassa");
+keylime-agent/test-data/ima/ascii_runtime_measurements:29:10 51edfaacaca1914eccf69f922bd0fcc06e74d771 ima-ng sha1:dbd83f1084e686fa8cd3945b9fda544f6cc86b82 /bin/udevadm
+keylime-agent/test-data/ima/ascii_runtime_measurements:132:10 e702049eb4fe11a58f816a875bbfa94e49cff125 ima-ng sha1:8b4ae5d7a22314b59d1598919e990d1f74750c9a /lib/x86_64-linux-gnu/libseccomp.so.2.2.3
+keylime-agent/test-data/ima/ascii_runtime_measurements:245:10 811dbf53e04f41dd1c971b2cabff015ec3e2163c ima-ng sha1:01784c220fecc5fc0707416ce9cf9e60a117db7f /lib/systemd/system/rescue.service
+keylime-agent/test-data/ima/ascii_runtime_measurements:288:10 edc2056a2461756d397c771bd6abcd0fa5099e34 ima-ng sha1:556373ecc60782361ef1cc4b1e10006bb279dbda /lib/ufw/ufw-init
+keylime-agent/test-data/ima/ascii_runtime_measurements:324:10 50a10264f327161a83c625158a470542ec1d0f0d ima-ng sha1:18f55eeccf6a22cdecf260ef0295f726842e14dc /etc/sysctl.d/10-network-security.conf
+keylime-agent/test-data/ima/ascii_runtime_measurements:330:10 cb771d0d46ec27fa808b26f6e5a9e40536f0eeca ima-ng sha1:ad85a18df37eb8f1754bc0ceccf3d1c2ced87c69 /usr/lib/tmpfiles.d/dbus.conf
+keylime-agent/test-data/ima/ascii_runtime_measurements:378:10 ac694aab08d6cc97eb66d51a6b1f2ecc0dda6074 ima-ng sha1:0ce0aebffbe6c095f1d14a474e8152ca8369ca62 /bin/journalctl
+keylime-agent/test-data/ima/ascii_runtime_measurements:400:10 2318ab06e6f3eccb3a8800877e368ca7c13a1e01 ima-ng sha1:ba7d17756266abbbd41e261487766ae7c44fbe5e /usr/bin/systemd-detect-virt
+keylime-agent/test-data/ima/ascii_runtime_measurements:410:10 bddb181e0340a3732a1bd6430074442d1442af14 ima-ng sha1:c41f2165b47b50f15e911e1444576fecced17922 /lib/x86_64-linux-gnu/libnss_dns-2.23.so
+keylime-agent/test-data/ima/ascii_runtime_measurements:456:10 f2a2f3acc83fb3e1440895f3503971ff7e0395b2 ima-ng sha1:a5472ae67094eccdd75b939d01671e6bb9da2894 /lib/modules/4.4.0-45-generic/kernel/drivers/macintosh/mac_hid.ko
+keylime-agent/test-data/ima/ascii_runtime_measurements:516:10 8bcce4cf279f9334a873a89e5c629459f2b43757 ima-ng sha1:ded98fbfc8d75d1aa30992bab7febaecc0cb989b /lib/modules/4.4.0-45-generic/kernel/drivers/media/usb/uvc/uvcvideo.ko
+keylime-agent/test-data/ima/ascii_runtime_measurements:672:10 d37a4806c28ce268df5f385696ececca6c8082ef ima-ng sha1:fa7fe597b7793e3a88590dcdd22b0fad03d08d3b /usr/lib/python3.5/__pycache__/types.cpython-35.pyc
+keylime-agent/test-data/ima/ascii_runtime_measurements:705:10 54ee4d6ac06dfa7eccce734b8ebcfe79dd28aa48 ima-ng sha1:feff510598cf82a1a4cdae6cfbcfc15d248573b9 /usr/lib/x86_64-linux-gnu/libkrb5support.so.0.1
+keylime-agent/test-data/ima/ascii_runtime_measurements:711:10 51ec08c38aa3e62adaa8a5ecc3946131deee0f4e ima-ng sha1:e8afb262e577395e9225c9c73754d8636936b864 /etc/ssh/ssh_host_rsa_key
+keylime-agent/test-data/ima/ascii_runtime_measurements:713:10 62409e77ab9aff6d1220e3d7cabab39a48adfc95 ima-ng sha1:b69ec3ea0020672f19d1a409926bbaf21ad96333 /etc/ssh/ssh_host_rsa_key.pub
+keylime-agent/test-data/ima/ascii_runtime_measurements:745:10 e5ec355feee75067331154cfcd876ec9fcfd722f ima-ng sha1:ea64e70054ecc8b6947dd7c6e8029a623a338548 /etc/apache2/mods-available/autoindex.load
+keylime-agent/test-data/ima/ascii_runtime_measurements:748:10 5207922da9ad87103d4debd7682a63ee41686e9b ima-ng sha1:decc9090a6fa747178898d06e4b978ac4cd93618 /usr/lib/apache2/modules/mod_deflate.so
+keylime-agent/test-data/test-rsa.pem:1:-----BEGIN RSA PRIVATE KEY-----
+keylime-agent/test-data/test-rsa.pem:27:-----END RSA PRIVATE KEY-----
+keylime-ima-emulator/src/main.rs:134:            "Unable to find current measurement list position, Resetting the TPM emulator may be neccesary".to_string()));
+keylime-push-model-agent/src/header_validation.rs:321:    fn test_validate_location_header_path_traversal() {
+keylime-push-model-agent/src/registration.rs:155:            tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/registration.rs:157:            tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/registration.rs:271:            tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/registration.rs:273:            tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/registration.rs:308:            tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/registration.rs:310:            tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/registration.rs:346:            tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/registration.rs:348:            tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/registration.rs:527:            tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/registration.rs:529:            tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/registration.rs:565:            tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/registration.rs:567:            tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/registration.rs:629:            tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/registration.rs:631:            tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/registration.rs:684:            tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/registration.rs:686:            tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/response_handler.rs:138:                            "signature_scheme": "rsassa",
+keylime-push-model-agent/src/response_handler.rs:145:                                "key_algorithm": "rsa",
+keylime-push-model-agent/src/response_handler.rs:186:                            "signature_scheme": "rsassa",
+keylime-push-model-agent/src/response_handler.rs:193:                                "key_algorithm": "rsa",
+keylime-push-model-agent/src/response_handler.rs:303:            assert_eq!(signature_scheme, "rsassa");
+keylime-push-model-agent/src/response_handler.rs:456:            assert_eq!(signature_scheme, "rsassa");
+keylime-push-model-agent/src/state_machine.rs:456:                    keylime::algorithms::EncryptionAlgorithm::Rsa2048,
+keylime-push-model-agent/src/state_machine.rs:458:                tpm_signing_alg: keylime::algorithms::SignAlgorithm::RsaSsa,
+keylime-push-model-agent/src/state_machine.rs:696:                    keylime::algorithms::EncryptionAlgorithm::Rsa2048,
+keylime-push-model-agent/src/state_machine.rs:698:                tpm_signing_alg: keylime::algorithms::SignAlgorithm::RsaSsa,
+keylime-push-model-agent/src/struct_filler.rs:456:                tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:458:                tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:487:                tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:489:                tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:561:                tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:563:                tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:653:                tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:655:                tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:730:                tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:732:                tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:767:                tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:769:                tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:819:                tpm_encryption_alg: "rsa".to_string(),
+keylime-push-model-agent/src/struct_filler.rs:821:                tpm_signing_alg: "rsassa".to_string(),
+keylime-push-model-agent/test-data/evidence_supported_attestation_request.json:15:              "rsassa"
+keylime-push-model-agent/test-data/evidence_supported_attestation_request.json:33:                "key_algorithm": "rsa",
+keylime-push-model-agent/test-data/verifier.json:20:          "body": "{\n  \"data\": {\n    \"type\": \"attestation\",\n    \"attributes\": {\n      \"stage\": \"awaiting_evidence\",\n      \"evidence_requested\": [\n        {\n          \"evidence_class\": \"certification\",\n          \"evidence_type\": \"tpm_quote\",\n          \"chosen_parameters\": {\n            \"certification_key\": {\n              \"key_algorithm\": \"rsa\",\n              \"key_class\": \"asymmetric\",\n              \"key_size\": 2048,\n              \"local_identifier\": \"att_local_identifier\",\n              \"public\": \"OTgtMjkzODQ1LTg5MjMtNDk1OGlrYXNkamZnO2Frc2pka2ZqYXM7a2RqZjtramJrY3hqejk4MS0zMjQ5MDhpLWpmZDth\",\n              \"server_identifier\": \"ak\"\n            },\n            \"challenge\": \"challenge\",\n            \"hash_algorithm\": \"sha384\",\n            \"selected_subjects\": {\n              \"sha1\": [\n                1,\n                2,\n                3\n              ],\n              \"sha256\": [\n                4,\n                5,\n                6\n              ]\n            },\n            \"signature_scheme\": \"rsassa\"\n          }\n        }\n      ]\n    }\n  }\n}",
+keylime-push-model-agent/test-data/verifier.json:72:          "body": "{\n  \"data\": {\n    \"type\": \"attestation\",\n    \"attributes\": {\n      \"stage\": \"evaluating_evidence\",\n      \"evidence\": [\n        {\n          \"evidence_class\": \"certification\",\n          \"evidence_type\": \"tpm_quote\",\n          \"capabilities\": {\n            \"component_version\": \"2.0\",\n            \"hash_algorithms\": [\n              \"sha3_512\"\n            ],\n            \"signature_schemes\": [\n              \"rsassa\"\n            ],\n            \"available_subjects\": {\n              \"sha1\": [\n                1,\n                2,\n                3\n              ],\n              \"sha256\": [\n                4,\n                5,\n                6\n              ]\n            },\n            \"certification_keys\": []\n          },\n          \"chosen_parameters\": {\n            \"certification_key\": {\n              \"key_algorithm\": \"rsa\",\n              \"key_class\": \"asymmetric\",\n              \"key_size\": 2048,\n              \"local_identifier\": \"att_local_identifier\",\n              \"public\": \"OTgtMjkzODQ1LTg5MjMtNDk1OGlrYXNkamZnO2Frc2pka2ZqYXM7a2RqZjtramJrY3hqejk4MS0zMjQ5MDhpLWpmZDth\",\n              \"server_identifier\": \"ak\"\n            },\n            \"challenge\": \"challenge\",\n            \"hash_algorithm\": \"sha384\",\n            \"selected_subjects\": {\n              \"sha1\": [\n                1,\n                2,\n                3\n              ],\n              \"sha256\": [\n                4,\n                5,\n                6\n              ]\n            },\n            \"signature_scheme\": \"rsassa\"\n          },\n          \"data\": {\n            \"message\": \"message\",\n            \"signature\": \"signature\",\n            \"subject_data\": \"subject_data\"\n          }\n        },\n        {\n          \"evidence_class\": \"log\",\n          \"evidence_type\": \"uefi_log\",\n          \"capabilities\": {\n            \"component_version\": \"2.0\",\n            \"hash_algorithms\": [\n              \"sha3_512\"\n            ],\n            \"signature_schemes\": [\n              \"rsassa\"\n            ],\n            \"available_subjects\": {\n              \"sha1\": [\n                1,\n                2,\n                3\n              ],\n              \"sha256\": [\n                4,\n                5,\n                6\n              ]\n            },\n            \"certification_keys\": []\n          },\n          \"chosen_parameters\": {\n            \"certification_key\": {\n              \"key_algorithm\": \"rsa\",\n              \"key_class\": \"asymmetric\",\n              \"key_size\": 2048,\n              \"local_identifier\": \"att_local_identifier\",\n              \"public\": \"OTgtMjkzODQ1LTg5MjMtNDk1OGlrYXNkamZnO2Frc2pka2ZqYXM7a2RqZjtramJrY3hqejk4MS0zMjQ5MDhpLWpmZDth\",\n              \"server_identifier\": \"ak\"\n            },\n            \"challenge\": \"challenge\",\n            \"hash_algorithm\": \"sha384\",\n            \"selected_subjects\": {\n              \"sha1\": [\n                1,\n                2,\n                3\n              ],\n              \"sha256\": [\n                4,\n                5,\n                6\n              ]\n            },\n            \"signature_scheme\": \"rsassa\"\n          },\n          \"data\": {\n            \"entries\": \"uefi_log_entries\"\n          }\n        },\n        {\n          \"evidence_class\": \"log\",\n          \"evidence_type\": \"ima_log\",\n          \"capabilities\": {\n            \"component_version\": \"2.0\",\n            \"hash_algorithms\": [\n              \"sha3_512\"\n            ],\n            \"signature_schemes\": [\n              \"rsassa\"\n            ],\n            \"available_subjects\": {\n              \"sha1\": [\n                1,\n                2,\n                3\n              ],\n              \"sha256\": [\n                4,\n                5,\n                6\n              ]\n            },\n            \"certification_keys\": []\n          },\n          \"chosen_parameters\": {\n            \"format\": \"application/octet-stream\"\n          },\n          \"data\": {\n            \"entries\": \"ima_log_entries\",\n            \"entry_count\": 96\n          }\n        }\n      ],\n      \"system_info\": {\n        \"boot_time\": \"2025-04-08T12:00:17Z\"\n      }\n    }\n  }\n}\n",
+keylime/src/algorithms.rs:14:        ecc::EccCurve,
+keylime/src/algorithms.rs:15:        key_bits::RsaKeyBits,
+keylime/src/algorithms.rs:130:    Rsa1024,
+keylime/src/algorithms.rs:131:    Rsa2048,
+keylime/src/algorithms.rs:132:    Rsa3072,
+keylime/src/algorithms.rs:133:    Rsa4096,
+keylime/src/algorithms.rs:134:    Ecc192,
+keylime/src/algorithms.rs:135:    Ecc224,
+keylime/src/algorithms.rs:136:    Ecc256,
+keylime/src/algorithms.rs:137:    Ecc384,
+keylime/src/algorithms.rs:138:    Ecc521,
+keylime/src/algorithms.rs:139:    EccSm2,
+keylime/src/algorithms.rs:160:        EncryptionAlgorithm::Rsa1024 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:161:        EncryptionAlgorithm::Rsa2048 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:162:        EncryptionAlgorithm::Rsa3072 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:163:        EncryptionAlgorithm::Rsa4096 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:164:        EncryptionAlgorithm::Ecc192 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:165:        EncryptionAlgorithm::Ecc224 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:166:        EncryptionAlgorithm::Ecc256 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:167:        EncryptionAlgorithm::Ecc384 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:168:        EncryptionAlgorithm::Ecc521 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:169:        EncryptionAlgorithm::EccSm2 => KeyClass::Asymmetric,
+keylime/src/algorithms.rs:175:        EncryptionAlgorithm::Rsa1024 => 1024,
+keylime/src/algorithms.rs:176:        EncryptionAlgorithm::Rsa2048 => 2048,
+keylime/src/algorithms.rs:177:        EncryptionAlgorithm::Rsa3072 => 3072,
+keylime/src/algorithms.rs:178:        EncryptionAlgorithm::Rsa4096 => 4096,
+keylime/src/algorithms.rs:179:        EncryptionAlgorithm::Ecc192 => 192,
+keylime/src/algorithms.rs:180:        EncryptionAlgorithm::Ecc224 => 224,
+keylime/src/algorithms.rs:181:        EncryptionAlgorithm::Ecc256 => 256,
+keylime/src/algorithms.rs:182:        EncryptionAlgorithm::Ecc384 => 384,
+keylime/src/algorithms.rs:183:        EncryptionAlgorithm::Ecc521 => 521,
+keylime/src/algorithms.rs:184:        EncryptionAlgorithm::EccSm2 => 256,
+keylime/src/algorithms.rs:192:        EncryptionAlgorithm::Rsa1024
+keylime/src/algorithms.rs:193:        | EncryptionAlgorithm::Rsa2048
+keylime/src/algorithms.rs:194:        | EncryptionAlgorithm::Rsa3072
+keylime/src/algorithms.rs:195:        | EncryptionAlgorithm::Rsa4096 => "rsa",
+keylime/src/algorithms.rs:196:        EncryptionAlgorithm::Ecc192
+keylime/src/algorithms.rs:197:        | EncryptionAlgorithm::Ecc224
+keylime/src/algorithms.rs:198:        | EncryptionAlgorithm::Ecc256
+keylime/src/algorithms.rs:199:        | EncryptionAlgorithm::Ecc384
+keylime/src/algorithms.rs:200:        | EncryptionAlgorithm::Ecc521
+keylime/src/algorithms.rs:201:        | EncryptionAlgorithm::EccSm2 => "ecc",
+keylime/src/algorithms.rs:208:            EncryptionAlgorithm::Rsa1024 => AsymmetricAlgorithm::Rsa,
+keylime/src/algorithms.rs:209:            EncryptionAlgorithm::Rsa2048 => AsymmetricAlgorithm::Rsa,
+keylime/src/algorithms.rs:210:            EncryptionAlgorithm::Rsa3072 => AsymmetricAlgorithm::Rsa,
+keylime/src/algorithms.rs:211:            EncryptionAlgorithm::Rsa4096 => AsymmetricAlgorithm::Rsa,
+keylime/src/algorithms.rs:212:            EncryptionAlgorithm::Ecc192 => AsymmetricAlgorithm::Ecc,
+keylime/src/algorithms.rs:213:            EncryptionAlgorithm::Ecc224 => AsymmetricAlgorithm::Ecc,
+keylime/src/algorithms.rs:214:            EncryptionAlgorithm::Ecc256 => AsymmetricAlgorithm::Ecc,
+keylime/src/algorithms.rs:215:            EncryptionAlgorithm::Ecc384 => AsymmetricAlgorithm::Ecc,
+keylime/src/algorithms.rs:216:            EncryptionAlgorithm::Ecc521 => AsymmetricAlgorithm::Ecc,
+keylime/src/algorithms.rs:217:            EncryptionAlgorithm::EccSm2 => AsymmetricAlgorithm::Ecc,
+keylime/src/algorithms.rs:225:            EncryptionAlgorithm::Rsa1024 => {
+keylime/src/algorithms.rs:226:                AsymmetricAlgorithmSelection::Rsa(RsaKeyBits::Rsa1024)
+keylime/src/algorithms.rs:228:            EncryptionAlgorithm::Rsa2048 => {
+keylime/src/algorithms.rs:229:                AsymmetricAlgorithmSelection::Rsa(RsaKeyBits::Rsa2048)
+keylime/src/algorithms.rs:231:            EncryptionAlgorithm::Rsa3072 => {
+keylime/src/algorithms.rs:232:                AsymmetricAlgorithmSelection::Rsa(RsaKeyBits::Rsa3072)
+keylime/src/algorithms.rs:234:            EncryptionAlgorithm::Rsa4096 => {
+keylime/src/algorithms.rs:235:                AsymmetricAlgorithmSelection::Rsa(RsaKeyBits::Rsa4096)
+keylime/src/algorithms.rs:237:            EncryptionAlgorithm::Ecc192 => {
+keylime/src/algorithms.rs:238:                AsymmetricAlgorithmSelection::Ecc(EccCurve::NistP192)
+keylime/src/algorithms.rs:240:            EncryptionAlgorithm::Ecc224 => {
+keylime/src/algorithms.rs:241:                AsymmetricAlgorithmSelection::Ecc(EccCurve::NistP224)
+keylime/src/algorithms.rs:243:            EncryptionAlgorithm::Ecc256 => {
+keylime/src/algorithms.rs:244:                AsymmetricAlgorithmSelection::Ecc(EccCurve::NistP256)
+keylime/src/algorithms.rs:246:            EncryptionAlgorithm::Ecc384 => {
+keylime/src/algorithms.rs:247:                AsymmetricAlgorithmSelection::Ecc(EccCurve::NistP384)
+keylime/src/algorithms.rs:249:            EncryptionAlgorithm::Ecc521 => {
+keylime/src/algorithms.rs:250:                AsymmetricAlgorithmSelection::Ecc(EccCurve::NistP521)
+keylime/src/algorithms.rs:252:            EncryptionAlgorithm::EccSm2 => {
+keylime/src/algorithms.rs:253:                AsymmetricAlgorithmSelection::Ecc(EccCurve::Sm2P256)
+keylime/src/algorithms.rs:265:            "rsa" => Ok(EncryptionAlgorithm::Rsa2048),
+keylime/src/algorithms.rs:266:            "ecc" => Ok(EncryptionAlgorithm::Ecc256),
+keylime/src/algorithms.rs:267:            "rsa1024" => Ok(EncryptionAlgorithm::Rsa1024),
+keylime/src/algorithms.rs:268:            "rsa2048" => Ok(EncryptionAlgorithm::Rsa2048),
+keylime/src/algorithms.rs:269:            "rsa3072" => Ok(EncryptionAlgorithm::Rsa3072),
+keylime/src/algorithms.rs:270:            "rsa4096" => Ok(EncryptionAlgorithm::Rsa4096),
+keylime/src/algorithms.rs:271:            "ecc192" => Ok(EncryptionAlgorithm::Ecc192),
+keylime/src/algorithms.rs:272:            "ecc_nist_p192" => Ok(EncryptionAlgorithm::Ecc192),
+keylime/src/algorithms.rs:273:            "ecc224" => Ok(EncryptionAlgorithm::Ecc224),
+keylime/src/algorithms.rs:274:            "ecc_nist_p224" => Ok(EncryptionAlgorithm::Ecc224),
+keylime/src/algorithms.rs:275:            "ecc256" => Ok(EncryptionAlgorithm::Ecc256),
+keylime/src/algorithms.rs:276:            "ecc_nist_p256" => Ok(EncryptionAlgorithm::Ecc256),
+keylime/src/algorithms.rs:277:            "ecc384" => Ok(EncryptionAlgorithm::Ecc384),
+keylime/src/algorithms.rs:278:            "ecc_nist_p384" => Ok(EncryptionAlgorithm::Ecc384),
+keylime/src/algorithms.rs:279:            "ecc521" => Ok(EncryptionAlgorithm::Ecc521),
+keylime/src/algorithms.rs:280:            "ecc_nist_p521" => Ok(EncryptionAlgorithm::Ecc521),
+keylime/src/algorithms.rs:281:            "ecc_sm2" => Ok(EncryptionAlgorithm::EccSm2),
+keylime/src/algorithms.rs:282:            "ecc_sm2_p256" => Ok(EncryptionAlgorithm::EccSm2),
+keylime/src/algorithms.rs:290:/// API version 2.5 introduced specific algorithm names (rsa2048, ecc256)
+keylime/src/algorithms.rs:291:/// instead of generic names (rsa, ecc)
+keylime/src/algorithms.rs:298:    /// - For API versions < 2.5: Rsa2048 returns "rsa" and Ecc256 returns "ecc" (legacy format)
+keylime/src/algorithms.rs:299:    /// - For API versions >= 2.5: all algorithms use their specific format (e.g., "rsa2048", "ecc256")
+keylime/src/algorithms.rs:304:        // Only Rsa2048 and Ecc256 had different formats in legacy API versions
+keylime/src/algorithms.rs:306:            EncryptionAlgorithm::Rsa2048 => ("rsa", "rsa2048"),
+keylime/src/algorithms.rs:307:            EncryptionAlgorithm::Ecc256 => ("ecc", "ecc256"),
+keylime/src/algorithms.rs:323:            EncryptionAlgorithm::Rsa1024 => "rsa1024",
+keylime/src/algorithms.rs:324:            EncryptionAlgorithm::Rsa2048 => "rsa2048",
+keylime/src/algorithms.rs:325:            EncryptionAlgorithm::Rsa3072 => "rsa3072",
+keylime/src/algorithms.rs:326:            EncryptionAlgorithm::Rsa4096 => "rsa4096",
+keylime/src/algorithms.rs:327:            EncryptionAlgorithm::Ecc192 => "ecc192",
+keylime/src/algorithms.rs:328:            EncryptionAlgorithm::Ecc224 => "ecc224",
+keylime/src/algorithms.rs:329:            EncryptionAlgorithm::Ecc256 => "ecc256",
+keylime/src/algorithms.rs:330:            EncryptionAlgorithm::Ecc384 => "ecc384",
+keylime/src/algorithms.rs:331:            EncryptionAlgorithm::Ecc521 => "ecc521",
+keylime/src/algorithms.rs:332:            EncryptionAlgorithm::EccSm2 => "ecc_sm2",
+keylime/src/algorithms.rs:340:    RsaSsa,
+keylime/src/algorithms.rs:341:    RsaPss,
+keylime/src/algorithms.rs:354:            SignAlgorithm::RsaSsa => SignatureScheme::RsaSsa { hash_scheme },
+keylime/src/algorithms.rs:355:            SignAlgorithm::RsaPss => SignatureScheme::RsaPss { hash_scheme },
+keylime/src/algorithms.rs:368:            SignAlgorithm::RsaSsa => SignatureSchemeAlgorithm::RsaSsa,
+keylime/src/algorithms.rs:369:            SignAlgorithm::RsaPss => SignatureSchemeAlgorithm::RsaPss,
+keylime/src/algorithms.rs:382:            "rsassa" => Ok(SignAlgorithm::RsaSsa),
+keylime/src/algorithms.rs:383:            "rsapss" => Ok(SignAlgorithm::RsaPss),
+keylime/src/algorithms.rs:397:            SignAlgorithm::RsaSsa => "rsassa",
+keylime/src/algorithms.rs:398:            SignAlgorithm::RsaPss => "rsapss",
+keylime/src/algorithms.rs:407:pub fn get_ecc_curve_key_size(curve_id: EccCurve) -> u16 {
+keylime/src/algorithms.rs:409:        EccCurve::NistP192 => 192,
+keylime/src/algorithms.rs:410:        EccCurve::NistP224 => 224,
+keylime/src/algorithms.rs:411:        EccCurve::NistP256 => 256,
+keylime/src/algorithms.rs:412:        EccCurve::NistP384 => 384,
+keylime/src/algorithms.rs:413:        EccCurve::NistP521 => 521,
+keylime/src/algorithms.rs:414:        EccCurve::BnP256 => 256,
+keylime/src/algorithms.rs:415:        EccCurve::BnP638 => 638,
+keylime/src/algorithms.rs:416:        EccCurve::Sm2P256 => 256,
+keylime/src/algorithms.rs:445:        let result = EncryptionAlgorithm::try_from("rsa");
+keylime/src/algorithms.rs:446:        assert!(result.is_ok_and(|r| r == EncryptionAlgorithm::Rsa2048));
+keylime/src/algorithms.rs:447:        let result = EncryptionAlgorithm::try_from("ecc");
+keylime/src/algorithms.rs:448:        assert!(result.is_ok_and(|r| r == EncryptionAlgorithm::Ecc256));
+keylime/src/algorithms.rs:449:        let result = EncryptionAlgorithm::try_from("rsa4096");
+keylime/src/algorithms.rs:450:        assert!(result.is_ok_and(|r| r == EncryptionAlgorithm::Rsa4096));
+keylime/src/algorithms.rs:451:        let result = EncryptionAlgorithm::try_from("ecc256");
+keylime/src/algorithms.rs:452:        assert!(result.is_ok_and(|r| r == EncryptionAlgorithm::Ecc256));
+keylime/src/algorithms.rs:461:        let result = SignAlgorithm::try_from("rsassa");
+keylime/src/algorithms.rs:463:        let result = SignAlgorithm::try_from("rsapss");
+keylime/src/algorithms.rs:495:            (EncryptionAlgorithm::Rsa1024, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:496:            (EncryptionAlgorithm::Rsa2048, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:497:            (EncryptionAlgorithm::Rsa3072, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:498:            (EncryptionAlgorithm::Rsa4096, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:499:            (EncryptionAlgorithm::Ecc192, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:500:            (EncryptionAlgorithm::Ecc224, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:501:            (EncryptionAlgorithm::Ecc256, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:502:            (EncryptionAlgorithm::Ecc384, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:503:            (EncryptionAlgorithm::Ecc521, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:504:            (EncryptionAlgorithm::EccSm2, KeyClass::Asymmetric),
+keylime/src/algorithms.rs:515:            (EncryptionAlgorithm::Rsa1024, 1024),
+keylime/src/algorithms.rs:516:            (EncryptionAlgorithm::Rsa2048, 2048),
+keylime/src/algorithms.rs:517:            (EncryptionAlgorithm::Rsa3072, 3072),
+keylime/src/algorithms.rs:518:            (EncryptionAlgorithm::Rsa4096, 4096),
+keylime/src/algorithms.rs:519:            (EncryptionAlgorithm::Ecc192, 192),
+keylime/src/algorithms.rs:520:            (EncryptionAlgorithm::Ecc224, 224),
+keylime/src/algorithms.rs:521:            (EncryptionAlgorithm::Ecc256, 256),
+keylime/src/algorithms.rs:522:            (EncryptionAlgorithm::Ecc384, 384),
+keylime/src/algorithms.rs:523:            (EncryptionAlgorithm::Ecc521, 521),
+keylime/src/algorithms.rs:524:            (EncryptionAlgorithm::EccSm2, 256),
+keylime/src/algorithms.rs:538:            (EncryptionAlgorithm::Rsa1024, "rsa"),
+keylime/src/algorithms.rs:539:            (EncryptionAlgorithm::Rsa2048, "rsa"),
+keylime/src/algorithms.rs:540:            (EncryptionAlgorithm::Rsa3072, "rsa"),
+keylime/src/algorithms.rs:541:            (EncryptionAlgorithm::Rsa4096, "rsa"),
+keylime/src/algorithms.rs:542:            (EncryptionAlgorithm::Ecc192, "ecc"),
+keylime/src/algorithms.rs:543:            (EncryptionAlgorithm::Ecc224, "ecc"),
+keylime/src/algorithms.rs:544:            (EncryptionAlgorithm::Ecc256, "ecc"),
+keylime/src/algorithms.rs:545:            (EncryptionAlgorithm::Ecc384, "ecc"),
+keylime/src/algorithms.rs:546:            (EncryptionAlgorithm::Ecc521, "ecc"),
+keylime/src/algorithms.rs:547:            (EncryptionAlgorithm::EccSm2, "ecc"),
+keylime/src/algorithms.rs:559:    fn test_get_ecc_curve_key_size() {
+keylime/src/algorithms.rs:561:            (EccCurve::NistP192, 192),
+keylime/src/algorithms.rs:562:            (EccCurve::NistP224, 224),
+keylime/src/algorithms.rs:563:            (EccCurve::NistP256, 256),
+keylime/src/algorithms.rs:564:            (EccCurve::NistP384, 384),
+keylime/src/algorithms.rs:565:            (EccCurve::NistP521, 521),
+keylime/src/algorithms.rs:566:            (EccCurve::BnP256, 256),
+keylime/src/algorithms.rs:567:            (EccCurve::BnP638, 638),
+keylime/src/algorithms.rs:568:            (EccCurve::Sm2P256, 256),
+keylime/src/algorithms.rs:571:            let size = get_ecc_curve_key_size(curve_id);
+keylime/src/algorithms.rs:574:    } // test_get_ecc_curve_key_size
+keylime/src/algorithms.rs:589:        let result = EncryptionAlgorithm::try_from("invalid-rsa-type");
+keylime/src/config/base.rs:52:pub static DEFAULT_IAK_IDEVID_ASYMMETRIC_ALG: &str = "rsa";
+keylime/src/config/base.rs:62:pub static DEFAULT_TPM_ENCRYPTION_ALG: &str = "rsa";
+keylime/src/config/base.rs:64:pub static DEFAULT_TPM_SIGNING_ALG: &str = "rsassa";
+keylime/src/context_info.rs:20:    rsa::Rsa,
+keylime/src/context_info.rs:328:            TssPublic::Rsa { parameters, .. } => {
+keylime/src/context_info.rs:331:            TssPublic::Ecc { parameters, .. } => {
+keylime/src/context_info.rs:332:                Ok(algorithms::get_ecc_curve_key_size(parameters.ecc_curve()))
+keylime/src/context_info.rs:403:        if let TssPublic::Rsa {
+keylime/src/context_info.rs:415:            let rsa = Rsa::from_public_components(n, e)?;
+keylime/src/context_info.rs:416:            let pkey = PKey::from_rsa(rsa)?;
+keylime/src/context_info.rs:772:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:774:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:787:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:789:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:797:        assert_eq!(context_info.get_key_algorithm(), "rsa");
+keylime/src/context_info.rs:820:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:822:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:857:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:869:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:871:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:882:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:895:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:897:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:906:        assert_eq!(context_info.get_key_algorithm(), "rsa");
+keylime/src/context_info.rs:923:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:925:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:939:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:941:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:968:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:970:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:991:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:993:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:1006:                signature_scheme: "rsassa".to_string(),
+keylime/src/context_info.rs:1047:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:1049:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:1084:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:1086:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:1099:            signature_scheme: "rsassa".to_string(),
+keylime/src/context_info.rs:1124:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:1126:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/context_info.rs:1146:                signature_scheme: "rsassa".to_string(),
+keylime/src/context_info.rs:1172:            tpm_encryption_alg: "rsa".to_string(),
+keylime/src/context_info.rs:1174:            tpm_signing_alg: "rsassa".to_string(),
+keylime/src/crypto.rs:19:    rsa::{Padding, Rsa},
+keylime/src/crypto.rs:127:    /// Error creating PKey structure from RSA structure
+keylime/src/crypto.rs:128:    #[error("failed to create PKey structure from RSA structure")]
+keylime/src/crypto.rs:129:    PKeyFromRSAError(#[source] openssl::error::ErrorStack),
+keylime/src/crypto.rs:147:    /// Error obtaining ECC public key from structure
+keylime/src/crypto.rs:148:    #[error("failed to get ECC public key from structure")]
+keylime/src/crypto.rs:149:    PublicKeyGetECCError(#[source] openssl::error::ErrorStack),
+keylime/src/crypto.rs:159:    /// Error composing RSA public key structure from public components
+keylime/src/crypto.rs:161:        "failed to compose RSA public key structure from public components"
+keylime/src/crypto.rs:163:    RSAFromComponents(#[source] openssl::error::ErrorStack),
+keylime/src/crypto.rs:165:    /// Error generating RSA key pair
+keylime/src/crypto.rs:166:    #[error("failed to generate RSA key pair")]
+keylime/src/crypto.rs:167:    RSAGenerateError(#[source] openssl::error::ErrorStack),
+keylime/src/crypto.rs:169:    /// Error obtaining RSA private key from structure
+keylime/src/crypto.rs:170:    #[error("failed to get RSA private key from structure")]
+keylime/src/crypto.rs:171:    RSAGetPrivateKeyError(#[source] openssl::error::ErrorStack),
+keylime/src/crypto.rs:173:    /// Error obtaining RSA public key from structure
+keylime/src/crypto.rs:174:    #[error("failed to get RSA public key from structure")]
+keylime/src/crypto.rs:175:    RSAGetPublicKeyError(#[source] openssl::error::ErrorStack),
+keylime/src/crypto.rs:177:    /// RSA OAEP decrypt error
+keylime/src/crypto.rs:178:    #[error("RSA OAEP decrypt error: {message}")]
+keylime/src/crypto.rs:179:    RSAOAEPDecryptError {
+keylime/src/crypto.rs:202:    /// Error converting ECC public key into TSS structure
+keylime/src/crypto.rs:203:    #[error("failed to convert ECC public key into TSS structure")]
+keylime/src/crypto.rs:204:    SubjectPublicKeyInfoFromECCError(#[source] tss_esapi::Error),
+keylime/src/crypto.rs:206:    /// Error converting RSA public key into TSS structure
+keylime/src/crypto.rs:207:    #[error("failed to convert RSA public key into TSS structure")]
+keylime/src/crypto.rs:208:    SubjectPublicKeyInfoFromRSAError(#[source] tss_esapi::Error),
+keylime/src/crypto.rs:396:    // Id:RSA_PSS only added in rust-openssl from v0.10.59; remove this let and use Id::RSA_PSS after update
+keylime/src/crypto.rs:398:    let id_rsa_pss: Id = Id::from_raw(912);
+keylime/src/crypto.rs:404:        Id::RSA => {
+keylime/src/crypto.rs:408:                .rsa()
+keylime/src/crypto.rs:409:                .map_err(CryptoError::RSAGetPublicKeyError)?
+keylime/src/crypto.rs:416:                .map_err(CryptoError::SubjectPublicKeyInfoFromRSAError)?;
+keylime/src/crypto.rs:423:        cert_id if cert_id == id_rsa_pss => {
+keylime/src/crypto.rs:427:                .rsa()
+keylime/src/crypto.rs:428:                .map_err(CryptoError::RSAGetPublicKeyError)?
+keylime/src/crypto.rs:435:                .map_err(CryptoError::SubjectPublicKeyInfoFromRSAError)?;
+keylime/src/crypto.rs:447:                .map_err(CryptoError::PublicKeyGetECCError)?
+keylime/src/crypto.rs:454:                .map_err(CryptoError::SubjectPublicKeyInfoFromECCError)?;
+keylime/src/crypto.rs:470:    // Id:RSA_PSS only added in rust-openssl from v0.10.59; remove this let and use Id::RSA_PSS after update
+keylime/src/crypto.rs:472:    let id_rsa_pss: Id = Id::from_raw(912);
+keylime/src/crypto.rs:478:        Id::RSA => match cert
+keylime/src/crypto.rs:486:        cert_id if cert_id == id_rsa_pss => match cert
+keylime/src/crypto.rs:503:                .map_err(CryptoError::PublicKeyGetECCError)?
+keylime/src/crypto.rs:603:/// * `algorithm` - The encryption algorithm to use (e.g., RSA 2048, ECC 256)
+keylime/src/crypto.rs:637:            EncryptionAlgorithm::Rsa1024 => rsa_generate_pair(1024)?,
+keylime/src/crypto.rs:638:            EncryptionAlgorithm::Rsa2048 => rsa_generate_pair(2048)?,
+keylime/src/crypto.rs:639:            EncryptionAlgorithm::Rsa3072 => rsa_generate_pair(3072)?,
+keylime/src/crypto.rs:640:            EncryptionAlgorithm::Rsa4096 => rsa_generate_pair(4096)?,
+keylime/src/crypto.rs:641:            EncryptionAlgorithm::Ecc192 => {
+keylime/src/crypto.rs:644:                ecc_generate_pair(&group)?
+keylime/src/crypto.rs:646:            EncryptionAlgorithm::Ecc224 => {
+keylime/src/crypto.rs:649:                ecc_generate_pair(&group)?
+keylime/src/crypto.rs:651:            EncryptionAlgorithm::Ecc256 => {
+keylime/src/crypto.rs:654:                ecc_generate_pair(&group)?
+keylime/src/crypto.rs:656:            EncryptionAlgorithm::Ecc384 => {
+keylime/src/crypto.rs:659:                ecc_generate_pair(&group)?
+keylime/src/crypto.rs:661:            EncryptionAlgorithm::Ecc521 => {
+keylime/src/crypto.rs:664:                ecc_generate_pair(&group)?
+keylime/src/crypto.rs:666:            EncryptionAlgorithm::EccSm2 => {
+keylime/src/crypto.rs:669:                ecc_generate_pair(&group)?
+keylime/src/crypto.rs:680:fn rsa_generate(key_size: u32) -> Result<PKey<Private>, CryptoError> {
+keylime/src/crypto.rs:681:    PKey::from_rsa(
+keylime/src/crypto.rs:682:        Rsa::generate(key_size).map_err(CryptoError::RSAGenerateError)?,
+keylime/src/crypto.rs:684:    .map_err(CryptoError::PKeyFromRSAError)
+keylime/src/crypto.rs:687:/// Generate RSA key pair with the given size
+keylime/src/crypto.rs:690:pub fn rsa_generate_pair(
+keylime/src/crypto.rs:693:    let private = rsa_generate(key_size)?;
+keylime/src/crypto.rs:712:            EncryptionAlgorithm::Rsa1024
+keylime/src/crypto.rs:713:            | EncryptionAlgorithm::Rsa2048
+keylime/src/crypto.rs:714:            | EncryptionAlgorithm::Rsa3072
+keylime/src/crypto.rs:715:            | EncryptionAlgorithm::Rsa4096 => Id::RSA,
+keylime/src/crypto.rs:716:            EncryptionAlgorithm::Ecc192
+keylime/src/crypto.rs:717:            | EncryptionAlgorithm::Ecc224
+keylime/src/crypto.rs:718:            | EncryptionAlgorithm::Ecc256
+keylime/src/crypto.rs:719:            | EncryptionAlgorithm::Ecc384
+keylime/src/crypto.rs:720:            | EncryptionAlgorithm::Ecc521
+keylime/src/crypto.rs:721:            | EncryptionAlgorithm::EccSm2 => Id::EC,
+keylime/src/crypto.rs:750:/// Generate a ECC key pair on given group
+keylime/src/crypto.rs:753:pub fn ecc_generate_pair(
+keylime/src/crypto.rs:770:        Id::RSA => {
+keylime/src/crypto.rs:771:            let rsa = Rsa::from_public_components(
+keylime/src/crypto.rs:773:                    .rsa()
+keylime/src/crypto.rs:774:                    .map_err(CryptoError::RSAGetPrivateKeyError)?
+keylime/src/crypto.rs:779:                    .rsa()
+keylime/src/crypto.rs:780:                    .map_err(CryptoError::RSAGetPrivateKeyError)?
+keylime/src/crypto.rs:785:            .map_err(CryptoError::RSAFromComponents)?;
+keylime/src/crypto.rs:786:            PKey::from_rsa(rsa).map_err(CryptoError::PKeyFromRSAError)
+keylime/src/crypto.rs:916: * Verify a remote message and signature against a local rsa cert
+keylime/src/crypto.rs:929:        .set_rsa_padding(Padding::PKCS1_PSS)
+keylime/src/crypto.rs:936:        .set_rsa_mgf1_md(MessageDigest::sha256())
+keylime/src/crypto.rs:944:        .set_rsa_pss_saltlen(openssl::sign::RsaPssSaltlen::MAXIMUM_LENGTH)
+keylime/src/crypto.rs:946:            message: "failed to set signature verifier RSA PSS salt length"
+keylime/src/crypto.rs:969: * Inputs: OpenSSL RSA key
+keylime/src/crypto.rs:973: * Take in an RSA-encrypted ciphertext and an RSA private key and decrypt the
+keylime/src/crypto.rs:976:pub fn rsa_oaep_decrypt(
+keylime/src/crypto.rs:981:        CryptoError::RSAOAEPDecryptError {
+keylime/src/crypto.rs:982:            message: "failed to create RSA decrypter object".into(),
+keylime/src/crypto.rs:988:        .set_rsa_padding(Padding::PKCS1_OAEP)
+keylime/src/crypto.rs:989:        .map_err(|source| CryptoError::RSAOAEPDecryptError {
+keylime/src/crypto.rs:990:            message: "failed to set RSA decrypter padding".into(),
+keylime/src/crypto.rs:994:        .set_rsa_mgf1_md(MessageDigest::sha1())
+keylime/src/crypto.rs:995:        .map_err(|source| CryptoError::RSAOAEPDecryptError {
+keylime/src/crypto.rs:996:            message: "failed to set RSA decrypter Message Digest algorithm"
+keylime/src/crypto.rs:1001:        .set_rsa_oaep_md(MessageDigest::sha1())
+keylime/src/crypto.rs:1002:        .map_err(|source| CryptoError::RSAOAEPDecryptError {
+keylime/src/crypto.rs:1004:                "failed to set RSA decrypter OAEP Message Digest algorithm"
+keylime/src/crypto.rs:1011:        CryptoError::RSAOAEPDecryptError {
+keylime/src/crypto.rs:1012:            message: "failed to get RSA decrypter output length".into(),
+keylime/src/crypto.rs:1021:            CryptoError::RSAOAEPDecryptError {
+keylime/src/crypto.rs:1022:                message: "failed to decrypt data with RSA OAEP".into(),
+keylime/src/crypto.rs:1154:    pub fn rsa_import_pair(
+keylime/src/crypto.rs:1170:    pub fn rsa_oaep_encrypt(
+keylime/src/crypto.rs:1176:        encrypter.set_rsa_padding(Padding::PKCS1_OAEP)?;
+keylime/src/crypto.rs:1177:        encrypter.set_rsa_mgf1_md(MessageDigest::sha1())?;
+keylime/src/crypto.rs:1178:        encrypter.set_rsa_oaep_md(MessageDigest::sha1())?;
+keylime/src/crypto.rs:1230:    pub fn rsa_generate(
+keylime/src/crypto.rs:1233:        super::rsa_generate(key_size).map_err(CryptoTestError::CryptoError)
+keylime/src/crypto.rs:1275:        let ca_key = rsa_generate(2048).expect("Failed to generate CA key");
+keylime/src/crypto.rs:1284:            rsa_generate(2048).expect("Failed to generate server key");
+keylime/src/crypto.rs:1294:            rsa_generate(2048).expect("Failed to generate client key");
+keylime/src/crypto.rs:1366:    use testing::{encrypt_aead, rsa_import_pair, rsa_oaep_encrypt};
+keylime/src/crypto.rs:1402:        let (pub_key, priv_key) = rsa_generate_pair(2048).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1422:    fn test_rsa_oaep() {
+keylime/src/crypto.rs:1424:        let rsa_key_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+keylime/src/crypto.rs:1426:            .join("test-rsa.pem");
+keylime/src/crypto.rs:1428:        let (pub_key, priv_key) = rsa_import_pair(rsa_key_path)
+keylime/src/crypto.rs:1429:            .expect("unable to import RSA key pair");
+keylime/src/crypto.rs:1431:        let ciphertext = rsa_oaep_encrypt(&pub_key, &plaintext[..])
+keylime/src/crypto.rs:1436:        let decrypted = rsa_oaep_decrypt(&priv_key, &ciphertext[..])
+keylime/src/crypto.rs:1520:        let rsa_key_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+keylime/src/crypto.rs:1522:            .join("test-rsa.pem");
+keylime/src/crypto.rs:1524:        // Get RSA keys
+keylime/src/crypto.rs:1525:        let contents = read_to_string(rsa_key_path);
+keylime/src/crypto.rs:1535:            .join("test-rsa.sig");
+keylime/src/crypto.rs:1545:        let rsa_key_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+keylime/src/crypto.rs:1547:            .join("test-rsa.pem");
+keylime/src/crypto.rs:1549:        // Get RSA keys
+keylime/src/crypto.rs:1550:        let (_public, private) = rsa_import_pair(rsa_key_path).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1706:    fn test_x509_rsa() {
+keylime/src/crypto.rs:1707:        let (pubkey, privkey) = rsa_generate_pair(2048).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1713:    fn test_x509_long_rsa() {
+keylime/src/crypto.rs:1715:            let (pubkey, privkey) = rsa_generate_pair(length).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1721:    fn test_x509_ecc() {
+keylime/src/crypto.rs:1730:            let (pubkey, privkey) = ecc_generate_pair(&group).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1757:    fn test_validate_key_algorithm_rsa_2048() {
+keylime/src/crypto.rs:1758:        // Generate RSA 2048 key and validate it
+keylime/src/crypto.rs:1759:        let (_, private_key) = rsa_generate_pair(2048).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1762:            EncryptionAlgorithm::Rsa2048,
+keylime/src/crypto.rs:1764:        assert!(result.is_ok(), "RSA 2048 key should validate successfully");
+keylime/src/crypto.rs:1768:    fn test_validate_key_algorithm_rsa_3072() {
+keylime/src/crypto.rs:1769:        // Generate RSA 3072 key and validate it
+keylime/src/crypto.rs:1770:        let (_, private_key) = rsa_generate_pair(3072).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1773:            EncryptionAlgorithm::Rsa3072,
+keylime/src/crypto.rs:1775:        assert!(result.is_ok(), "RSA 3072 key should validate successfully");
+keylime/src/crypto.rs:1779:    fn test_validate_key_algorithm_rsa_4096() {
+keylime/src/crypto.rs:1780:        // Generate RSA 4096 key and validate it
+keylime/src/crypto.rs:1781:        let (_, private_key) = rsa_generate_pair(4096).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1784:            EncryptionAlgorithm::Rsa4096,
+keylime/src/crypto.rs:1786:        assert!(result.is_ok(), "RSA 4096 key should validate successfully");
+keylime/src/crypto.rs:1791:        // Generate RSA 2048 key but validate as RSA 4096
+keylime/src/crypto.rs:1792:        let (_, private_key) = rsa_generate_pair(2048).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1795:            EncryptionAlgorithm::Rsa4096,
+keylime/src/crypto.rs:1799:            "RSA 2048 key should fail RSA 4096 validation"
+keylime/src/crypto.rs:1812:    fn test_validate_key_algorithm_ecc_256() {
+keylime/src/crypto.rs:1815:        // Generate ECC 256 key and validate it
+keylime/src/crypto.rs:1817:        let (_, private_key) = ecc_generate_pair(&group).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1819:            validate_key_algorithm(&private_key, EncryptionAlgorithm::Ecc256);
+keylime/src/crypto.rs:1820:        assert!(result.is_ok(), "ECC 256 key should validate successfully");
+keylime/src/crypto.rs:1824:    fn test_validate_key_algorithm_ecc_384() {
+keylime/src/crypto.rs:1827:        // Generate ECC 384 key and validate it
+keylime/src/crypto.rs:1829:        let (_, private_key) = ecc_generate_pair(&group).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1831:            validate_key_algorithm(&private_key, EncryptionAlgorithm::Ecc384);
+keylime/src/crypto.rs:1832:        assert!(result.is_ok(), "ECC 384 key should validate successfully");
+keylime/src/crypto.rs:1848:            EncryptionAlgorithm::Rsa2048,
+keylime/src/crypto.rs:1855:        // Verify the key is valid RSA 2048
+keylime/src/crypto.rs:1859:            EncryptionAlgorithm::Rsa2048,
+keylime/src/crypto.rs:1861:        assert!(validation.is_ok(), "Generated key should be RSA 2048");
+keylime/src/crypto.rs:1872:        let (pub1, priv1) = rsa_generate_pair(2048).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1879:            EncryptionAlgorithm::Rsa2048,
+keylime/src/crypto.rs:1908:            EncryptionAlgorithm::Rsa2048,
+keylime/src/crypto.rs:1921:            EncryptionAlgorithm::Rsa2048,
+keylime/src/crypto.rs:1942:        // Generate and save an RSA 2048 key
+keylime/src/crypto.rs:1943:        let (_, priv_key) = rsa_generate_pair(2048).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1946:        // Try to load it as RSA 4096 with validation enabled
+keylime/src/crypto.rs:1950:            EncryptionAlgorithm::Rsa4096,
+keylime/src/crypto.rs:1978:        // Generate and save an RSA 2048 key
+keylime/src/crypto.rs:1979:        let (pub1, priv1) = rsa_generate_pair(2048).unwrap(); //#[allow_ci]
+keylime/src/crypto.rs:1982:        // Load it as RSA 4096 but with validation disabled
+keylime/src/crypto.rs:1986:            EncryptionAlgorithm::Rsa4096,
+keylime/src/crypto.rs:2004:    fn test_load_or_generate_key_rsa_3072() {
+keylime/src/crypto.rs:2010:        // Generate RSA 3072 key
+keylime/src/crypto.rs:2014:            EncryptionAlgorithm::Rsa3072,
+keylime/src/crypto.rs:2018:        assert!(result.is_ok(), "Should generate RSA 3072 key successfully");
+keylime/src/crypto.rs:2023:            EncryptionAlgorithm::Rsa3072,
+keylime/src/crypto.rs:2025:        assert!(validation.is_ok(), "Generated key should be RSA 3072");
+keylime/src/crypto.rs:2029:    fn test_load_or_generate_key_ecc_256() {
+keylime/src/crypto.rs:2033:        let key_path = dir.path().join("test-ecc-256.pem");
+keylime/src/crypto.rs:2035:        // Generate ECC 256 key
+keylime/src/crypto.rs:2039:            EncryptionAlgorithm::Ecc256,
+keylime/src/crypto.rs:2043:        assert!(result.is_ok(), "Should generate ECC 256 key successfully");
+keylime/src/crypto.rs:2047:            validate_key_algorithm(&private_key, EncryptionAlgorithm::Ecc256);
+keylime/src/crypto.rs:2048:        assert!(validation.is_ok(), "Generated key should be ECC 256");
+keylime/src/crypto/x509.rs:559:    fn test_generate_rsa_certificate() {
+keylime/src/crypto/x509.rs:560:        let (pubkey, privkey) = rsa_generate_pair(2048).unwrap(); //#[allow_ci]
+keylime/src/crypto/x509.rs:566:    fn test_generate_long_rsa_certificate() {
+keylime/src/crypto/x509.rs:568:            let (pubkey, privkey) = rsa_generate_pair(length).unwrap(); //#[allow_ci]
+keylime/src/crypto/x509.rs:574:    fn test_generate_ecc_certificate() {
+keylime/src/crypto/x509.rs:583:            let (pubkey, privkey) = ecc_generate_pair(&group).unwrap(); //#[allow_ci]
+keylime/src/device_id.rs:662:            .iak_asym_alg("rsa")
+keylime/src/device_id.rs:668:            .idevid_asym_alg("rsa")
+keylime/src/quote.rs:37:            sign_alg: "RSASSA-PSS".to_string(),
+keylime/src/quote.rs:48:        assert!(serialized.contains("RSASSA-PSS"));
+keylime/src/quote.rs:60:  "sign_alg": "RSASSA-PSS",
+keylime/src/registrar_client.rs:752:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/registrar_client.rs:817:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/registrar_client.rs:888:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/registrar_client.rs:960:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/registrar_client.rs:1004:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/registrar_client.rs:1076:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/registrar_client.rs:1504:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/registrar_client.rs:1550:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/registrar_client.rs:1622:        let priv_key = crypto::testing::rsa_generate(2048).unwrap(); //#[allow_ci]
+keylime/src/structures/capabilities_negotiation.rs:312:                                signature_schemes: vec!["rsassa".to_string()],
+keylime/src/structures/capabilities_negotiation.rs:324:                                        key_algorithm: "rsa".to_string(),
+keylime/src/structures/capabilities_negotiation.rs:360:              "rsassa"
+keylime/src/structures/capabilities_negotiation.rs:386:                "key_algorithm": "rsa",
+keylime/src/structures/capabilities_negotiation.rs:489:                                signature_schemes: vec!["rsassa".to_string()],
+keylime/src/structures/capabilities_negotiation.rs:503:                                        key_algorithm: "rsa".to_string(),
+keylime/src/structures/capabilities_negotiation.rs:555:              "rsassa"
+keylime/src/structures/capabilities_negotiation.rs:581:                "key_algorithm": "rsa",
+keylime/src/structures/capabilities_negotiation.rs:638:                                            "signature_schemes":["rsassa"],
+keylime/src/structures/capabilities_negotiation.rs:643:                                                                   "key_algorithm":"rsa",
+keylime/src/structures/capabilities_negotiation.rs:680:                assert_eq!(capabilities.signature_schemes[0], "rsassa");
+keylime/src/structures/capabilities_negotiation.rs:700:                assert_eq!(certification_key.key_algorithm, "rsa");
+keylime/src/structures/capabilities_negotiation.rs:825:                                signature_scheme: Some("rsassa".to_string()),
+keylime/src/structures/capabilities_negotiation.rs:831:                                    key_algorithm: "rsa".to_string(),
+keylime/src/structures/capabilities_negotiation.rs:859:              "key_algorithm": "rsa",
+keylime/src/structures/capabilities_negotiation.rs:890:            "signature_scheme": "rsassa"
+keylime/src/structures/capabilities_negotiation.rs:920:                                signature_scheme: Some("rsassa".to_string()),
+keylime/src/structures/capabilities_negotiation.rs:926:                                    key_algorithm: "rsa".to_string(),
+keylime/src/structures/capabilities_negotiation.rs:971:              "key_algorithm": "rsa",
+keylime/src/structures/capabilities_negotiation.rs:1002:            "signature_scheme": "rsassa"
+keylime/src/structures/capabilities_negotiation.rs:1045:                                                "signature_scheme": "rsassa",
+keylime/src/structures/capabilities_negotiation.rs:1052:                                                    "key_algorithm": "rsa",
+keylime/src/structures/capabilities_negotiation.rs:1118:                    Some("rsassa".to_string())
+keylime/src/structures/capabilities_negotiation.rs:1124:                assert_eq!(certification_key.key_algorithm, "rsa");
+keylime/src/structures/evidence_handling.rs:883:                                    signature_schemes: vec!["rsassa".to_string()],
+keylime/src/structures/evidence_handling.rs:909:                                            "rsassa".to_string(),
+keylime/src/structures/evidence_handling.rs:916:                                            key_algorithm: "rsa".to_string(),
+keylime/src/structures/evidence_handling.rs:960:                                            "rsassa".to_string(),
+keylime/src/structures/evidence_handling.rs:967:                                            key_algorithm: "rsa".to_string(),
+keylime/src/structures/evidence_handling.rs:1046:              "rsassa"
+keylime/src/structures/evidence_handling.rs:1064:              "key_algorithm": "rsa",
+keylime/src/structures/evidence_handling.rs:1085:            "signature_scheme": "rsassa"
+keylime/src/structures/evidence_handling.rs:1107:              "key_algorithm": "rsa",
+keylime/src/structures/evidence_handling.rs:1128:            "signature_scheme": "rsassa"
+keylime/src/structures/evidence_handling.rs:1189:              "rsassa"
+keylime/src/structures/evidence_handling.rs:1205:                "key_algorithm": "rsa",
+keylime/src/structures/evidence_handling.rs:1216:              "key_algorithm": "rsa",
+keylime/src/structures/evidence_handling.rs:1237:            "signature_scheme": "rsassa"
+keylime/src/structures/evidence_handling.rs:1254:              "rsassa"
+keylime/src/structures/evidence_handling.rs:1270:                "key_algorithm": "rsa",
+keylime/src/structures/evidence_handling.rs:1281:              "key_algorithm": "rsa",
+keylime/src/structures/evidence_handling.rs:1302:            "signature_scheme": "rsassa"
+keylime/src/structures/evidence_handling.rs:1317:              "rsassa"
+keylime/src/structures/evidence_handling.rs:1333:                "key_algorithm": "rsa",
+keylime/src/structures/evidence_handling.rs:1391:            assert_eq!(capabilities.signature_schemes, vec!["rsassa"]);
+keylime/src/structures/evidence_handling.rs:1409:            assert_eq!(certification_key.key_algorithm, "rsa");
+keylime/src/structures/evidence_handling.rs:1434:                    Some("rsassa".to_string())
+keylime/src/structures/evidence_handling.rs:1443:                assert_eq!(certification_key.key_algorithm, "rsa");
+keylime/src/tpm.rs:49:        ecc::EccCurve,
+keylime/src/tpm.rs:50:        key_bits::RsaKeyBits,
+keylime/src/tpm.rs:57:        DigestValues, EccParameter, EccPoint, EccScheme, EncryptedSecret,
+keylime/src/tpm.rs:61:        PublicEccParametersBuilder, PublicKeyRsa, PublicRsaParametersBuilder,
+keylime/src/tpm.rs:62:        RsaExponent, RsaScheme, Signature, SignatureScheme,
+keylime/src/tpm.rs:128:const RSA_EK_CERTIFICATE_CHAIN_START: u32 = 0x01c00100;
+keylime/src/tpm.rs:129:const RSA_EK_CERTIFICATE_CHAIN_END: u32 = 0x01c001ff;
+keylime/src/tpm.rs:236:    /// Error obtaining RSA public key from IDevID
+keylime/src/tpm.rs:237:    #[error("Error obtaining RSA public key from IDevID")]
+keylime/src/tpm.rs:240:    /// Error obtaining RSA public key from IAK
+keylime/src/tpm.rs:241:    #[error("Error obtaining RSA public key from IAK")]
+keylime/src/tpm.rs:248:    /// Error building public RSA parameters
+keylime/src/tpm.rs:249:    #[error("Error building public RSA parameters")]
+keylime/src/tpm.rs:250:    TSSPublicRSAParametersBuildError { source: tss_esapi::Error },
+keylime/src/tpm.rs:252:    /// Error building public ECC parameters
+keylime/src/tpm.rs:253:    #[error("Error building public ECC parameters")]
+keylime/src/tpm.rs:254:    TSSPublicECCParametersBuildError { source: tss_esapi::Error },
+keylime/src/tpm.rs:264:    /// Error obtaining ECC parameter from IDevID
+keylime/src/tpm.rs:265:    #[error("Error obtaining ECC parameter from IDevID")]
+keylime/src/tpm.rs:266:    TSSECCParameterFromIDevIDError { source: tss_esapi::Error },
+keylime/src/tpm.rs:268:    /// Error obtaining ECC parameter from IAK
+keylime/src/tpm.rs:269:    #[error("Error obtaining ECC parameter from IAK")]
+keylime/src/tpm.rs:270:    TSSECCParameterFromIAKError { source: tss_esapi::Error },
+keylime/src/tpm.rs:399:    /// Error getting RSA public key from PKey
+keylime/src/tpm.rs:400:    #[error("Error getting RSA public key from PKey")]
+keylime/src/tpm.rs:401:    OpenSSLRSAFromPKey { source: openssl::error::ErrorStack },
+keylime/src/tpm.rs:997:                RsaKeyBits::Rsa2048,
+keylime/src/tpm.rs:998:                EccCurve::NistP256,
+keylime/src/tpm.rs:1002:                RsaKeyBits::Rsa2048,
+keylime/src/tpm.rs:1003:                EccCurve::Sm2P256,
+keylime/src/tpm.rs:1007:                RsaKeyBits::Rsa3072,
+keylime/src/tpm.rs:1008:                EccCurve::NistP384,
+keylime/src/tpm.rs:1012:                RsaKeyBits::Rsa4096,
+keylime/src/tpm.rs:1013:                EccCurve::NistP521,
+keylime/src/tpm.rs:1017:                RsaKeyBits::Rsa2048,
+keylime/src/tpm.rs:1018:                EccCurve::NistP256,
+keylime/src/tpm.rs:1023:            AsymmetricAlgorithm::Rsa => PublicBuilder::new()
+keylime/src/tpm.rs:1024:                .with_public_algorithm(PublicAlgorithm::Rsa)
+keylime/src/tpm.rs:1032:                .with_rsa_parameters(
+keylime/src/tpm.rs:1033:                    PublicRsaParametersBuilder::new()
+keylime/src/tpm.rs:1035:                        .with_scheme(RsaScheme::Null)
+keylime/src/tpm.rs:1037:                        .with_exponent(RsaExponent::default())
+keylime/src/tpm.rs:1043:                            TpmError::TSSPublicRSAParametersBuildError {
+keylime/src/tpm.rs:1048:                .with_rsa_unique_identifier(
+keylime/src/tpm.rs:1049:                    PublicKeyRsa::try_from(&UNIQUE_IDEVID[0..6]).map_err(
+keylime/src/tpm.rs:1053:            AsymmetricAlgorithm::Ecc => PublicBuilder::new()
+keylime/src/tpm.rs:1054:                .with_public_algorithm(PublicAlgorithm::Ecc)
+keylime/src/tpm.rs:1062:                .with_ecc_parameters(
+keylime/src/tpm.rs:1063:                    PublicEccParametersBuilder::new()
+keylime/src/tpm.rs:1065:                        .with_ecc_scheme(EccScheme::EcDsa(HashScheme::new(
+keylime/src/tpm.rs:1077:                            TpmError::TSSPublicECCParametersBuildError {
+keylime/src/tpm.rs:1082:                .with_ecc_unique_identifier(EccPoint::new(
+keylime/src/tpm.rs:1083:                    EccParameter::try_from(&UNIQUE_IDEVID[0..6]).map_err(
+keylime/src/tpm.rs:1084:                        |source| TpmError::TSSECCParameterFromIDevIDError {
+keylime/src/tpm.rs:1088:                    EccParameter::try_from(&UNIQUE_IDEVID[0..6]).map_err(
+keylime/src/tpm.rs:1089:                        |source| TpmError::TSSECCParameterFromIDevIDError {
+keylime/src/tpm.rs:1094:            // Defaulting to RSA on null
+keylime/src/tpm.rs:1096:                .with_public_algorithm(PublicAlgorithm::Rsa)
+keylime/src/tpm.rs:1107:                .with_rsa_parameters(
+keylime/src/tpm.rs:1108:                    PublicRsaParametersBuilder::new()
+keylime/src/tpm.rs:1110:                        .with_scheme(RsaScheme::Null)
+keylime/src/tpm.rs:1111:                        .with_key_bits(RsaKeyBits::Rsa2048)
+keylime/src/tpm.rs:1112:                        .with_exponent(RsaExponent::default())
+keylime/src/tpm.rs:1118:                            TpmError::TSSPublicRSAParametersBuildError {
+keylime/src/tpm.rs:1123:                .with_rsa_unique_identifier(
+keylime/src/tpm.rs:1124:                    PublicKeyRsa::try_from(&UNIQUE_IDEVID[0..6]).map_err(
+keylime/src/tpm.rs:1215:                RsaKeyBits::Rsa2048,
+keylime/src/tpm.rs:1216:                EccCurve::NistP256,
+keylime/src/tpm.rs:1220:                RsaKeyBits::Rsa2048,
+keylime/src/tpm.rs:1221:                EccCurve::Sm2P256,
+keylime/src/tpm.rs:1225:                RsaKeyBits::Rsa3072,
+keylime/src/tpm.rs:1226:                EccCurve::NistP384,
+keylime/src/tpm.rs:1230:                RsaKeyBits::Rsa4096,
+keylime/src/tpm.rs:1231:                EccCurve::NistP521,
+keylime/src/tpm.rs:1235:                RsaKeyBits::Rsa2048,
+keylime/src/tpm.rs:1236:                EccCurve::NistP256,
+keylime/src/tpm.rs:1241:            AsymmetricAlgorithm::Rsa => PublicBuilder::new()
+keylime/src/tpm.rs:1242:                .with_public_algorithm(PublicAlgorithm::Rsa)
+keylime/src/tpm.rs:1250:                .with_rsa_parameters(
+keylime/src/tpm.rs:1251:                    PublicRsaParametersBuilder::new()
+keylime/src/tpm.rs:1253:                        .with_scheme(RsaScheme::RsaPss(HashScheme::new(
+keylime/src/tpm.rs:1257:                        .with_exponent(RsaExponent::default())
+keylime/src/tpm.rs:1263:                            TpmError::TSSPublicRSAParametersBuildError {
+keylime/src/tpm.rs:1268:                .with_rsa_unique_identifier(
+keylime/src/tpm.rs:1269:                    PublicKeyRsa::try_from(&UNIQUE_IAK[0..3]).map_err(
+keylime/src/tpm.rs:1273:            AsymmetricAlgorithm::Ecc => PublicBuilder::new()
+keylime/src/tpm.rs:1274:                .with_public_algorithm(PublicAlgorithm::Ecc)
+keylime/src/tpm.rs:1282:                .with_ecc_parameters(
+keylime/src/tpm.rs:1283:                    PublicEccParametersBuilder::new()
+keylime/src/tpm.rs:1285:                        .with_ecc_scheme(EccScheme::EcDsa(HashScheme::new(
+keylime/src/tpm.rs:1297:                            TpmError::TSSPublicECCParametersBuildError {
+keylime/src/tpm.rs:1302:                .with_ecc_unique_identifier(EccPoint::new(
+keylime/src/tpm.rs:1303:                    EccParameter::try_from(&UNIQUE_IAK[0..3]).map_err(
+keylime/src/tpm.rs:1304:                        |source| TpmError::TSSECCParameterFromIAKError {
+keylime/src/tpm.rs:1308:                    EccParameter::try_from(&UNIQUE_IAK[0..3]).map_err(
+keylime/src/tpm.rs:1309:                        |source| TpmError::TSSECCParameterFromIAKError {
+keylime/src/tpm.rs:1315:                .with_public_algorithm(PublicAlgorithm::Rsa)
+keylime/src/tpm.rs:1324:                .with_rsa_parameters(
+keylime/src/tpm.rs:1325:                    PublicRsaParametersBuilder::new()
+keylime/src/tpm.rs:1327:                        .with_scheme(RsaScheme::Null)
+keylime/src/tpm.rs:1328:                        .with_key_bits(RsaKeyBits::Rsa2048)
+keylime/src/tpm.rs:1329:                        .with_exponent(RsaExponent::default())
+keylime/src/tpm.rs:1335:                            TpmError::TSSPublicRSAParametersBuildError {
+keylime/src/tpm.rs:1340:                .with_rsa_unique_identifier(
+keylime/src/tpm.rs:1341:                    PublicKeyRsa::try_from(&UNIQUE_IAK[0..3]).map_err(
+keylime/src/tpm.rs:1847:                        AlgorithmIdentifier::RsaSsa => {
+keylime/src/tpm.rs:1849:                                .push(KeylimeInternalSignAlgorithm::RsaSsa);
+keylime/src/tpm.rs:1851:                        AlgorithmIdentifier::RsaPss => {
+keylime/src/tpm.rs:1853:                                .push(KeylimeInternalSignAlgorithm::RsaPss);
+keylime/src/tpm.rs:1938:    /// let enc_alg = EncryptionAlgorithm::Rsa2048;
+keylime/src/tpm.rs:1940:    /// let signing_alg = SignAlgorithm::RsaSsa;
+keylime/src/tpm.rs:1973:            TssPublic::Rsa { parameters, .. } => {
+keylime/src/tpm.rs:1974:                // Extract scheme from RSA parameters
+keylime/src/tpm.rs:1975:                let scheme_str = match parameters.rsa_scheme() {
+keylime/src/tpm.rs:1976:                    tss_esapi::structures::RsaScheme::RsaPss(hash_scheme) => {
+keylime/src/tpm.rs:1979:                        ("rsapss".to_string(), hash_str)
+keylime/src/tpm.rs:1981:                    tss_esapi::structures::RsaScheme::RsaSsa(hash_scheme) => {
+keylime/src/tpm.rs:1984:                        ("rsassa".to_string(), hash_str)
+keylime/src/tpm.rs:1986:                    tss_esapi::structures::RsaScheme::Null => {
+keylime/src/tpm.rs:1987:                        // Default to RSASSA with SHA256 for null scheme
+keylime/src/tpm.rs:1988:                        ("rsassa".to_string(), "sha256".to_string())
+keylime/src/tpm.rs:2000:            TssPublic::Ecc { parameters, .. } => {
+keylime/src/tpm.rs:2001:                // Extract scheme from ECC parameters
+keylime/src/tpm.rs:2002:                let scheme_str = match parameters.ecc_scheme() {
+keylime/src/tpm.rs:2003:                    tss_esapi::structures::EccScheme::EcDsa(hash_scheme) => {
+keylime/src/tpm.rs:2008:                    tss_esapi::structures::EccScheme::EcSchnorr(
+keylime/src/tpm.rs:2015:                    tss_esapi::structures::EccScheme::Null => {
+keylime/src/tpm.rs:2175:        Id::RSA => pubkey
+keylime/src/tpm.rs:2176:            .rsa()
+keylime/src/tpm.rs:2177:            .map_err(|source| TpmError::OpenSSLRSAFromPKey { source })?
+keylime/src/tpm.rs:2454:        "H-1" => (AsymmetricAlgorithm::Rsa, HashingAlgorithm::Sha256),
+keylime/src/tpm.rs:2455:        "H-2" => (AsymmetricAlgorithm::Ecc, HashingAlgorithm::Sha256),
+keylime/src/tpm.rs:2456:        "H-3" => (AsymmetricAlgorithm::Ecc, HashingAlgorithm::Sha384),
+keylime/src/tpm.rs:2457:        "H-4" => (AsymmetricAlgorithm::Ecc, HashingAlgorithm::Sha512),
+keylime/src/tpm.rs:2458:        "H-5" => (AsymmetricAlgorithm::Ecc, HashingAlgorithm::Sm3_256),
+keylime/src/tpm.rs:2564:        RSA_EK_CERTIFICATE_CHAIN_START,
+keylime/src/tpm.rs:2565:        RSA_EK_CERTIFICATE_CHAIN_END - RSA_EK_CERTIFICATE_CHAIN_START,
+keylime/src/tpm.rs:2924:        use openssl::rsa::Rsa;
+keylime/src/tpm.rs:2926:        let rsa = Rsa::generate(2048).unwrap(); //#[allow_ci]
+keylime/src/tpm.rs:2927:        let pkey = PKey::from_rsa(rsa).unwrap(); //#[allow_ci]
+keylime/src/tpm.rs:3012:            ("H-1", (AsymmetricAlgorithm::Rsa, HashingAlgorithm::Sha256)),
+keylime/src/tpm.rs:3013:            ("H-2", (AsymmetricAlgorithm::Ecc, HashingAlgorithm::Sha256)),
+keylime/src/tpm.rs:3014:            ("H-3", (AsymmetricAlgorithm::Ecc, HashingAlgorithm::Sha384)),
+keylime/src/tpm.rs:3015:            ("H-4", (AsymmetricAlgorithm::Ecc, HashingAlgorithm::Sha512)),
+keylime/src/tpm.rs:3016:            ("H-5", (AsymmetricAlgorithm::Ecc, HashingAlgorithm::Sm3_256)),
+keylime/src/tpm.rs:3032:                (AsymmetricAlgorithm::Rsa, HashingAlgorithm::Sha256)
+keylime/src/tpm.rs:3069:            [EncryptionAlgorithm::Rsa2048, EncryptionAlgorithm::Ecc256];
+keylime/src/tpm.rs:3092:        let r = ctx.create_ek(EncryptionAlgorithm::Rsa2048, None);
+keylime/src/tpm.rs:3099:            [EncryptionAlgorithm::Rsa1024, EncryptionAlgorithm::Rsa2048];
+keylime/src/tpm.rs:3111:            SignAlgorithm::RsaSsa,
+keylime/src/tpm.rs:3112:            SignAlgorithm::RsaPss,
+keylime/src/tpm.rs:3113:            // - ECC keys creation requires this: https://github.com/parallaxsecond/rust-tss-esapi/pull/464
+keylime/src/tpm.rs:3147:        let asym_algs = [AsymmetricAlgorithm::Rsa, AsymmetricAlgorithm::Ecc];
+keylime/src/tpm.rs:3181:        let asym_algs = [AsymmetricAlgorithm::Rsa, AsymmetricAlgorithm::Ecc];
+keylime/src/tpm.rs:3215:            .create_ek(EncryptionAlgorithm::Rsa2048, None)
+keylime/src/tpm.rs:3224:                EncryptionAlgorithm::Rsa2048,
+keylime/src/tpm.rs:3225:                SignAlgorithm::RsaSsa,
+keylime/src/tpm.rs:3272:            .create_ek(EncryptionAlgorithm::Rsa2048, None)
+keylime/src/tpm.rs:3281:                EncryptionAlgorithm::Rsa2048,
+keylime/src/tpm.rs:3282:                SignAlgorithm::RsaSsa,
+keylime/src/tpm.rs:3290:            .create_iak(AsymmetricAlgorithm::Rsa, HashingAlgorithm::Sha256)
+keylime/src/tpm.rs:3342:        let enc_alg = EncryptionAlgorithm::Rsa2048;
+keylime/src/tpm.rs:3344:        let signing_alg = SignAlgorithm::RsaSsa;
+keylime/src/tpm.rs:3364:        assert_eq!(extracted_scheme, "rsassa");
+keylime/test-data/test-rsa.pem:1:-----BEGIN RSA PRIVATE KEY-----
+keylime/test-data/test-rsa.pem:27:-----END RSA PRIVATE KEY-----
+packit-ci.fmf:67:       - /functional/tpm-issuer-cert-using-ecc
+tests/generate-iak-idevid-certs.sh:105:        openssl genrsa \
+tests/generate-iak-idevid-certs.sh:132:        openssl genrsa \
+tests/generate-iak-idevid-certs.sh:187:        -G rsa2048:null:null \
+tests/generate-iak-idevid-certs.sh:226:        -G rsa2048:rsapss-sha256:null \

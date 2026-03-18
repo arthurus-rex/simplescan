@@ -1,0 +1,765 @@
+.git/packed-refs:31:19fa378b7c93bbaecc37c7d0c5b189531c0869d5 refs/tags/v2.1.1
+docs/design/security.rst:394:We give the main security property for Keylime by stating what a successful adversary must achieve:
+docs/design/security.rst:396:    **A valid attack against Keylime is one in which an adversary can cause a mismatch between a verification outcome
+docs/design/security.rst:413:The Capabilities of the Adversary
+docs/design/security.rst:416:For our adversary, we consider a typical network-based (Dolev-Yao) attacker [7]_ which exercises full control over the
+docs/design/security.rst:418:assumed perfect). Because we need to consider attacks in which the adversary is resident on a node to be verified, we
+docs/design/security.rst:422:The adversary cannot corrupt (i.e., take control of, or impersonate) the verifier, registrar, tenant or any attesting
+docs/design/security.rst:475:.. [8] This type of rule-based adversary is first described by Danny Dolev and Andrew Yao in their 1983 paper, `"On the
+docs/man/keylime_push_model_agent.8.rst:136:   TPM algorithms. Defaults: ``sha256``, ``rsa``, ``rsassa``
+docs/publications.bib:220:  abstract = {The accuracy and reliability of time synchronization and distribution are essential requirements for many critical infrastructures, including telecommunication networks, where 5G technologies place increasingly stringent conditions in terms of maintaining highly accurate time. A lack of synchronization between the clocks causes a malfunction of the 5G network, preventing it from providing a high quality of service; this makes the time distribution network a very viable target for attacks. Various solutions have been analyzed to mitigate attacks on the Global Navigation Satellite System (GNSS) radio-frequency spectrum and the Precision Time Protocol (PTP) used for time distribution over the network. This paper highlights the significance of monitoring the integrity of the software and configurations of the infrastructural nodes of a time distribution network. Moreover, this work proposes an attestation scheme, based on the Trusted Computing principles, capable of detecting both software violations on the nodes and hardware attacks aimed at tampering with the configuration of the GNSS receivers. The proposed solution has been implemented and validated on a testbed representing a typical synchronization distribution network. The results, simulating various types of adversaries, emphasize the effectiveness of the proposed approach in a wide range of typical attacks and the certain limitations that need to be addressed to enhance the security of the current GNSS receivers.},
+docs/rest_apis.rst:74:      bit-length formats (e.g., ``rsa2048``, ``rsa3072``, ``ecc256``,
+docs/rest_apis.rst:75:      ``ecc384``)
+docs/rest_apis.rst:77:    * ``rsa`` → ``rsa2048``
+docs/rest_apis.rst:78:    * ``ecc`` → ``ecc256``
+docs/rest_apis/2_1/agent.rst:44:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_1/agent.rst:169:            "enc_alg": "rsa",
+docs/rest_apis/2_1/agent.rst:170:            "sign_alg": "rsassa",
+docs/rest_apis/2_1/agent.rst:184:    :>json string enc_alg: Encryption algorithm used in the quote (ecc, rsa).
+docs/rest_apis/2_1/agent.rst:185:    :>json string sign_alg: Signing algorthm used in the quote (rsassa, rsapss, ecdsa, ecdaa or ecschnorr).
+docs/rest_apis/2_1/agent.rst:227:            "enc_alg": "rsa",
+docs/rest_apis/2_1/agent.rst:228:            "sign_alg": "rsassa",
+docs/rest_apis/2_1/verifier.rst:32:              "ecc",
+docs/rest_apis/2_1/verifier.rst:33:              "rsa"
+docs/rest_apis/2_1/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_1/verifier.rst:40:            "enc_alg": "rsa",
+docs/rest_apis/2_1/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_1/verifier.rst:111:            "ecc",
+docs/rest_apis/2_1/verifier.rst:112:            "rsa"
+docs/rest_apis/2_1/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_2/agent.rst:39:            "tpm_enc_alg": "rsa",
+docs/rest_apis/2_2/agent.rst:40:            "tpm_sign_alg": "rsassa",
+docs/rest_apis/2_2/agent.rst:73:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_2/agent.rst:197:            "enc_alg": "rsa",
+docs/rest_apis/2_2/agent.rst:198:            "sign_alg": "rsassa",
+docs/rest_apis/2_2/agent.rst:212:    :>json string enc_alg: Encryption algorithm used in the quote (ecc, rsa).
+docs/rest_apis/2_2/agent.rst:213:    :>json string sign_alg: Signing algorthm used in the quote (rsassa, rsapss, ecdsa, ecdaa or ecschnorr).
+docs/rest_apis/2_2/agent.rst:256:            "enc_alg": "rsa",
+docs/rest_apis/2_2/agent.rst:257:            "sign_alg": "rsassa",
+docs/rest_apis/2_2/verifier.rst:32:              "ecc",
+docs/rest_apis/2_2/verifier.rst:33:              "rsa"
+docs/rest_apis/2_2/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_2/verifier.rst:40:            "enc_alg": "rsa",
+docs/rest_apis/2_2/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_2/verifier.rst:111:            "ecc",
+docs/rest_apis/2_2/verifier.rst:112:            "rsa"
+docs/rest_apis/2_2/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_3/agent.rst:39:            "tpm_enc_alg": "rsa",
+docs/rest_apis/2_3/agent.rst:40:            "tpm_sign_alg": "rsassa",
+docs/rest_apis/2_3/agent.rst:73:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_3/agent.rst:198:            "enc_alg": "rsa",
+docs/rest_apis/2_3/agent.rst:199:            "sign_alg": "rsassa",
+docs/rest_apis/2_3/agent.rst:213:    :>json string enc_alg: Encryption algorithm used in the quote (ecc, rsa).
+docs/rest_apis/2_3/agent.rst:214:    :>json string sign_alg: Signing algorthm used in the quote (rsassa, rsapss, ecdsa, ecdaa or ecschnorr).
+docs/rest_apis/2_3/agent.rst:257:            "enc_alg": "rsa",
+docs/rest_apis/2_3/agent.rst:258:            "sign_alg": "rsassa",
+docs/rest_apis/2_3/verifier.rst:32:              "ecc",
+docs/rest_apis/2_3/verifier.rst:33:              "rsa"
+docs/rest_apis/2_3/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_3/verifier.rst:40:            "enc_alg": "rsa",
+docs/rest_apis/2_3/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_3/verifier.rst:111:            "ecc",
+docs/rest_apis/2_3/verifier.rst:112:            "rsa"
+docs/rest_apis/2_3/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_4/agent.rst:39:            "tpm_enc_alg": "rsa",
+docs/rest_apis/2_4/agent.rst:40:            "tpm_sign_alg": "rsassa",
+docs/rest_apis/2_4/agent.rst:73:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_4/agent.rst:198:            "enc_alg": "rsa",
+docs/rest_apis/2_4/agent.rst:199:            "sign_alg": "rsassa",
+docs/rest_apis/2_4/agent.rst:213:    :>json string enc_alg: Encryption algorithm used in the quote (ecc, rsa).
+docs/rest_apis/2_4/agent.rst:214:    :>json string sign_alg: Signing algorthm used in the quote (rsassa, rsapss, ecdsa, ecdaa or ecschnorr).
+docs/rest_apis/2_4/agent.rst:257:            "enc_alg": "rsa",
+docs/rest_apis/2_4/agent.rst:258:            "sign_alg": "rsassa",
+docs/rest_apis/2_4/verifier.rst:32:              "ecc",
+docs/rest_apis/2_4/verifier.rst:33:              "rsa"
+docs/rest_apis/2_4/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_4/verifier.rst:40:            "enc_alg": "rsa",
+docs/rest_apis/2_4/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_4/verifier.rst:111:            "ecc",
+docs/rest_apis/2_4/verifier.rst:112:            "rsa"
+docs/rest_apis/2_4/verifier.rst:116:            "rsassa"
+docs/rest_apis/2_5/agent.rst:53:            "tpm_enc_alg": "rsa2048",
+docs/rest_apis/2_5/agent.rst:54:            "tpm_sign_alg": "rsassa",
+docs/rest_apis/2_5/agent.rst:64:    :>json string tpm_enc_alg: The encryption algorithm used by this agent's TPM device. In API v2.5+, this includes explicit bit-length (e.g., ``rsa2048``, ``ecc256``). Generic formats (``rsa``, ``ecc``) from earlier API versions are normalized to their default bit-lengths.
+docs/rest_apis/2_5/agent.rst:87:    :>json string pubkey: Public rsa key of the agent used for encrypting V and U key.
+docs/rest_apis/2_5/agent.rst:212:            "enc_alg": "rsa2048",
+docs/rest_apis/2_5/agent.rst:213:            "sign_alg": "rsassa",
+docs/rest_apis/2_5/agent.rst:227:    :>json string enc_alg: Encryption algorithm used in the quote. In API v2.5+, this includes explicit bit-length specifications. Supported values: ``rsa``, ``rsa1024``, ``rsa2048``, ``rsa3072``, ``rsa4096``, ``ecc``, ``ecc192``, ``ecc224``, ``ecc256``, ``ecc384``, ``ecc521``, ``ecc_sm2``. Generic formats (``rsa``, ``ecc``) are normalized to ``rsa2048`` and ``ecc256`` respectively.
+docs/rest_apis/2_5/agent.rst:228:    :>json string sign_alg: Signing algorithm used in the quote. Supported values: ``rsassa``, ``rsapss``, ``ecdsa``, ``ecdaa``, ``ecschnorr``.
+docs/rest_apis/2_5/agent.rst:271:            "enc_alg": "rsa2048",
+docs/rest_apis/2_5/agent.rst:272:            "sign_alg": "rsassa",
+docs/rest_apis/2_5/verifier.rst:32:              "ecc",
+docs/rest_apis/2_5/verifier.rst:33:              "rsa"
+docs/rest_apis/2_5/verifier.rst:37:              "rsassa"
+docs/rest_apis/2_5/verifier.rst:40:            "enc_alg": "rsa2048",
+docs/rest_apis/2_5/verifier.rst:41:            "sign_alg": "rsassa",
+docs/rest_apis/2_5/verifier.rst:69:    :>json string enc_alg: Used encryption algorithm. In API v2.5+, this includes explicit bit-length (e.g., rsa2048, ecc256). Generic formats (rsa, ecc) are normalized to their defaults.
+docs/rest_apis/2_5/verifier.rst:111:            "ecc",
+docs/rest_apis/2_5/verifier.rst:112:            "rsa"
+docs/rest_apis/2_5/verifier.rst:116:            "rsassa"
+docs/rest_apis/3_0/verifier.rst:39:                    "signature_schemes": ["rsassa"],
+docs/rest_apis/3_0/verifier.rst:45:                        "key_algorithm": "rsa",
+docs/rest_apis/3_0/verifier.rst:48:                        "allowable_signature_schemes": ["rsassa"],
+docs/rest_apis/3_0/verifier.rst:93:                    "signature_scheme": "rsassa",
+docs/rest_apis/3_0/verifier.rst:98:                      "key_algorithm": "rsa",
+docs/user_guide/idevid_and_iak.rst:55:H-1         RSA 2048         SHA256
+docs/user_guide/idevid_and_iak.rst:56:H-2         ECC NIST P256    SHA256
+docs/user_guide/idevid_and_iak.rst:57:H-3         ECC NIST P384    SHA384
+docs/user_guide/idevid_and_iak.rst:58:H-4         ECC NIST P521    SHA512
+docs/user_guide/idevid_and_iak.rst:59:H-5         ECC SM2 P256     SM3_256
+docs/user_guide/push_model.rst:131:     - ``rsassa``
+docs/user_guide/push_model.rst:132:     - TPM signing algorithm (``rsassa``, ``ecdsa``).
+docs/user_guide/push_model.rst:151:    tpm_signing_alg = "rsassa"
+docs/user_guide/runtime_ima.rst:174:    sha256sum /etc/keys/ima/rsakey-rsa.crt.der
+docs/user_guide/runtime_ima.rst:415:  openssl genrsa -out ima-filesigning.pem 2048
+docs/user_guide/runtime_ima.rst:416:  openssl rsa -in ima-filesigning.pem -pubout -out ima-pub.pem
+docs/user_guide/secure_payload.rst:147:    cp payload_id_rsa* /root/.ssh/
+docs/user_guide/secure_payload.rst:148:    chmod 600 /root/.ssh/payload_id_rsa*
+docs/user_guide/secure_payload.rst:156:    payload_id_rsa.pub
+docs/user_guide/secure_payload.rst:157:    payload_id_rsa
+docs/user_guide/secure_payload.rst:212:            os.remove("/root/.ssh/payload_id_rsa")
+docs/user_guide/secure_payload.rst:213:            os.remove("/root/.ssh/payload_id_rsa.pub")
+docs/user_guide/secure_payload.rst:224:    as above, then provision a second server and add `payload_id_rsa.pub` to `.ssh/authorized_keys`
+keylime/.gitignore:2:/tci_rsa_key
+keylime/ca_impl_openssl.py:9:from cryptography.hazmat.primitives.asymmetric import rsa
+keylime/ca_impl_openssl.py:14:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey, RSAPublicKey
+keylime/ca_impl_openssl.py:129:def mk_request(bits: int, common_name: str) -> Tuple[CertificateBuilder, RSAPrivateKey]:
+keylime/ca_impl_openssl.py:133:      bits -- number of RSA key bits
+keylime/ca_impl_openssl.py:138:    privkey = rsa.generate_private_key(
+keylime/ca_impl_openssl.py:151:def mk_cacert(name: Optional[str] = None) -> Tuple[Certificate, RSAPrivateKey, RSAPublicKey]:
+keylime/ca_impl_openssl.py:228:) -> Tuple[Certificate, RSAPrivateKey]:
+keylime/ca_impl_openssl.py:327:        priv_key, (EllipticCurvePrivateKey, RSAPrivateKey, DSAPrivateKey, Ed448PrivateKey, Ed25519PrivateKey)
+keylime/ca_util.py:40:from cryptography.hazmat.primitives.asymmetric import padding, rsa
+keylime/ca_util.py:45:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
+keylime/ca_util.py:118:            ca_pk, (EllipticCurvePrivateKey, RSAPrivateKey, DSAPrivateKey, Ed448PrivateKey, Ed25519PrivateKey)
+keylime/ca_util.py:158:        assert isinstance(pubkey, rsa.RSAPublicKey)
+keylime/ca_util.py:246:        assert isinstance(pubkey, rsa.RSAPublicKey)
+keylime/cert_utils.py:12:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+keylime/cert_utils.py:115:                if isinstance(signcert_pubkey, RSAPublicKey):
+keylime/cert_utils.py:235:    if not isinstance(idevid_pub, (RSAPublicKey, EllipticCurvePublicKey)):
+keylime/cert_utils.py:236:        return "Error: IDevID certificate does not contain an RSA or EC public key", None, None
+keylime/cert_utils.py:237:    if not isinstance(iak_pub, (RSAPublicKey, EllipticCurvePublicKey)):
+keylime/cert_utils.py:238:        return "Error: IAK certificate does not contain an RSA or EC public key", None, None
+keylime/cloud_verifier_common.py:238:            crypto.rsa_encrypt(crypto.rsa_import_pubkey(agent["public_key"]), base64.b64decode(agent["v"]))
+keylime/cloud_verifier_common.py:378:        signing_key = crypto.rsa_import_privkey(agent["revocation_key"])
+keylime/cloud_verifier_common.py:379:        tosend["signature"] = crypto.rsa_sign(signing_key, tosend["msg"])
+keylime/common/algorithms.py:17:    # This handles backwards compatibility cases like "ecc" accepting "ecc256".
+keylime/common/algorithms.py:86:    RSA = "rsa"
+keylime/common/algorithms.py:87:    ECC = "ecc"
+keylime/common/algorithms.py:95:    RSA = "rsa"
+keylime/common/algorithms.py:96:    RSA1024 = "rsa1024"
+keylime/common/algorithms.py:97:    RSA2048 = "rsa2048"
+keylime/common/algorithms.py:98:    RSA3072 = "rsa3072"
+keylime/common/algorithms.py:99:    RSA4096 = "rsa4096"
+keylime/common/algorithms.py:100:    ECC = "ecc"
+keylime/common/algorithms.py:101:    ECC192 = "ecc192"
+keylime/common/algorithms.py:102:    ECC224 = "ecc224"
+keylime/common/algorithms.py:103:    ECC256 = "ecc256"
+keylime/common/algorithms.py:104:    ECC384 = "ecc384"
+keylime/common/algorithms.py:105:    ECC521 = "ecc521"
+keylime/common/algorithms.py:110:        if algorithm == "ecc":
+keylime/common/algorithms.py:111:            algorithm = "ecc256"  # Default ECC alias maps to P-256, same as the agent.
+keylime/common/algorithms.py:112:        if algorithm == "rsa":
+keylime/common/algorithms.py:113:            algorithm = "rsa2048"  # Default RSA alias maps to RSA-2048, same as the agent.
+keylime/common/algorithms.py:119:        if algorithm == "ecc":
+keylime/common/algorithms.py:120:            return "ecc256"  # Default ECC alias maps to P-256.
+keylime/common/algorithms.py:121:        if algorithm == "rsa":
+keylime/common/algorithms.py:122:            return "rsa2048"  # Default RSA alias maps to RSA-2048.
+keylime/common/algorithms.py:127:    RSASSA = "rsassa"
+keylime/common/algorithms.py:128:    RSAPSS = "rsapss"
+keylime/common/algorithms.py:139:        if self.value.startswith("rsa"):
+keylime/common/algorithms.py:140:            return Key("rsa")
+keylime/common/algorithms.py:142:            return Key("ecc")
+keylime/crypto.py:15:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey, RSAPublicKey, generate_private_key
+keylime/crypto.py:22:def rsa_import_pubkey(pubkey: Union[str, bytes]) -> RSAPublicKey:
+keylime/crypto.py:31:        raise TypeError(f"Unsupported raw pubkey data passed to rsa_import_pubkey: {type(pubkey).__name__}")
+keylime/crypto.py:32:    if not isinstance(public_key, RSAPublicKey):
+keylime/crypto.py:33:        raise Exception(f"Given public key is not an RSA public key but of type {type(public_key).__name__}")
+keylime/crypto.py:37:def rsa_import_privkey(privkey: Union[str, bytes], password: Optional[bytes] = None) -> RSAPrivateKey:
+keylime/crypto.py:46:        raise TypeError(f"Unsupported raw privkey data passed to rsa_import_privkey: {type(privkey).__name__}")
+keylime/crypto.py:47:    if not isinstance(private_key, RSAPrivateKey):
+keylime/crypto.py:48:        raise Exception(f"Given private key is not an RSA private key but of type {type(private_key).__name__}")
+keylime/crypto.py:52:def x509_import_pubkey(pubkey: bytes) -> RSAPublicKey:
+keylime/crypto.py:55:    if not isinstance(public_key, RSAPublicKey):
+keylime/crypto.py:57:            f"Given x509 certificate does not have an RSA public key but one of type {type(public_key).__name__}"
+keylime/crypto.py:62:def rsa_generate(size: int) -> RSAPrivateKey:
+keylime/crypto.py:68:def get_public_key(private_key: RSAPrivateKey) -> RSAPublicKey:
+keylime/crypto.py:74:def rsa_sign(key: RSAPrivateKey, message: bytes, paddingt: str = "internal") -> bytes:
+keylime/crypto.py:75:    """RSA sign message"""
+keylime/crypto.py:89:def rsa_verify(public_key: RSAPublicKey, message: bytes, signature: bytes) -> bool:
+keylime/crypto.py:90:    """RSA verify message"""
+keylime/crypto.py:105:def rsa_export_pubkey(private_key: RSAPrivateKey) -> bytes:
+keylime/crypto.py:112:def rsa_export_privkey(private_key: RSAPrivateKey, password: Optional[str] = None) -> bytes:
+keylime/crypto.py:126:def rsa_encrypt(key: RSAPublicKey, message: bytes) -> bytes:
+keylime/crypto.py:127:    """RSA encrypt message"""
+keylime/crypto.py:138:def rsa_decrypt(key: RSAPrivateKey, ciphertext: bytes) -> bytes:
+keylime/crypto.py:139:    """RSA decrypt message"""
+keylime/da/record.py:12:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey
+keylime/da/record.py:39:        self.priv_key: Optional[RSAPrivateKey] = None
+keylime/da/record.py:80:                        self.priv_key = crypto.rsa_import_privkey(fp.read())
+keylime/da/record.py:226:        Sign a record with with a private (RSA) key from Keylime
+keylime/da/record.py:286:                    record_object["signature"] = crypto.rsa_sign(self.priv_key, contents_for_signing, "default")
+keylime/ima/file_signatures.py:14:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+keylime/ima/file_signatures.py:24:SupportedKeyTypes = Union[RSAPublicKey, EllipticCurvePublicKey]
+keylime/ima/file_signatures.py:117:    PUBKEY_ALGO_RSA = 0
+keylime/ima/file_signatures.py:135:        if isinstance(pubkey, RSAPublicKey):
+keylime/ima/file_signatures.py:227:                if not isinstance(pubkey, (RSAPublicKey, EllipticCurvePublicKey)):
+keylime/ima/file_signatures.py:327:        if isinstance(pubkey, RSAPublicKey):
+keylime/ima/file_signatures.py:492:            if not isinstance(pubkey, (RSAPublicKey, EllipticCurvePublicKey)):
+keylime/ima/file_signatures.py:505:            if not isinstance(pubkey, (RSAPublicKey, EllipticCurvePublicKey)):
+keylime/ima/ima.py:349:            failure.add_event("entry", f"Line was not parsable into a valid IMA entry: {line}", True, ["parser"])
+keylime/ima/ima.py:350:            logger.error("Line was not parsable into a valid IMA entry: %s", line)
+keylime/models/base/basic_model.py:193:    of a DevID in the absence of an EK cert and vice versa.
+keylime/models/registrar/registrar_agent.py:6:from cryptography.hazmat.primitives.asymmetric import ec, rsa
+keylime/models/registrar/registrar_agent.py:99:        # Make sure that the TPM key is either an RSA or EC public key
+keylime/models/registrar/registrar_agent.py:100:        if not isinstance(tpm_pub, (rsa.RSAPublicKey, ec.EllipticCurvePublicKey)):
+keylime/models/registrar/registrar_agent.py:101:            self._add_error(tpm_key_field, "must contain a valid RSA or EC public key")
+keylime/models/verifier/auth_session.py:336:        signing_scheme = "rsassa"
+keylime/models/verifier/auth_session.py:623:        self.supported_signing_schemes = ["rsassa", "rsapss", "ecdsa"]  # pylint: disable=attribute-defined-outside-init
+keylime/policy/create_mb_policy.py:18:    _SubparserType = argparse._SubParsersAction[argparse.ArgumentParser]  # pylint: disable=protected-access
+keylime/policy/create_runtime_policy.py:34:    _SubparserType = argparse._SubParsersAction[argparse.ArgumentParser]  # pylint: disable=protected-access
+keylime/policy/sign_runtime_policy.py:19:    _SubparserType = argparse._SubParsersAction[argparse.ArgumentParser]  # pylint: disable=protected-access
+keylime/revocation_notifier.py:341:    elif not crypto.rsa_verify(
+keylime/tee/snp.py:84:            {"message": "VEK public key is not an RSA public key"},
+keylime/tenant.py:1400:            encrypted_U = crypto.rsa_encrypt(crypto.rsa_import_pubkey(public_key), self.U)
+keylime/tpm/tpm2_objects.py:13:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey, RSAPublicNumbers
+keylime/tpm/tpm2_objects.py:18:pubkey_type = Union[RSAPublicKey, EllipticCurvePublicKey]
+keylime/tpm/tpm2_objects.py:28:TPM_ECC_NIST_P192 = 0x0001
+keylime/tpm/tpm2_objects.py:29:TPM_ECC_NIST_P224 = 0x0002
+keylime/tpm/tpm2_objects.py:30:TPM_ECC_NIST_P256 = 0x0003
+keylime/tpm/tpm2_objects.py:31:TPM_ECC_NIST_P384 = 0x0004
+keylime/tpm/tpm2_objects.py:32:TPM_ECC_NIST_P521 = 0x0005
+keylime/tpm/tpm2_objects.py:34:# ECC curve prime moduli lookup table (coordinates must be < p)
+keylime/tpm/tpm2_objects.py:36:ECC_CURVE_PRIMES = {
+keylime/tpm/tpm2_objects.py:37:    TPM_ECC_NIST_P192: 2**192 - 2**64 - 1,  # P-192 prime
+keylime/tpm/tpm2_objects.py:38:    TPM_ECC_NIST_P224: 2**224 - 2**96 + 1,  # P-224 prime
+keylime/tpm/tpm2_objects.py:39:    TPM_ECC_NIST_P256: 2**256 - 2**224 + 2**192 + 2**96 - 1,  # P-256 prime
+keylime/tpm/tpm2_objects.py:40:    TPM_ECC_NIST_P384: 2**384 - 2**128 - 2**96 + 2**32 - 1,  # P-384 prime
+keylime/tpm/tpm2_objects.py:41:    TPM_ECC_NIST_P521: 2**521 - 1,  # P-521 prime
+keylime/tpm/tpm2_objects.py:44:TPM_ALG_RSA = 0x0001
+keylime/tpm/tpm2_objects.py:45:TPM_ALG_ECC = 0x0023
+keylime/tpm/tpm2_objects.py:55:TPM_ALG_RSASSA = 0x0014
+keylime/tpm/tpm2_objects.py:56:TPM_ALG_RSAPSS = 0x0016
+keylime/tpm/tpm2_objects.py:249:        return TPM_ECC_NIST_P192
+keylime/tpm/tpm2_objects.py:251:        return TPM_ECC_NIST_P224
+keylime/tpm/tpm2_objects.py:253:        return TPM_ECC_NIST_P256
+keylime/tpm/tpm2_objects.py:255:        return TPM_ECC_NIST_P384
+keylime/tpm/tpm2_objects.py:257:        return TPM_ECC_NIST_P521
+keylime/tpm/tpm2_objects.py:263:    if cid == TPM_ECC_NIST_P192:
+keylime/tpm/tpm2_objects.py:265:    if cid == TPM_ECC_NIST_P224:
+keylime/tpm/tpm2_objects.py:267:    if cid == TPM_ECC_NIST_P256:
+keylime/tpm/tpm2_objects.py:269:    if cid == TPM_ECC_NIST_P384:
+keylime/tpm/tpm2_objects.py:271:    if cid == TPM_ECC_NIST_P521:
+keylime/tpm/tpm2_objects.py:309:    if alg_type == TPM_ALG_RSA:
+keylime/tpm/tpm2_objects.py:318:        rsa_numbers = RSAPublicNumbers(exponent, bmodulus)
+keylime/tpm/tpm2_objects.py:319:        return rsa_numbers.public_key(backend=default_backend()), name_alg
+keylime/tpm/tpm2_objects.py:321:    if alg_type == TPM_ALG_ECC:
+keylime/tpm/tpm2_objects.py:331:        # ECC coordinates can vary in byte length due to:
+keylime/tpm/tpm2_objects.py:339:        prime_p = ECC_CURVE_PRIMES.get(curve_id)
+keylime/tpm/tpm2_objects.py:363:        ecc_numbers = EllipticCurvePublicNumbers(bx, by, curve)
+keylime/tpm/tpm2_objects.py:364:        return ecc_numbers.public_key(backend=default_backend()), name_alg
+keylime/tpm/tpm2_objects.py:380:    if isinstance(pubkey, RSAPublicKey):
+keylime/tpm/tpm2_objects.py:381:        alg_type = TPM_ALG_RSA
+keylime/tpm/tpm2_objects.py:383:        rsa_numbers = pubkey.public_numbers()
+keylime/tpm/tpm2_objects.py:384:        n = rsa_numbers.n.to_bytes((rsa_numbers.n.bit_length() + 7) // 8, byteorder="big")
+keylime/tpm/tpm2_objects.py:386:        pub_e = rsa_numbers.e
+keylime/tpm/tpm2_objects.py:393:        alg_type = TPM_ALG_ECC
+keylime/tpm/tpm2_objects.py:395:        ecc_numbers = pubkey.public_numbers()
+keylime/tpm/tpm2_objects.py:399:            _curve_id_from_name(ecc_numbers.curve.name),
+keylime/tpm/tpm2_objects.py:402:        unique_x = ecc_numbers.x.to_bytes((ecc_numbers.x.bit_length() + 7) // 8, byteorder="big")
+keylime/tpm/tpm2_objects.py:403:        unique_y = ecc_numbers.y.to_bytes((ecc_numbers.y.bit_length() + 7) // 8, byteorder="big")
+keylime/tpm/tpm2_objects.py:598:def tpms_ecc_point_marshal(public_key: EllipticCurvePublicKey) -> bytes:
+keylime/tpm/tpm2_objects_test.py:5:from cryptography.hazmat.primitives.asymmetric import ec, rsa
+keylime/tpm/tpm2_objects_test.py:68:    # The RSA set is according to Template L-1, section B.3.3
+keylime/tpm/tpm2_objects_test.py:71:    def test_tpm2b_public_from_pubkey_rsa(self) -> None:
+keylime/tpm/tpm2_objects_test.py:72:        test_rsa_cert_bytes = base64.b64decode(
+keylime/tpm/tpm2_objects_test.py:98:        correct_rsa_obj = base64.b64decode(
+keylime/tpm/tpm2_objects_test.py:107:        test_rsa_cert = load_der_x509_certificate(test_rsa_cert_bytes, backend=default_backend())
+keylime/tpm/tpm2_objects_test.py:108:        test_rsa_pubkey = test_rsa_cert.public_key()
+keylime/tpm/tpm2_objects_test.py:109:        assert isinstance(test_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm2_objects_test.py:110:        new_rsa_obj = ek_low_tpm2b_public_from_pubkey(test_rsa_pubkey)
+keylime/tpm/tpm2_objects_test.py:111:        self.assertEqual(new_rsa_obj.hex(), correct_rsa_obj.hex())
+keylime/tpm/tpm2_objects_test.py:143:    def test_pubkey_from_tpm2b_public_rsa(self) -> None:
+keylime/tpm/tpm2_objects_test.py:144:        test_rsa_cert_bytes = base64.b64decode(
+keylime/tpm/tpm2_objects_test.py:170:        test_rsa_cert = load_der_x509_certificate(test_rsa_cert_bytes, backend=default_backend())
+keylime/tpm/tpm2_objects_test.py:171:        correct_rsa_obj = base64.b64decode(
+keylime/tpm/tpm2_objects_test.py:180:        new_rsa_pubkey = pubkey_from_tpm2b_public(correct_rsa_obj)
+keylime/tpm/tpm2_objects_test.py:181:        assert isinstance(new_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm2_objects_test.py:182:        correct_rsa_pubkey = test_rsa_cert.public_key()
+keylime/tpm/tpm2_objects_test.py:183:        assert isinstance(correct_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm2_objects_test.py:184:        new_rsa_pubkey_n = new_rsa_pubkey.public_numbers()
+keylime/tpm/tpm2_objects_test.py:185:        correct_rsa_pubkey_n = correct_rsa_pubkey.public_numbers()
+keylime/tpm/tpm2_objects_test.py:186:        self.assertEqual(new_rsa_pubkey.key_size, correct_rsa_pubkey.key_size)
+keylime/tpm/tpm2_objects_test.py:187:        self.assertEqual(new_rsa_pubkey_n.e, correct_rsa_pubkey_n.e)  # pylint: disable=no-member
+keylime/tpm/tpm2_objects_test.py:188:        self.assertEqual(new_rsa_pubkey_n.n, correct_rsa_pubkey_n.n)  # pylint: disable=no-member
+keylime/tpm/tpm2_objects_test.py:190:        sym_alg, symkey_bits = get_tpm2b_public_symkey_params(correct_rsa_obj)
+keylime/tpm/tpm2_objects_test.py:194:    def test_pubkey_from_tpm2b_public_rsa_without_encryption(self) -> None:
+keylime/tpm/tpm2_objects_test.py:195:        new_rsa_pubkey = pubkey_from_tpm2b_public(
+keylime/tpm/tpm2_objects_test.py:209:        assert isinstance(new_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm2_objects_test.py:210:        new_rsa_pubkey_n = new_rsa_pubkey.public_numbers()
+keylime/tpm/tpm2_objects_test.py:212:        self.assertEqual(new_rsa_pubkey.key_size, 2048)
+keylime/tpm/tpm2_objects_test.py:213:        self.assertEqual(new_rsa_pubkey_n.e, 65537)  # pylint: disable=no-member
+keylime/tpm/tpm2_objects_test.py:215:            str(new_rsa_pubkey_n.n),  # pylint: disable=no-member
+keylime/tpm/tpm2_objects_test.py:265:    def test_pubkey_from_tpm2b_public_rsa_2(self) -> None:
+keylime/tpm/tpm2_objects_test.py:266:        # This key has Null set for the RSA scheme algorithm
+keylime/tpm/tpm2_objects_test.py:276:        new_rsa_pubkey, name_alg = pubkey_parms_from_tpm2b_public(test_pubkey_bytes)
+keylime/tpm/tpm2_objects_test.py:277:        self.assertIsInstance(new_rsa_pubkey, rsa.RSAPublicKey)
+keylime/tpm/tpm_main.py:9:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+keylime/tpm/tpm_main.py:81:        Sign.RSASSA: tpm2_objects.TPM_ALG_RSASSA,
+keylime/tpm/tpm_main.py:82:        Sign.RSAPSS: tpm2_objects.TPM_ALG_RSAPSS,
+keylime/tpm/tpm_main.py:99:        if not isinstance(pub, (RSAPublicKey, EllipticCurvePublicKey)):
+keylime/tpm/tpm_main.py:141:            if isinstance(pub, RSAPublicKey):
+keylime/tpm/tpm_main.py:142:                if sig_alg in [tpm2_objects.TPM_ALG_RSASSA, tpm2_objects.TPM_ALG_RSAPSS]:
+keylime/tpm/tpm_main.py:146:                    raise ValueError(f"Unsupported quote signature algorithm '{sig_alg:#x}' for RSA keys")
+keylime/tpm/tpm_main.py:157:                f"signature does not verify, using the RSA key given, against the provided TPM object and"
+keylime/tpm/tpm_main.py:184:        if not isinstance(iak_pub, (RSAPublicKey, EllipticCurvePublicKey)):
+keylime/tpm/tpm_main.py:187:        if isinstance(iak_pub, RSAPublicKey):
+keylime/tpm/tpm_main.py:188:            if sig_alg in [tpm2_objects.TPM_ALG_RSASSA, tpm2_objects.TPM_ALG_RSAPSS]:
+keylime/tpm/tpm_main.py:195:                    logger.error("Agent %s AIK verification failed with IAK (RSA)", uuid)
+keylime/tpm/tpm_main.py:199:                raise ValueError(f"Unsupported quote signature algorithm '{sig_alg:#x}' for RSA keys")
+keylime/tpm/tpm_main.py:209:                    logger.error("Agent %s AIK verification failed with IAK (ECC)", uuid)
+keylime/tpm/tpm_util.py:50:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+keylime/tpm/tpm_util.py:61:SupportedKeyTypes = Union[RSAPublicKey, EllipticCurvePublicKey]
+keylime/tpm/tpm_util.py:63:# ECC signature parsing constants.
+keylime/tpm/tpm_util.py:64:# Raw signature sizes for different ECC curves (r||s concatenated format).
+keylime/tpm/tpm_util.py:66:ECC_SECP192R1_SIGNATURE_SIZE = 48  # 24 bytes each for r,s.
+keylime/tpm/tpm_util.py:67:ECC_SECP224R1_SIGNATURE_SIZE = 56  # 28 bytes each for r,s.
+keylime/tpm/tpm_util.py:68:ECC_SECP256R1_SIGNATURE_SIZE = 64  # 32 bytes each for r,s.
+keylime/tpm/tpm_util.py:69:ECC_SECP384R1_SIGNATURE_SIZE = 96  # 48 bytes each for r,s.
+keylime/tpm/tpm_util.py:70:ECC_SECP521R1_SIGNATURE_SIZE = 132  # 66 bytes each for r,s.
+keylime/tpm/tpm_util.py:82:# ECC curve to signature size mapping for raw r||s format.
+keylime/tpm/tpm_util.py:83:ECC_RAW_SIGNATURE_SIZES = {
+keylime/tpm/tpm_util.py:84:    "secp192r1": ECC_SECP192R1_SIGNATURE_SIZE,
+keylime/tpm/tpm_util.py:85:    "secp224r1": ECC_SECP224R1_SIGNATURE_SIZE,
+keylime/tpm/tpm_util.py:86:    "secp256r1": ECC_SECP256R1_SIGNATURE_SIZE,
+keylime/tpm/tpm_util.py:87:    "secp384r1": ECC_SECP384R1_SIGNATURE_SIZE,
+keylime/tpm/tpm_util.py:88:    "secp521r1": ECC_SECP521R1_SIGNATURE_SIZE,
+keylime/tpm/tpm_util.py:91:# ECC curve coordinate size ranges (min, max) for validation.
+keylime/tpm/tpm_util.py:92:ECC_COORDINATE_SIZE_RANGES = {
+keylime/tpm/tpm_util.py:106:    sigalg: int = tpm2_objects.TPM_ALG_RSASSA,
+keylime/tpm/tpm_util.py:110:    if isinstance(pubkey, RSAPublicKey):
+keylime/tpm/tpm_util.py:111:        if sigalg == tpm2_objects.TPM_ALG_RSAPSS:
+keylime/tpm/tpm_util.py:115:        elif sigalg == tpm2_objects.TPM_ALG_RSASSA:
+keylime/tpm/tpm_util.py:148:    """Convert ECC signature from TPM format to DER format for cryptographic verification.
+keylime/tpm/tpm_util.py:157:    pubkey: ECC public key to determine expected signature size
+keylime/tpm/tpm_util.py:183:            coordinate_range = ECC_COORDINATE_SIZE_RANGES.get(curve_name)
+keylime/tpm/tpm_util.py:199:    raise ValueError("Unable to parse ECC signature from TPM format")
+keylime/tpm/tpm_util.py:299:    aikblob: PEM-formatted public RSA or EC key
+keylime/tpm/tpm_util.py:309:    if not isinstance(pubkey, (RSAPublicKey, EllipticCurvePublicKey)):
+keylime/tpm/tpm_util.py:312:    if isinstance(pubkey, RSAPublicKey) and sig_alg not in [tpm2_objects.TPM_ALG_RSASSA]:
+keylime/tpm/tpm_util.py:313:        raise ValueError(f"Unsupported quote signature algorithm '{sig_alg:#x}' for RSA keys")
+keylime/tpm/tpm_util.py:317:    if sig_alg in [tpm2_objects.TPM_ALG_RSASSA]:
+keylime/tpm/tpm_util.py:396:    if isinstance(public_key, RSAPublicKey):
+keylime/tpm/tpm_util.py:404:        random, secret = crypt_secret_encrypt_ecc(public_key, hashfunc)
+keylime/tpm/tpm_util.py:417:def crypt_secret_encrypt_ecc(public_key: EllipticCurvePublicKey, hashfunc: hashes.HashAlgorithm) -> Tuple[bytes, bytes]:
+keylime/tpm/tpm_util.py:421:    point = tpm2_objects.tpms_ecc_point_marshal(my_public_key)
+keylime/tpm/tpm_util.py:423:    ecc_secret_x = my_private_key.exchange(ec.ECDH(), public_key)
+keylime/tpm/tpm_util.py:436:    data = crypt_kdfe(hashfunc, ecc_secret_x, "IDENTITY", party_x, party_y, digest_size << 3)
+keylime/tpm/tpm_util.py:598:    secret_x: the X coordinate of the product of a public ECC key and a different private ECC key
+keylime/tpm/tpm_util_test.py:126:    def test_makecredential_ecc(self) -> None:
+packit-ci.fmf:99:     - /functional/tpm-issuer-cert-using-ecc
+pylintrc:14:ignored-modules=zmq,alembic.op,alembic.context,cryptography.hazmat.primitives.asymmetric.rsa,gpg
+scripts/keylime_oneshot_attestation:364:        help="The encryption algorithm to be used by the TPM. Defaults to 'rsa'",
+scripts/keylime_oneshot_attestation:365:        default="rsa",
+scripts/keylime_oneshot_attestation:371:        help="The signing algorithm to be used by the TPM. Defaults to 'rsassa'",
+scripts/keylime_oneshot_attestation:372:        default="rsassa",
+templates/2.0/agent.j2:159:# Accepted values: ecc, rsa
+templates/2.0/agent.j2:163:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.0/mapping.json:67:                "option": "rsa_keyname",
+templates/2.0/mapping.json:163:                "default": "rsa"
+templates/2.0/mapping.json:168:                "default": "rsassa"
+templates/2.0/mapping.json:489:                "default": "ecc, rsa"
+templates/2.0/mapping.json:494:                "default": "ecschnorr, rsassa"
+templates/2.0/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.0/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.1/agent.j2:159:# Accepted values: ecc, rsa
+templates/2.1/agent.j2:163:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.1/agent.j2:180:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.1/mapping.json:163:                "default": "rsa"
+templates/2.1/mapping.json:168:                "default": "rsassa"
+templates/2.1/mapping.json:193:                "default": "rsa"
+templates/2.1/mapping.json:519:                "default": "ecc, rsa"
+templates/2.1/mapping.json:524:                "default": "ecschnorr, rsassa"
+templates/2.1/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.1/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.2/agent.j2:159:# Accepted values: ecc, rsa
+templates/2.2/agent.j2:163:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.2/agent.j2:180:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.2/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.2/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.3/agent.j2:159:# Accepted values: ecc, rsa
+templates/2.3/agent.j2:163:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.3/agent.j2:183:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.3/mapping.json:33:                    "default": "['ecc', 'rsa']"
+templates/2.3/mapping.json:38:                    "default": "['ecschnorr', 'rsassa']"
+templates/2.3/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.3/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.4/agent.j2:169:# Accepted values: ecc, rsa
+templates/2.4/agent.j2:173:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.4/agent.j2:193:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.4/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.4/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.5/agent.j2:189:# Accepted values: ecc, rsa
+templates/2.5/agent.j2:193:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+templates/2.5/agent.j2:213:# iak_idevid_asymmetric_alg:   rsa, ecc
+templates/2.5/tenant.j2:70:# Accepted values: ecc, rsa
+templates/2.5/tenant.j2:74:# Accepted values: rsassa, rsapss, ecdsa, ecdaa, ecschnorr
+test-data/emulator-inputs.txt:16:        "rsa:\n", 
+test-data/emulator-inputs.txt:106:        "rsassa:\n", 
+test-data/emulator-inputs.txt:116:        "rsaes:\n", 
+test-data/emulator-inputs.txt:126:        "rsapss:\n", 
+test-data/emulator-inputs.txt:206:        "ecc:\n", 
+test-data/emulator-inputs.txt:295:        "rsa:\n", 
+test-data/emulator-inputs.txt:385:        "rsassa:\n", 
+test-data/emulator-inputs.txt:395:        "rsaes:\n", 
+test-data/emulator-inputs.txt:405:        "rsapss:\n", 
+test-data/emulator-inputs.txt:485:        "ecc:\n", 
+test-data/emulator-inputs.txt:574:        "rsa:\n", 
+test-data/emulator-inputs.txt:664:        "rsassa:\n", 
+test-data/emulator-inputs.txt:674:        "rsaes:\n", 
+test-data/emulator-inputs.txt:684:        "rsapss:\n", 
+test-data/emulator-inputs.txt:764:        "ecc:\n", 
+test-data/emulator-inputs.txt:848:    "cmd": "tpm2_createek -c - -G rsa -p /tmp/tmpN6MZiK -P tO4ckKfWtqGMz70rt7ep -o keylime -e keylime", 
+test-data/emulator-inputs.txt:877:        "  value: rsa\n", 
+test-data/emulator-inputs.txt:894:        "rsa: d1d2f17400015493baab16a68c2321ca15998221476479cf11ed2d305c8addf355affc3c957f6bf9038bc4b9a44f421d82c118b4664679f6c3faa425e0ed6c936e7cdb75f3bb9b4417cf7aeab4dd91fb2ff0246b35a04bc16967b7f9feaa3228537c5924c991fa615fa937376bacd598f39826cb45b4cf2be1bf473c252ae8cb5efc9dd6c7817123d47852b094ca201e1fefb441aa48c6e106b15218b3dda71b2bc541805915153a708b77de26aa4eb442202269f986e5327c39e18246007daf4d541febf7cb02742de4bd547e64f247f640e9a76fc7cb287a4481388016ed7995f17a7d992aae20765d49730995c9ff077e4f53705d914b48626e49b861ad3d\n", 
+test-data/emulator-inputs.txt:910:    "cmd": "tpm2_createak -C 0x81000000 -k - -G rsa -D sha256 -s rsassa -p /tmp/tmp8ts49q -f pem -e keylime -P DNRPz7uh9I4Z3yUG1Pl0 -o keylime", 
+test-data/emulator-inputs.txt:1187:        "rsa:\n", 
+test-data/emulator-inputs.txt:1277:        "rsassa:\n", 
+test-data/emulator-inputs.txt:1287:        "rsaes:\n", 
+test-data/emulator-inputs.txt:1297:        "rsapss:\n", 
+test-data/emulator-inputs.txt:1377:        "ecc:\n", 
+test-data/emulator-inputs.txt:1691:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:1731:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:1895:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:2041:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:2187:        "  alg: rsassa\n", 
+test-data/emulator-inputs.txt:2333:        "  alg: rsassa\n", 
+test/.pylintrc:14:ignored-modules=zmq,alembic.op,alembic.context,cryptography.hazmat.primitives.asymmetric.rsa,gpg
+test/data/ca-private.pem:16:DRh5BED/On9izZ4L7AjwjNpnAwKBgQDHYVozs+Z++5Sk4hZiPePyJlQtMwRSAi1V
+test/data/create-runtime-policy/setup-rpm-tests:33:GPGDIR_RSA="${BASEDIR}"/gnupg/rsa
+test/data/create-runtime-policy/setup-rpm-tests:34:GPGDIR_ECC="${BASEDIR}"/gnupg/ecc
+test/data/create-runtime-policy/setup-rpm-tests:35:GPGRSA="gpg --homedir ${GPGDIR_RSA} --batch --yes"
+test/data/create-runtime-policy/setup-rpm-tests:36:GPGECC="gpg --homedir ${GPGDIR_ECC} --batch --yes"
+test/data/create-runtime-policy/setup-rpm-tests:47:RPM_REPO_SIGNED_ECC="${BASEDIR}"/repo/signed-ecc
+test/data/create-runtime-policy/setup-rpm-tests:48:RPM_REPO_SIGNED_RSA="${BASEDIR}"/repo/signed-rsa
+test/data/create-runtime-policy/setup-rpm-tests:91:    openssl rsa -pubout -in "${IMA_PRIV_KEY}" -out "${IMA_PUB_KEY}"
+test/data/create-runtime-policy/setup-rpm-tests:94:create_gpg_rsa_key() {
+test/data/create-runtime-policy/setup-rpm-tests:95:    mkdir -p "${GPGDIR_RSA}"
+test/data/create-runtime-policy/setup-rpm-tests:96:    chmod 700 "${GPGDIR_RSA}"
+test/data/create-runtime-policy/setup-rpm-tests:98:    ${GPGRSA} --gen-key <<EOF
+test/data/create-runtime-policy/setup-rpm-tests:100:Key-Type: RSA
+test/data/create-runtime-policy/setup-rpm-tests:102:Subkey-Type: RSA
+test/data/create-runtime-policy/setup-rpm-tests:110:create_gpg_ecc_key() {
+test/data/create-runtime-policy/setup-rpm-tests:111:    mkdir -p "${GPGDIR_ECC}"
+test/data/create-runtime-policy/setup-rpm-tests:112:    chmod 700 "${GPGDIR_ECC}"
+test/data/create-runtime-policy/setup-rpm-tests:114:    ${GPGECC} --gen-key <<EOF
+test/data/create-runtime-policy/setup-rpm-tests:127:    [ -d "${GPGDIR_RSA}" ] || create_gpg_rsa_key
+test/data/create-runtime-policy/setup-rpm-tests:128:    [ -d "${GPGDIR_ECC}" ] || create_gpg_ecc_key
+test/data/create-runtime-policy/setup-rpm-tests:190:%_signature ${GPGRSA}
+test/data/create-runtime-policy/setup-rpm-tests:191:%_gpg_path ${GPGDIR_RSA}
+test/data/create-runtime-policy/setup-rpm-tests:194:%__gpg_sign_cmd %{__gpg} ${GPGRSA} --force-v3-sigs --verbose --no-armor --no-secmem-warning -u "%{_gpg_name}" -sbo %{__signature_filename} --digest-algo sha256 %{__plaintext_filename}'
+test/data/create-runtime-policy/setup-rpm-tests:249:                    "${RPM_REPO_SIGNED_RSA}" \
+test/data/create-runtime-policy/setup-rpm-tests:250:                    "${RPM_REPO_SIGNED_ECC}" \
+test/data/create-runtime-policy/setup-rpm-tests:275:    for _repodir in "${RPM_REPO_SIGNED_RSA}" \
+test/data/create-runtime-policy/setup-rpm-tests:276:                    "${RPM_REPO_SIGNED_ECC}"; do
+test/data/create-runtime-policy/setup-rpm-tests:291:            cp "${RPM_REPO_SIGNED_RSA}"/* -a "${_repodir}"/
+test/data/create-runtime-policy/setup-rpm-tests:298:    # Sign the repo metadata for the signed repos with both an RSA
+test/data/create-runtime-policy/setup-rpm-tests:299:    # and an ECC gpg key..
+test/data/create-runtime-policy/setup-rpm-tests:300:    for _repodir in "${RPM_REPO_SIGNED_RSA}" "${RPM_REPO_FILELIST_EXT_MATCH}" "${RPM_REPO_FILELIST_EXT_MISMATCH}"; do
+test/data/create-runtime-policy/setup-rpm-tests:302:            ${GPGRSA} --detach-sign \
+test/data/create-runtime-policy/setup-rpm-tests:304:            ${GPGRSA} --output "${_repodir}"/repodata/repomd.xml.key \
+test/data/create-runtime-policy/setup-rpm-tests:309:    ${GPGECC} --detach-sign \
+test/data/create-runtime-policy/setup-rpm-tests:310:              --armor "${RPM_REPO_SIGNED_ECC}"/repodata/repomd.xml
+test/data/create-runtime-policy/setup-rpm-tests:311:    ${GPGECC} --output "${RPM_REPO_SIGNED_ECC}"/repodata/repomd.xml.key \
+test/data/create-runtime-policy/setup-rpm-tests:314:    # For the mismatched one, let's use the asc file from the RSA repo
+test/data/create-runtime-policy/setup-rpm-tests:315:    # and the key from the ECC one.
+test/data/create-runtime-policy/setup-rpm-tests:316:    cp "${RPM_REPO_SIGNED_RSA}"/* -a "${RPM_REPO_SIGNED_MISMATCH}"/
+test/data/create-runtime-policy/setup-rpm-tests:317:    cp -f "${RPM_REPO_SIGNED_ECC}"/repodata/repomd.xml.key \
+test/data/create-runtime-policy/setup-rpm-tests:325:    cp "${RPM_REPO_SIGNED_RSA}"/* -a "${RPM_REPO_SIGNED_NO_KEY}"/
+test/data/create-runtime-policy/setup-rpm-tests:336:    # Now let us add IMA signatures to the rpms in RPM_REPO_SIGNED_RSA.
+test/data/create-runtime-policy/setup-rpm-tests:337:    find "${RPM_REPO_SIGNED_RSA}" -type f -name '*.rpm' -exec \
+test/data/ima_keys/rsa2048.pem:1:-----BEGIN RSA PRIVATE KEY-----
+test/data/ima_keys/rsa2048.pem:27:-----END RSA PRIVATE KEY-----
+test/data/sign-runtime-policy/ec-p521-private.pem:6:nhawwfdsYf+afoDTPxfiaMegziXSo6zuPaD45eCCSg==
+test/test_algorithms.py:109:                "enc": "rsa",
+test/test_algorithms.py:117:                "enc": "ecc",
+test/test_algorithms.py:134:                "enc": "rsa",
+test/test_algorithms.py:142:                "enc": "ecc",
+test/test_algorithms.py:146:                "enc": "ecc192",
+test/test_algorithms.py:150:                "enc": "ecc224",
+test/test_algorithms.py:154:                "enc": "ecc256",
+test/test_algorithms.py:158:                "enc": "ecc384",
+test/test_algorithms.py:162:                "enc": "ecc521",
+test/test_algorithms.py:171:        """Test that all ECC curve algorithms are members of the Encrypt enum"""
+test/test_algorithms.py:172:        self.assertTrue(Encrypt.RSA in Encrypt)
+test/test_algorithms.py:173:        self.assertTrue(Encrypt.ECC in Encrypt)
+test/test_algorithms.py:174:        self.assertTrue(Encrypt.ECC192 in Encrypt)
+test/test_algorithms.py:175:        self.assertTrue(Encrypt.ECC224 in Encrypt)
+test/test_algorithms.py:176:        self.assertTrue(Encrypt.ECC256 in Encrypt)
+test/test_algorithms.py:177:        self.assertTrue(Encrypt.ECC384 in Encrypt)
+test/test_algorithms.py:178:        self.assertTrue(Encrypt.ECC521 in Encrypt)
+test/test_algorithms.py:181:        """Test the normalize method for handling ECC aliases"""
+test/test_algorithms.py:184:                "input": "ecc",
+test/test_algorithms.py:185:                "expected": "ecc256",
+test/test_algorithms.py:188:                "input": "ecc192",
+test/test_algorithms.py:189:                "expected": "ecc192",
+test/test_algorithms.py:192:                "input": "ecc224",
+test/test_algorithms.py:193:                "expected": "ecc224",
+test/test_algorithms.py:196:                "input": "ecc256",
+test/test_algorithms.py:197:                "expected": "ecc256",
+test/test_algorithms.py:200:                "input": "ecc384",
+test/test_algorithms.py:201:                "expected": "ecc384",
+test/test_algorithms.py:204:                "input": "ecc521",
+test/test_algorithms.py:205:                "expected": "ecc521",
+test/test_algorithms.py:208:                "input": "rsa",
+test/test_algorithms.py:209:                "expected": "rsa2048",
+test/test_algorithms.py:216:    def test_normalize_ecc_alias_behavior(self):
+test/test_algorithms.py:217:        """Test that ECC alias normalization matches agent behavior"""
+test/test_algorithms.py:218:        # Test that "ecc" is recognized through alias handling
+test/test_algorithms.py:219:        self.assertTrue(Encrypt.is_recognized("ecc"))
+test/test_algorithms.py:221:        # Test that normalize converts "ecc" to "ecc256" (P-256)
+test/test_algorithms.py:222:        self.assertEqual(Encrypt.normalize("ecc"), "ecc256")
+test/test_algorithms.py:224:        # Test that direct ecc256 works
+test/test_algorithms.py:225:        self.assertTrue(Encrypt.is_recognized("ecc256"))
+test/test_algorithms.py:227:    def test_normalize_rsa_alias_behavior(self):
+test/test_algorithms.py:228:        """Test that RSA alias normalization matches agent behavior"""
+test/test_algorithms.py:229:        # Test that "rsa" is recognized through alias handling
+test/test_algorithms.py:230:        self.assertTrue(Encrypt.is_recognized("rsa"))
+test/test_algorithms.py:232:        # Test that normalize converts "rsa" to "rsa2048"
+test/test_algorithms.py:233:        self.assertEqual(Encrypt.normalize("rsa"), "rsa2048")
+test/test_algorithms.py:235:        # Test that direct rsa2048 works
+test/test_algorithms.py:236:        self.assertTrue(Encrypt.is_recognized("rsa2048"))
+test/test_algorithms.py:247:                "sign": "rsassa",
+test/test_algorithms.py:251:                "sign": "rsapss",
+test/test_algorithms.py:281:                "algorithm": "ecc256",
+test/test_algorithms.py:282:                "accepted": ["ecc256"],
+test/test_algorithms.py:286:                "algorithm": "rsa",
+test/test_algorithms.py:287:                "accepted": ["rsa"],
+test/test_algorithms.py:291:                "algorithm": "ecc384",
+test/test_algorithms.py:292:                "accepted": ["ecc256", "ecc384"],
+test/test_algorithms.py:296:                "algorithm": "ecc521",
+test/test_algorithms.py:297:                "accepted": ["ecc256"],
+test/test_algorithms.py:302:                "accepted": ["rsa", "ecc256"],
+test/test_algorithms.py:311:    def test_backwards_compatibility_ecc_normalization(self):
+test/test_algorithms.py:312:        """Test backwards compatibility: 'ecc' in accepted list should accept specific ECC algorithms"""
+test/test_algorithms.py:315:                "algorithm": "ecc256",
+test/test_algorithms.py:316:                "accepted": ["ecc"],
+test/test_algorithms.py:318:                "desc": "ecc256 should be accepted when 'ecc' is in accepted list",
+test/test_algorithms.py:321:                "algorithm": "ecc384",
+test/test_algorithms.py:322:                "accepted": ["ecc"],
+test/test_algorithms.py:324:                "desc": "ecc384 should NOT be accepted when only 'ecc' is in accepted list (ecc maps to ecc256)",
+test/test_algorithms.py:327:                "algorithm": "ecc521",
+test/test_algorithms.py:328:                "accepted": ["ecc"],
+test/test_algorithms.py:330:                "desc": "ecc521 should NOT be accepted when only 'ecc' is in accepted list",
+test/test_algorithms.py:333:                "algorithm": "ecc192",
+test/test_algorithms.py:334:                "accepted": ["ecc"],
+test/test_algorithms.py:336:                "desc": "ecc192 should NOT be accepted when only 'ecc' is in accepted list",
+test/test_algorithms.py:346:    def test_forward_compatibility_ecc_normalization(self):
+test/test_algorithms.py:347:        """Test forward compatibility: specific ECC in accepted list should accept 'ecc' algorithm"""
+test/test_algorithms.py:350:                "algorithm": "ecc",
+test/test_algorithms.py:351:                "accepted": ["ecc256"],
+test/test_algorithms.py:353:                "desc": "ecc should be accepted when 'ecc256' is in accepted list (both normalize to ecc256)",
+test/test_algorithms.py:356:                "algorithm": "ecc",
+test/test_algorithms.py:357:                "accepted": ["ecc384"],
+test/test_algorithms.py:359:                "desc": "ecc should NOT be accepted when only 'ecc384' is in accepted list",
+test/test_algorithms.py:362:                "algorithm": "ecc",
+test/test_algorithms.py:363:                "accepted": ["ecc521"],
+test/test_algorithms.py:365:                "desc": "ecc should NOT be accepted when only 'ecc521' is in accepted list",
+test/test_algorithms.py:379:                "algorithm": "ecc256",
+test/test_algorithms.py:380:                "accepted": ["rsa", "ecc"],
+test/test_algorithms.py:382:                "desc": "Agent reports ecc256, tenant config has generic 'ecc'",
+test/test_algorithms.py:385:                "algorithm": "ecc",
+test/test_algorithms.py:386:                "accepted": ["rsa", "ecc256"],
+test/test_algorithms.py:388:                "desc": "Agent reports generic 'ecc', tenant config has specific 'ecc256'",
+test/test_algorithms.py:391:                "algorithm": "ecc384",
+test/test_algorithms.py:392:                "accepted": ["rsa", "ecc"],
+test/test_algorithms.py:394:                "desc": "Agent reports ecc384, tenant has generic 'ecc' (should not match)",
+test/test_algorithms.py:397:                "algorithm": "ecc",
+test/test_algorithms.py:398:                "accepted": ["rsa", "ecc384"],
+test/test_algorithms.py:400:                "desc": "Agent reports generic 'ecc', tenant has ecc384 (should not match)",
+test/test_algorithms.py:414:                "algorithm": "rsa",
+test/test_algorithms.py:415:                "accepted": ["ecc", "rsa"],
+test/test_algorithms.py:419:                "algorithm": "ecc256",
+test/test_algorithms.py:420:                "accepted": ["rsa", "ecc"],
+test/test_algorithms.py:424:                "algorithm": "ecc384",
+test/test_algorithms.py:425:                "accepted": ["rsa", "ecc256", "ecc384"],
+test/test_algorithms.py:430:                "accepted": ["rsa", "ecc", "ecc384"],
+test/test_algorithms.py:442:            {"algorithm": "", "accepted": ["ecc"], "expected": False, "desc": "Empty algorithm string"},
+test/test_algorithms.py:443:            {"algorithm": "ecc256", "accepted": [], "expected": False, "desc": "Empty accepted list"},
+test/test_algorithms.py:444:            {"algorithm": "ecc256", "accepted": [""], "expected": False, "desc": "Accepted list with empty string"},
+test/test_algorithms.py:446:                "algorithm": "ECC256",
+test/test_algorithms.py:447:                "accepted": ["ecc256"],
+test/test_algorithms.py:452:                "algorithm": "ecc256",
+test/test_algorithms.py:453:                "accepted": ["ecc"],
+test/test_algorithms.py:455:                "desc": "ecc256 algorithm should match ecc in accepted list",
+test/test_algorithms.py:458:                "algorithm": "ecc",
+test/test_algorithms.py:459:                "accepted": ["ecc256"],
+test/test_algorithms.py:461:                "desc": "ecc algorithm should match ecc256 in accepted list",
+test/test_attestation_model.py:219:                "capabilities": {"algorithms": ["rsa2048"]},
+test/test_attestation_model.py:247:                "capabilities": {"algorithms": ["rsa2048"]},
+test/test_attestation_model.py:359:                    "capabilities": {"algorithms": ["rsa2048"]},
+test/test_auth_session.py:414:                                "supported_signing_schemes": ["rsassa", "ecdsa"],
+test/test_auth_session.py:573:            "signing_scheme": "rsassa",
+test/test_auth_session.py:681:        mock_session.signing_scheme = "rsassa"
+test/test_ca_impl_openssl.py:10:from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
+test/test_ca_impl_openssl.py:30:        assert isinstance(pubkey, RSAPublicKey)
+test/test_ca_impl_openssl.py:53:        assert isinstance(pubkey, RSAPublicKey)
+test/test_ca_impl_openssl.py:173:        assert isinstance(pubkey, RSAPublicKey)
+test/test_ca_impl_openssl.py:205:        assert isinstance(pubkey, RSAPublicKey)
+test/test_ca_util.py:62:            ca_util.cmd_import_priv(working_dir, os.path.join(keydir, "rsa2048.pem"), 3)
+test/test_cert_utils.py:29:st_sha256_with_rsa_der = """\
+test/test_cert_utils.py:79:# This is an IDevID cert with RSA PSS key that requires crypto >=38
+test/test_cert_utils.py:151:def has_rsa_pss_compatibility():
+test/test_cert_utils.py:152:    """Indicates whether python-cryptography can process RSASSA-PSS. If this test fails IAK and IDevID will not be used to register unless cryptography is updated."""
+test/test_cert_utils.py:154:    # Major release where python-cryptography could process RSA PSS
+test/test_cert_utils.py:187:            {"cert": st_sha256_with_rsa_der, "expected": True},  # RSA, signed by STM_RSA_05I.pem.
+test/test_cert_utils.py:188:            {"cert": st_ecdsa_sha256_der, "expected": True},  # ECC, signed by STM_ECC_01I.pem.
+test/test_cert_utils.py:203:            {"cert": nuvoton_ecdsa_sha256_der, "expected": True},  # ECC, signed by NUVO_2110.pem.
+test/test_cert_utils.py:245:        has_rsa_pss_compatibility(), "Cryptography earlier than v38.0.0 does not support RSAPSS from x509"
+test/test_cert_utils.py:297:                "data": base64.b64decode(st_sha256_with_rsa_der),
+test/test_cert_utils.py:301:                "data": f"-----BEGIN CERTIFICATE-----\n{st_sha256_with_rsa_der}\n-----END CERTIFICATE-----".encode(
+test/test_cloud_verifier_common.py:821:        agent.accept_tpm_encryption_algs = ["rsa"]
+test/test_cloud_verifier_common.py:822:        agent.accept_tpm_signing_algs = ["rsassa"]
+test/test_crypto.py:12:    rsa_decrypt,
+test/test_crypto.py:13:    rsa_encrypt,
+test/test_crypto.py:14:    rsa_export_privkey,
+test/test_crypto.py:15:    rsa_export_pubkey,
+test/test_crypto.py:16:    rsa_generate,
+test/test_crypto.py:17:    rsa_import_privkey,
+test/test_crypto.py:18:    rsa_import_pubkey,
+test/test_crypto.py:19:    rsa_sign,
+test/test_crypto.py:20:    rsa_verify,
+test/test_crypto.py:26:    def test_rsa(self):
+test/test_crypto.py:28:        private = rsa_generate(2048)
+test/test_crypto.py:29:        pubkeypem = rsa_export_pubkey(private)
+test/test_crypto.py:30:        pubkey = rsa_import_pubkey(pubkeypem)
+test/test_crypto.py:31:        keypem = rsa_export_privkey(private)
+test/test_crypto.py:32:        key = rsa_import_privkey(keypem)
+test/test_crypto.py:33:        ciphertext = rsa_encrypt(pubkey, message)
+test/test_crypto.py:34:        plain = rsa_decrypt(key, ciphertext)
+test/test_crypto.py:67:    def test_rsa_sign(self):
+test/test_crypto.py:69:        private = rsa_generate(2048)
+test/test_crypto.py:71:        signature = rsa_sign(private, message)
+test/test_crypto.py:72:        self.assertTrue(rsa_verify(public_key, message, signature))
+test/test_crypto.py:75:        self.assertFalse(rsa_verify(public_key, message, signature))
+test/test_evidence_model.py:105:            "capabilities": {"algorithms": ["rsa2048"]},
+test/test_evidence_model.py:259:        mock_caps.render.return_value = {"algorithms": ["rsa2048"]}
+test/test_evidence_model.py:303:        mock_caps1.values = {"algorithms": ["rsa2048"]}
+test/test_evidence_model.py:306:        mock_caps2.values = {"algorithms": ["rsa2048"]}
+test/test_evidence_model.py:504:        mock_caps1.values = {"algorithms": ["rsa2048"]}
+test/test_evidence_model.py:631:            "key_algorithm": "rsa",
+test/test_evidence_model.py:637:            "signature_schemes": ["rsassa"],
+test/test_evidence_model.py:650:        caps.signature_schemes = ["rsassa"]
+test/test_evidence_model.py:658:        cert_key.key_algorithm = "rsa"
+test/test_evidence_model.py:713:        params.signature_scheme = "rsassa"
+test/test_evidence_model.py:722:        cert_key.key_algorithm = "rsa"
+test/test_evidence_model.py:792:        key.key_algorithm = "rsa"
+test/test_evidence_model.py:795:        key.allowable_signature_schemes = ["rsassa"]
+test/test_ima_ast.py:10:    "ima-sig-rsa": (
+test/test_ima_verification.py:78:# 1st signature: RSA
+test/test_ima_verification.py:160:        rsakeyfile = os.path.join(keydir, "rsa2048pub.pem")
+test/test_ima_verification.py:161:        pubkey, keyidv2 = file_signatures.get_pubkey_from_file(rsakeyfile)
+test/test_ima_verification.py:239:        rsakeyfile = os.path.join(keydir, "rsa2048pub.pem")
+test/test_ima_verification.py:240:        pubkey, keyidv2 = file_signatures.get_pubkey_from_file(rsakeyfile)
+test/test_push_agent_monitor.py:93:            accept_tpm_encryption_algs=["rsa"],
+test/test_push_agent_monitor.py:94:            accept_tpm_signing_algs=["rsassa"],
+test/test_rpm_repo.py:80:                "repo": os.path.join(self.dirpath, "repo", "signed-ecc"),
+test/test_rpm_repo.py:86:                "repo": os.path.join(self.dirpath, "repo", "signed-rsa"),
+test/test_rpm_repo.py:143:                "rpm": os.path.join(self.dirpath, "repo", "signed-rsa", "DUMMY-empty-42.0.0-el42.noarch.rpm"),
+test/test_rpm_repo.py:148:                "rpm": os.path.join(self.dirpath, "repo", "signed-rsa", "DUMMY-foo-42.0.0-el42.noarch.rpm"),
+test/test_rpm_repo.py:162:                "repo": os.path.join(self.dirpath, "repo", "signed-ecc"),
+test/test_rpm_repo.py:168:                "repo": os.path.join(self.dirpath, "repo", "signed-rsa"),
+test/test_rpm_repo.py:244:                "repo": os.path.join(self.dirpath, "repo", "signed-rsa"),
+test/test_rpm_repo.py:250:                "repo": os.path.join(self.dirpath, "repo", "signed-rsa"),
+test/test_rpm_repo.py:255:            {"repo": os.path.join(self.dirpath, "repo", "signed-rsa"), "rpm": "foo/bar", "hashes": {}, "ima-sig": {}},
+test/test_session_controller.py:400:            "signing_scheme": "rsassa",
+test/test_sign_runtime_policy.py:23:RSA_PRIVKEY = os.path.join(DATA_DIR, "rsa-4096-private.pem")
+test/test_sign_runtime_policy.py:40:            {"backend": "ecdsa", "keyfile": RSA_PRIVKEY, "keypath": None, "outcertfile": None, "valid": False},
+test/test_sign_runtime_policy.py:52:            {"backend": "x509", "keyfile": RSA_PRIVKEY, "keypath": None, "outcertfile": "cert.x509", "valid": False},
+test/test_sign_runtime_policy.py:164:            {"--runtime-policy": POLICY, "valid": False, "missing_params": False, "--keyfile": RSA_PRIVKEY},
+test/test_tpm2_objects.py:8:    ECC_CURVE_PRIMES,
+test/test_tpm2_objects.py:9:    TPM_ECC_NIST_P192,
+test/test_tpm2_objects.py:10:    TPM_ECC_NIST_P224,
+test/test_tpm2_objects.py:11:    TPM_ECC_NIST_P256,
+test/test_tpm2_objects.py:12:    TPM_ECC_NIST_P384,
+test/test_tpm2_objects.py:13:    TPM_ECC_NIST_P521,
+test/test_tpm2_objects.py:17:    tpms_ecc_point_marshal,
+test/test_tpm2_objects.py:19:from keylime.tpm.tpm_util import crypt_secret_encrypt_ecc, der_int, der_len, ecdsa_der_from_tpm
+test/test_tpm2_objects.py:25:        curve = _curve_from_curve_id(TPM_ECC_NIST_P521)
+test/test_tpm2_objects.py:52:        curve = _curve_from_curve_id(TPM_ECC_NIST_P256)
+test/test_tpm2_objects.py:75:        curve = _curve_from_curve_id(TPM_ECC_NIST_P384)
+test/test_tpm2_objects.py:93:        curve_p256 = _curve_from_curve_id(TPM_ECC_NIST_P256)
+test/test_tpm2_objects.py:99:        curve_p384 = _curve_from_curve_id(TPM_ECC_NIST_P384)
+test/test_tpm2_objects.py:105:        curve_p521 = _curve_from_curve_id(TPM_ECC_NIST_P521)
+test/test_tpm2_objects.py:112:        curve = _curve_from_curve_id(TPM_ECC_NIST_P521)
+test/test_tpm2_objects.py:133:        curve = _curve_from_curve_id(TPM_ECC_NIST_P521)
+test/test_tpm2_objects.py:155:        curve = _curve_from_curve_id(TPM_ECC_NIST_P521)
+test/test_tpm2_objects.py:176:        # curve_p521 = _curve_from_curve_id(TPM_ECC_NIST_P521)  # Not needed for this test
+test/test_tpm2_objects.py:177:        p521_prime = ECC_CURVE_PRIMES[TPM_ECC_NIST_P521]
+test/test_tpm2_objects.py:199:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P192], 2**192 - 2**64 - 1)
+test/test_tpm2_objects.py:200:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P224], 2**224 - 2**96 + 1)
+test/test_tpm2_objects.py:201:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P256], 2**256 - 2**224 + 2**192 + 2**96 - 1)
+test/test_tpm2_objects.py:202:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P384], 2**384 - 2**128 - 2**96 + 2**32 - 1)
+test/test_tpm2_objects.py:203:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P521], 2**521 - 1)
+test/test_tpm2_objects.py:206:        self.assertLess(ECC_CURVE_PRIMES[TPM_ECC_NIST_P192], 2**192)
+test/test_tpm2_objects.py:207:        self.assertLess(ECC_CURVE_PRIMES[TPM_ECC_NIST_P224], 2**224)
+test/test_tpm2_objects.py:208:        self.assertLess(ECC_CURVE_PRIMES[TPM_ECC_NIST_P256], 2**256)
+test/test_tpm2_objects.py:209:        self.assertLess(ECC_CURVE_PRIMES[TPM_ECC_NIST_P384], 2**384)
+test/test_tpm2_objects.py:210:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P521], 2**521 - 1)  # P-521 is special case
+test/test_tpm2_objects.py:215:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P192], 2**192 - 2**64 - 1)
+test/test_tpm2_objects.py:216:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P224], 2**224 - 2**96 + 1)
+test/test_tpm2_objects.py:217:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P256], 2**256 - 2**224 + 2**192 + 2**96 - 1)
+test/test_tpm2_objects.py:218:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P384], 2**384 - 2**128 - 2**96 + 2**32 - 1)
+test/test_tpm2_objects.py:219:        self.assertEqual(ECC_CURVE_PRIMES[TPM_ECC_NIST_P521], 2**521 - 1)
+test/test_tpm2_objects.py:223:        unknown_prime = ECC_CURVE_PRIMES.get(unknown_curve_id)
+test/test_tpm2_objects.py:224:        self.assertIsNone(unknown_prime, "Unknown curves should not be in ECC_CURVE_PRIMES")
+test/test_tpm2_objects.py:229:        large_value = ECC_CURVE_PRIMES[TPM_ECC_NIST_P521]  # This would be hundreds of digits
+test/test_tpm2_objects.py:246:        result = ECC_CURVE_PRIMES.get(unknown_curve_id)
+test/test_tpm2_objects.py:250:class TestEccPublicKeySecurityValidation(unittest.TestCase):
+test/test_tpm2_objects.py:251:    """Test that ECC public key validation includes all required security checks:
+test/test_tpm2_objects.py:257:    def create_ecc_tpm2b_public(self, x: int, y: int, curve_id: int = TPM_ECC_NIST_P256) -> bytes:
+test/test_tpm2_objects.py:258:        """Helper to create a TPM2B_PUBLIC structure for ECC key with given coordinates"""
+test/test_tpm2_objects.py:268:        # alg_type (TPM_ALG_ECC = 0x0023)
+test/test_tpm2_objects.py:299:        tpm2b_public = self.create_ecc_tpm2b_public(x, y, TPM_ECC_NIST_P256)
+test/test_tpm2_objects.py:312:        tpm2b_public = self.create_ecc_tpm2b_public(x, y, TPM_ECC_NIST_P256)
+test/test_tpm2_objects.py:327:        tpm2b_public = self.create_ecc_tpm2b_public(numbers.x, numbers.y, TPM_ECC_NIST_P256)
+test/test_tpm2_objects.py:353:            (TPM_ECC_NIST_P192, ec.SECP192R1()),
+test/test_tpm2_objects.py:354:            (TPM_ECC_NIST_P224, ec.SECP224R1()),
+test/test_tpm2_objects.py:355:            (TPM_ECC_NIST_P256, ec.SECP256R1()),
+test/test_tpm2_objects.py:356:            (TPM_ECC_NIST_P384, ec.SECP384R1()),
+test/test_tpm2_objects.py:357:            (TPM_ECC_NIST_P521, ec.SECP521R1()),
+test/test_tpm2_objects.py:374:                tpm2b_public = self.create_ecc_tpm2b_public(numbers.x, numbers.y, curve_id)
+test/test_tpm2_objects.py:384:        p256_prime = ECC_CURVE_PRIMES[TPM_ECC_NIST_P256]
+test/test_tpm2_objects.py:390:        tpm2b_public = self.create_ecc_tpm2b_public(x, y, TPM_ECC_NIST_P256)
+test/test_tpm2_objects.py:408:        tpm2b_public = self.create_ecc_tpm2b_public(numbers.x, numbers.y, TPM_ECC_NIST_P521)
+test/test_tpm2_objects.py:413:        tpm2b_public_invalid = self.create_ecc_tpm2b_public(1, 1, TPM_ECC_NIST_P521)
+test/test_tpm2_objects.py:419:class TestEccMarshaling(unittest.TestCase):
+test/test_tpm2_objects.py:420:    """Test ECC point marshaling consistency fixes"""
+test/test_tpm2_objects.py:433:            blob = tpms_ecc_point_marshal(key)
+test/test_tpm2_objects.py:447:        p521_blob = tpms_ecc_point_marshal(p521_key)
+test/test_tpm2_objects.py:458:        p256_blob = tpms_ecc_point_marshal(p256_key)
+test/test_tpm2_objects.py:474:        blob1 = tpms_ecc_point_marshal(key1)
+test/test_tpm2_objects.py:475:        blob2 = tpms_ecc_point_marshal(key2)
+test/test_tpm2_objects.py:490:        blob = tpms_ecc_point_marshal(key)
+test/test_tpm2_objects.py:509:    def test_crypt_secret_encrypt_ecc_consistency(self):
+test/test_tpm2_objects.py:510:        """Test that crypt_secret_encrypt_ecc produces consistent results with fixed coordinate sizes"""
+test/test_tpm2_objects.py:518:            data, point = crypt_secret_encrypt_ecc(public_key, hashfunc)
+test/test_tpm2_objects.py:546:class TestEccSignatureParsing(unittest.TestCase):
+test/test_tpm2_objects.py:547:    """Test ECC signature parsing improvements for variable-length coordinates"""
+test/test_tpm2_objects.py:624:        self.assertIn("Unable to parse ECC signature", str(cm.exception))
+test/test_tpm2_objects.py:631:        self.assertIn("Unable to parse ECC signature", str(cm.exception))
+test/test_tpm_verify.py:8:from cryptography.hazmat.primitives.asymmetric import rsa
+test/test_tpm_verify.py:19:        # Generate a real RSA key for testing
+test/test_tpm_verify.py:20:        private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+test/test_tpm_verify.py:50:        # Generate a real RSA key for testing
+test/test_tpm_verify.py:51:        private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+test/test_tpm_verify.py:82:        # Generate a real RSA key for testing
+test/test_tpm_verify.py:83:        private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+test/test_tpm_verify.py:101:            b"\x00\x14"  # TPM_ALG_RSASSA
+test/test_verifier_db.py:23:    "accept_tpm_encryption_algs": ["ecc", "rsa"],
+test/test_verifier_db.py:24:    "accept_tpm_signing_algs": ["ecschnorr", "rsassa"],
+test/test_verifier_db.py:37:    "ima_policy": '{"allowlist": {"/boot/System.map-5.1.17-300.fc30.x86_64": ["bdc084cc61c67dada53ff92c3235fbc774eace36aceb11967718399837e36485"], "/boot/vmlinuz-5.0.9-301.fc30.x86_64": ["187e65c35f449df145b57940cb73606623ab1eccc352f5b0d9b64c4d2ad3be58"], "/boot/initramfs-5.1.15-300.fc30.x86_64.img": ["7fb94b644d95de6ed2f70c247cf9a572027815b8f6a00b8c5f7b9fd2feef0ff1"], "/boot/config-5.0.9-301.fc30.x86_64": ["540f7b2732b8018be45dcfdf737fa6e51d9f5924d85b6c1987ddb4215260b49f"], "boot_aggregate": ["0000000000000000000000000000000000000000"]}, "exclude": ["/*"]}',
+tpm_cert_store/Alibaba_Cloud_vTPM_EK.pem:5:    Signature Algorithm: sha384WithRSAEncryption
+tpm_cert_store/Alibaba_Cloud_vTPM_EK.pem:12:            Public Key Algorithm: rsaEncryption
+tpm_cert_store/Alibaba_Cloud_vTPM_EK.pem:52:    Signature Algorithm: sha384WithRSAEncryption
+tpm_cert_store/INF_RSA_022.pem:22:z4Uw9+7YLlyEWgZfH6BRrDzXUHzuePRSa8odikOrDX/UcZYjzjJOOmDZhMDH9RGC

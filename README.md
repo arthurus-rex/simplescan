@@ -1,22 +1,34 @@
 # Simplescan
 A very simple bash script designed to clone open source github repositories locally, scan for keywords, and save the output to results files.  Designed with crypto in mind, but could be used for any keywords.
 
-# Installation:
+## Installation:
 ```
 git clone https://github.com/arthurus-rex/simplescan.git
 cd simplescan
 chmod +x cryptoscan.sh
 ```
-# Usage:
+## Usage:
 1. Modify `repo_list.txt` to contain your list of which open source repositories to scan;
 2. Modify `keyword_list.txt` to contain your desired keywords;
 3. Run `./cryptoscan.sh`
 Results files will be created with names matching their source repositories in the filepath `outfiles/{datetime}/repo.txt`.
 
-* Remember: Your scan is only as good as your keywords.  [Examples](https://github.com/arthurus-rex/simplescan/blob/master/EXAMPLE_KEYWORDS.md) may help you choose wisely.
+Outfiles will look something like this [example](https://github.com/arthurus-rex/simplescan/blob/master/outfiles/2026-03-18_13.23.53/keylime.txt#L262) from running Simplescan on  the open source project [Keylime](https://github.com/keylime/keylime):
+```
+keylime/tpm/tpm2_objects.py:380:    if isinstance(pubkey, RSAPublicKey):
+keylime/tpm/tpm2_objects.py:381:        alg_type = TPM_ALG_RSA
+keylime/tpm/tpm2_objects.py:383:        rsa_numbers = pubkey.public_numbers()
+```
+which is just:
+```
+<filepath/filename>:<line_number>:   <contents of line>
+```
+For every line in every file that produces a regex match.  Simple.
 
-# Caveats:
+* Remember: Your scan is only as good as your keywords.  [Example keywords](https://github.com/arthurus-rex/simplescan/blob/master/EXAMPLE_KEYWORDS.md) may help you choose wisely.
+
+## Caveats:
 This is a simple keyword search designed to be verbose, preferring false positives to false negatives.  This project should not be considered for production without modification, and all output should be manually evaluated for accuracy.  This repo will change as bugs are found and features (maybe) added.
 
-# Results
+## Results
 As this tool was created in the context of a larger project, those looking for the output can find it at [pqc-crypto-analysis-results](https://github.com/arthurus-rex/pqc-crypto-analysis-results/tree/main).  
