@@ -3,6 +3,7 @@
 homedir=$(pwd)
 repo_list=${homedir}"/repo_list.txt"
 keyword_list=${homedir}"/keyword_list.txt"
+ignore_list=${homedir}"/ignore_list.txt"
 tmp_foldername=${homedir}"/repos"
 
 # create results folder in outfiles at datetime of analysis
@@ -33,7 +34,7 @@ for dir in */ ; do
     # results_`repo`.txt for output of grep into homedir
     repo_results="${results_folder}$(basename "$dir").txt"
     touch "$repo_results"   
-    find . | grep --file="$keyword_list" --recursive -n -i >> "$repo_results"
+    find . | grep --file="$keyword_list" --recursive -n -i | grep -v --file "$ignore_list" -i -n >> "$repo_results"
     echo "Done scanning  $dir"
     cd ..
 done
